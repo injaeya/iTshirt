@@ -1,0 +1,31 @@
+[DESC]
+;Assign a preset button,
+;You can set the button combination directly.
+; 2.0.1 2020/12/01 Type4 added.
+
+[INFO]
+FORMAT	= 2.0.1
+
+[PRESET]
+; Key is a string (numbers and letters can be combined)
+0 = 
+
+[EMERGENCY]
+;Key is a number.
+;0 is the default setting.
+
+[ALARM]
+;Key is a number.
+;0 is the default setting.
+
+[ERROR]
+;Key is a number.
+;0 is the default setting.
+
+[MESSAGE]
+;Key is a number.
+;0 is the default setting.
+
+[INFO]
+;Key is a number.
+;0 is the default setting.

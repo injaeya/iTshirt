@@ -1,0 +1,35 @@
+[DESC]
+; Comment
+
+[MEMORY]
+; INDEX(offset) = ID, ID, ID, ...
+0  = LS1,	LS2,	LS6,	LS7,	LS3,	LS5,	LS6S,	LS7S            ;//X000~X007
+8  = LS3S,	LS5S,	LS8,	LS9,	LS14,	LS15,	8X_ORG,	8X_OVR          ;//X008~X015
+16 =
+24 =
+32 = LS16,	LS4V1,	LS4T1,	LS17,	LS4V2,	LS4T2,	LS12,	PS          ;//X200~X207
+40 = LS4S,	LS33S,	SP1,	SP2,	SP3,	SP4,	SP5,	SP6             ;//X208~X215
+48 = MO,	MD,		MN,		MC,		ME,		MA,		MEB,	IMM_SP1         ;//X300~X307
+56 = OD,	RD,		IMM_SP2,SP1,	WRD,	WRU,	SP2,	SP3             ;//X308~X315
+64 = LS4_3,	LS4V3,	LS4_4,	LS4V4,	LS20, LS21, LS22, LS23                  ;//X400~X407
+72 = LS24, LS25, LS26, LS27, LS28, LS29, 2SP1, 2SP2                         ;//X408~X415
+80 = LS30, LS31, LS32, LS33, LS34, LS35, LS36, LS37                         ;//X500~X507
+88 = LS38, LS39, LS40, LS41, LS42, LS43, LS44, LS45                         ;//X508~X515
+
+[MONITOR]
+; Group ID = Input IDs, ..., Max 16
+AXINPUT	= LS1, LS2, LS6, LS7, LS3, LS5, LS6S, LS7S, LS3S, LS5S, LS8, LS9, LS14, LS15, 8X_ORG, 8X_OVR
+INOUT1	= LS16, LS4V1, LS4T1, LS17, LS4V2, LS4T2, LS12, PS, LS4S, LS33S, SP1, SP2, SP3, SP4, SP5, SP6
+INOUT2	= MO, MD, MN, MC, ME, MA, MEB, OD, RD, SP1, WRD, WRU, IMM_SP1, IMM_SP2, SP2, SP3
+;//3~4 Vacuum
+;//INOUT3  = LS4_3, LS4V3, LS4_4, LS4V4,
+;//Insert Chuck Grip 1~4
+;INOUT3  = LS20, LS21, LS22, LS23, 
+;//Inset Pusher
+;INOUT3  = LS24, LS25, 
+;//Insert Cyl'
+;INOUT3  = LS26, LS27, 
+;//Product Cyl' & Spare
+;INOUT3  = LS28, LS29, 2SP1, 2SP2
+;//EX Board #3
+;//INOUT4  = LS30, LS31, LS32, LS33, LS34, LS35, LS36, LS37, LS38, LS39, LS40, LS41, LS42, LS43, LS44, LS45

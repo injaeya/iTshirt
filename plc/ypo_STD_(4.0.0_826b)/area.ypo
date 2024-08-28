@@ -1,0 +1,34 @@
+; 1.0.1 2020/04/06 [ASI] Type2 added.
+; 2.0.1 2020/12/01 Type4 added.
+
+[INFO]
+;NAME	= 
+;VERSION	=
+FORMAT	= 2.0.1
+
+[CATEGORY]
+;Must be declared before [AREAITEM].
+; Base Category name = Subcategory names, ...
+ALLOWABLE	= STANDBY, TAKEOUT, MIDDLE, RELEASE
+FORBIDDEN	= AREA1, AREA2 
+
+
+[ASI]
+; Area Setting Item
+; Key : Subcategory name
+; Value 1: Memory block number(1~)
+; Value 2: Image name
+; Value 3: Axis interference enable(true/false or 1/0)
+; Value 4~6: Item lang id. Axis ID or area id
+;            - Type 1: Single argument : Axis ID only
+;            - Type 2: Multiple arguments in parentheses : 
+;                      The first argument is used only as a name.
+;                      2~ Used as a range list.
+STANDBY	= 1, area1.jpg, 	false,	Z, (CRWS X XS), (VERT Y YS)
+TAKEOUT	= 2, area2.jpg, 	false,	Z, (CRWS X XS), (VERT Y YS)
+MIDDLE	= 3, area3.jpg, 	false,	Z, (CRWS X XS), (VERT Y YS)
+RELEASE = 4, area4.jpg,		false,	Z, (CRWS X XS), (VERT Y YS)
+AREA1	= 7, noarea1.jpg,	true,	Z, (CRWS X XS), (VERT Y YS)
+AREA2	= 8, noarea2.jpg,	true,	Z, (CRWS X XS), (VERT Y YS)
+
+

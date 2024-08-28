@@ -1,0 +1,30 @@
+; 2020/03/20 Language tag added.
+; 2.0.1 2020/12/01 Type4 added.
+; 3.0.3 2021/07/01 Smart function parameter added.
+;       2021/07/19 OPT_CI added. Carrier Insert freey key used by Manual key (auto mode)
+
+[INFO]
+; FORMAT : Option file list
+;Caution!!! File name(with extension) case sensitive.
+NAME	= Y8STD_OP_Rev.00
+MODEL	= OPT ; STD / STM / SIDE / OPT / ZEBA_3V / OPT_CI /  etc...
+VERSION	= 0000.0000.0000
+FORMAT	= 2.0.1
+FILES	= info.ypo, input.ypo, output.ypo, mode.ypo, timer.ypo, axis.ypo, freekey.ypo, area.ypo, axispoint.ypo
+
+[IO-MONITOR]
+; In/Output Monitor Group ID list
+; Value 0 is dummy
+AXINPUT	= 0
+INOUT1	= 0
+INOUT2	= 0
+;INOUT3	= 0
+;INOUT4  = 0
+;$AXISMONITOR
+
+[USERPROGRAM]
+INSERT_MODE = 0
+
+[LANGUAGE]
+;US, KR, CN, VN, CZ, PL, MX, TK
+US, KR, VN, CZ, PL, MX, TK

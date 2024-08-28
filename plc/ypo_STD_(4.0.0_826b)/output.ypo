@@ -1,0 +1,35 @@
+[DESC]
+; Comment
+
+[MEMORY]
+; INDEX(offset) = ID, ID, ID, ...
+0  = V31_1,	V32_1,	V3VO1,	V3VC1,	V31_2,	V32_2,	V3VO2,	V3VC2           ;//Y000~Y007
+8  = V4R,	V4P,	SP1,		V6,		V3S,	LED1,	LED2,	LED3        ;//Y008~Y015
+16 = RY1,	RY2,	RY3,	RY4,	RY5,	RY6,	RY7,	RY8             ;//Y100~Y107
+24 = F_CS, DAN,	V7,		V8,		V14,	CS,		AL,		BZ                  ;//Y108~Y115
+32 = VCP1,	VCP2,	V3VO3,	V3VC3,	V3VO4,	V3VC4,	V20, V21                ;//Y200~Y207
+40 = V22, V23, V24, V25, V26, V27, V28, V29                                 ;//Y208~Y215
+48 = V30, V31, V32, V33, V34, V35, V36, V37                                 ;//Y300~Y307
+56 = V38, V39, V40, V41, V42, V43, V44, V45                                 ;//Y308~Y315
+
+160 = V9, V10, V11
+
+[MONITOR]
+; Group ID = Input IDs, ..., Max 16
+AXINPUT	= 
+INOUT1	= V31_1, V32_1, V3VO1, V3VC1, V31_2, V32_2, V3VO2, V3VC2, V4R, V4P, SP1, V6, V3S, LED1, LED2, LED3
+INOUT2	= RY1, RY2, RY3, RY4, RY5, RY6, RY7, RY8, F_CS, DAN, V7, V8, V14, CS, AL, BZ
+;//Air blow 1~2, Vacuum 3~4
+;//INOUT3	= VCP1,	VCP2, V3VO3, V3VC3, V3VO4, V3VC4,
+;//Insert Chuck Grip 1~4
+;INOUT3  = V20, V21, V22, V23, 
+;//Inset Pusher
+;INOUT3  = V24, V25,
+;//Insert Cyl'
+;INOUT3  = V26, V27,
+;//Product Cyl'
+;INOUT3  = V28, V29
+;//EX Board #3
+;//INOUT4  = V30, V31, V32, V33, V34, V35, V36, V37, V38, V39, V40, V41, V42, V43, V44, V45
+;//NT_Cut be use change address
+;//INOUT4  = V9, V10, V11

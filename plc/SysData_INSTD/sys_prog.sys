@@ -1,0 +1,3425 @@
+<YUDO>
+
+	<INFO>
+		Type = 	Step
+		FormatVer=1.0
+		Ver=1201.2023.0524
+		Date=2022/07/15
+	</INFO>
+		
+	<PROGRAM TYPE="SYSTEM">
+		
+		<GROUP TYPE="AUTO" MAIN="1000">
+			<PROG NO="1000">																	
+				001	=		/	IF	/	AL_CO_EX=0	/		/	GOTO L10	/		/		/	 IF AL_CO_EX=0  GOTO L10 
+				002	=		/	IF	/	MORG=0	/		/	CALL PROG 1901	/		/		/	 IF MORG=0  CALL PROG 1901 
+				003	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 1100	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 1100 
+				004	=		/	IF	/	CASE00=1	/		/	GOTO L330	/		/		/	 IF CASE00=1  GOTO L330 
+				005	=	L10	/	IF	/	I_O_ORGCP=1 | AUTO_EN=1	/		/	GOTO L50	/		/		/	L10 IF I_O_ORGCP=1 | AUTO_EN=1  GOTO L50 
+				006	=		/	IF	/	I_O_ORGCP=0	/		/	CALL PROG 1901	/		/		/	 IF I_O_ORGCP=0  CALL PROG 1901 
+				007	=	L50	/		/		/		/	OUT M37_EX=1, M11_EX=1, M14_EX=1	/		/		/	L50    OUT M37_EX=1, M11_EX=1, M14_EX=1 
+				008	=		/	IF	/	CHK_CHANGE=1	/		/	GOTO L950	/		/		/	 IF CHK_CHANGE=1  GOTO L950 
+				009	=		/	WT	/	V31_1=1 | V3S=1	/	I_S_AUTO=1	/	OUT M37_EX=0, M11_EX=0, M14_EX=0	/	OUT AT_ORG=0	/	1	/	 WT V31_1=1 | V3S=1 I_S_AUTO=1 OUT M37_EX=0, M11_EX=0, M14_EX=0 OUT AT_ORG=0
+				010	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 1100	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 1100 
+				011	=		/	IF	/	STEP1=1	/		/	GOTO L110	/		/		/	 IF STEP1=1  GOTO L110 
+				012	=		/	IF	/	STEP2=1	/		/	GOTO L340	/		/		/	 IF STEP2=1  GOTO L340 
+				013	=		/	IF	/	STEP3=1	/		/	GOTO L305	/		/		/	 IF STEP3=1  GOTO L305 
+				014	=		/	IF	/	STEP4=1	/		/	GOTO L630	/		/		/	 IF STEP4=1  GOTO L630 
+				015	=		/	IF	/	MMDIS=1 & ML4IS=0	/		/	GOTO L630	/		/		/	 IF MMDIS=1 & ML4IS=0  GOTO L630 
+				016	=		/	IF	/	MDYT=0	/		/	GOTO L110	/		/		/	 IF MDYT=0  GOTO L110 
+				017	=	L90	/	WT	/	XMO=1	/	MOPS=0 & MA=1	/		/	OUT AT_MA_CK=1	/		/	L90 WT XMO=1 MOPS=0 & MA=1  OUT AT_MA_CK=1
+				018	=	L100	/	IF	/	MDWS_K_SK=1 & MDYT=0	/		/	GOTO L110	/		/		/	L100 IF MDWS_K_SK=1 & MDYT=0  GOTO L110 
+				019	=		/	IF	/	MMDTA=1	/		/	CALL PROG 1101	/		/		/	 IF MMDTA=1  CALL PROG 1101 
+				020	=	L110	/	WT*	/	M01_EN=1	/		/	OUT M01_EX=1	/		/	2	/	L110 WT* M01_EN=1  OUT M01_EX=1 
+				021	=		/	IF	/	AT_STATUS=0 & MDISF=1	/		/	MOV AX1 AX2 PT81	/		/		/	 IF AT_STATUS=0 & MDISF=1  MOV AX1 AX2 PT81 
+				022	=		/	IF	/	AT_STATUS=0 & MDISF=1	/		/	GOTO L120	/		/		/	 IF AT_STATUS=0 & MDISF=1  GOTO L120 
+				023	=		/	IF	/	AT_STATUS=0	/		/	MOV AX1 AX2 PT102	/		/		/	 IF AT_STATUS=0  MOV AX1 AX2 PT102 
+				024	=		/	IF	/	AT_STATUS=0	/		/	MOV AX4 PT102	/		/		/	 IF AT_STATUS=0  MOV AX4 PT102 
+				025	=		/	IF	/	AT_STATUS=1 & MDISF=1	/		/	MOV AX1 AX2 PT81	/		/		/	 IF AT_STATUS=1 & MDISF=1  MOV AX1 AX2 PT81 
+				026	=		/	IF	/	AT_STATUS=1 & MDISF=1	/		/	GOTO L120	/		/		/	 IF AT_STATUS=1 & MDISF=1  GOTO L120 
+				027	=		/	IF	/	AT_STATUS=1	/		/	MOV AX1 AX2 AX4 PT102	/		/		/	 IF AT_STATUS=1  MOV AX1 AX2 AX4 PT102 
+				028	=	L120	/		/		/		/		/	OUT AT_MNG=0	/		/	L120     OUT AT_MNG=0
+				029	=		/	IF	/	MMDR2=1	/		/	CALL PROG 1108	/		/		/	 IF MMDR2=1  CALL PROG 1108 
+				030	=		/	WT*	/	LS14=1	/		/		/		/		/	 WT* LS14=1   
+				031	=		/		/		/		/	OUT M19_EX=0	/	OUT 1CYCLE_CP=1, M01_EX=0, AT_ORG=0	/		/	    OUT M19_EX=0 OUT 1CYCLE_CP=1, M01_EX=0, AT_ORG=0
+				032	=		/	WT	/		/	P_CYCLE=0	/		/		/		/	 WT  P_CYCLE=0  
+				033	=		/	IF	/	ALCO_END=1	/		/	GOTO L950	/		/		/	 IF ALCO_END=1  GOTO L950 
+				034	=		/		/		/		/		/	OUT AT_MRY3=0, AT_MRY6=0, 1CYCLE_CP=0, AL_TM07=0	/		/	     OUT AT_MRY3=0, AT_MRY6=0, 1CYCLE_CP=0, AL_TM07=0
+				035	=		/		/		/		/	OUT AT_STATUS=1	/		/		/	    OUT AT_STATUS=1 
+				036	=		/	WT#	/		/	I_S_AUTO_EX=1 & MA=1	/		/		/		/	 WT#  I_S_AUTO_EX=1 & MA=1  
+				037	=	L150	/	IF	/	MDKT=0	/		/	GOTO L200	/		/		/	L150 IF MDKT=0  GOTO L200 
+				038	=		/	IF	/	MO=1	/	AT_MDKT=1	/	GOTO L200	/		/		/	 IF MO=1 AT_MDKT=1 GOTO L200 
+				039	=		/		/		/		/	OUT AT_FL3=1, AT_FL3S=1	/		/		/	    OUT AT_FL3=1, AT_FL3S=1 
+				040	=		/	WT*	/	M02_EN=1	/		/	MOV AX3 AX5 PT103	/	OUT AT_MDKT=1	/	3	/	 WT* M02_EN=1  MOV AX3 AX5 PT103 OUT AT_MDKT=1
+				041	=	L200	/	WT	/	M03_EN=1	/	MOPS=0	/		/		/		/	L200 WT M03_EN=1 MOPS=0  
+				042	=		/		/		/		/		/	DELAY TMP127	/		/	     DELAY TMP127
+				043	=		/	IF	/	MDS=1	/		/	SPRUN PROG 1801	/		/		/	 IF MDS=1  SPRUN PROG 1801 
+				044	=		/	IF	/	MDSO=1	/		/	GOTO L320	/		/		/	 IF MDSO=1  GOTO L320 
+				045	=		/	IF	/	PASS01=1	/		/	GOTO L210	/		/		/	 IF PASS01=1  GOTO L210 
+				046	=		/	WT	/	M03_EN=1	/	MOPS=0	/	OUT AT_FL3=0	/		/		/	 WT M03_EN=1 MOPS=0 OUT AT_FL3=0 
+				047	=		/	IF	/	MDISF=1	/		/	CALL PROG 1300	/		/		/	 IF MDISF=1  CALL PROG 1300 
+				048	=		/	*	/		/		/	MOV AX3 PT104	/	OUT M03_EX=1, AT_MA_CK=1	/		/	 *   MOV AX3 PT104 OUT M03_EX=1, AT_MA_CK=1
+				049	=		/		/		/		/		/	DELAY TMP01	/	4	/	     DELAY TMP01
+				050	=		/	WT*	/	M04_EN=1	/		/	MOV AX2 PT105	/		/		/	 WT* M04_EN=1  MOV AX2 PT105 
+				051	=		/	IF	/	MDPPS=1	/		/	CALL PROG 1355	/		/		/	 IF MDPPS=1  CALL PROG 1355 
+				052	=		/	IF	/	PASS01=0	/		/	GOTO L220	/		/		/	 IF PASS01=0  GOTO L220 
+				053	=	L210	/	WT*	/	M03_EN=1	/	MOPS=0	/	OUT AT_FL3=0	/		/		/	L210 WT* M03_EN=1 MOPS=0 OUT AT_FL3=0 
+				054	=		/		/		/		/	MOV AX3 PT104 PASS PS1	/	OUT M03_EX=1	/		/	    MOV AX3 PT104 PASS PS1 OUT M03_EX=1
+				055	=		/	WT*	/	M04_EN=1	/		/	MOV AX2 PT105	/		/		/	 WT* M04_EN=1  MOV AX2 PT105 
+				056	=	L220	/	IF	/	ARM_RLS=0	/		/	GOTO L230	/		/		/	L220 IF ARM_RLS=0  GOTO L230 
+				057	=		/		/		/		/	SVFON AX2	/		/		/	    SVFON AX2 
+				058	=		/		/		/		/		/	DELAY TMP158	/		/	     DELAY TMP158
+				059	=	L230	/		/		/		/		/	DELAY TMP02	/	6	/	L230     DELAY TMP02
+				060	=		/	WT	/		/	MME=1	/		/	OUT M03_EX=0	/		/	 WT  MME=1  OUT M03_EX=0
+				061	=		/	IF	/	ARM_RLS=0	/		/	GOTO L240	/		/		/	 IF ARM_RLS=0  GOTO L240 
+				062	=		/		/		/		/	SVFOFF AX2	/		/		/	    SVFOFF AX2 
+				063	=		/		/		/		/		/	DELAY TMP158	/		/	     DELAY TMP158
+				064	=	L240	/	WT*	/		/	M05_EN=1	/		/	OUT M05_EX=1	/		/	L240 WT*  M05_EN=1  OUT M05_EX=1
+				065	=		/	WT	/		/	M05_CP=1&M22_CP=1	/		/	OUT M05_EX=0	/	7	/	 WT  M05_CP=1&M22_CP=1  OUT M05_EX=0
+				066	=		/	IF	/	MDPPS=1	/		/	CALL PROG 1356	/		/		/	 IF MDPPS=1  CALL PROG 1356 
+				067	=		/	IF	/	MMDSC=1	/		/	CALL PROG 1201	/		/		/	 IF MMDSC=1  CALL PROG 1201 
+				068	=		/	IF	/	MMDCS=1	/		/	CALL PROG 1103	/		/		/	 IF MMDCS=1  CALL PROG 1103 
+				069	=		/	IF	/	MPASS01_B=1	/		/	GOTO L310	/		/		/	 IF MPASS01_B=1  GOTO L310 
+				070	=		/	WT*	/	M06_EN=1	/		/	MOV AX2 PT106	/	OUT M06_EX=1	/		/	 WT* M06_EN=1  MOV AX2 PT106 OUT M06_EX=1
+				071	=		/		/		/		/		/	DELAY TMP07	/	8	/	     DELAY TMP07
+				072	=		/	WT*	/		/	TMU_AL1=0	/		/		/		/	 WT*  TMU_AL1=0  
+				073	=		/	IF	/	MMDSC=1	/		/	CALL PROG 1202	/		/		/	 IF MMDSC=1  CALL PROG 1202 
+				074	=		/	IF	/	MDK=0	/		/	GOTO L300	/		/		/	 IF MDK=0  GOTO L300 
+				075	=		/	IF	/	MDK=1	/		/	CALL PROG 1122	/		/		/	 IF MDK=1  CALL PROG 1122 
+				076	=	L300	/	WT	/		/	MMEB=1	/		/	OUT M06_EX=0	/		/	L300 WT  MMEB=1  OUT M06_EX=0
+				077	=		/	IF	/	STEP1=1	/		/	GOTO L308	/		/		/	 IF STEP1=1  GOTO L308 
+				078	=	L305	/	IF	/	MMDIS=1 & MDISF=0	/		/	CALL PROG 1300	/		/		/	L305 IF MMDIS=1 & MDISF=0  CALL PROG 1300 
+				079	=		/	IF	/	STEP3=1	/		/	GOTO L305	/		/		/	 IF STEP3=1  GOTO L305 
+				080	=		/	IF	/	MMDR1=1 & SERVO_A=0	/		/	CALL PROG 1109	/		/		/	 IF MMDR1=1 & SERVO_A=0  CALL PROG 1109 
+				081	=		/	IF	/	MMDR1=1 & SERVO_A=1	/		/	MOV AX7 PT106	/	DELAY TMP36	/		/	 IF MMDR1=1 & SERVO_A=1  MOV AX7 PT106 DELAY TMP36
+				082	=		/	WT*	/	M07_EN=1	/		/	MOV AX3 PT107	/	OUT M07_EX=1	/	9	/	 WT* M07_EN=1  MOV AX3 PT107 OUT M07_EX=1
+				083	=		/	IF	/	PASS01=0 | MPASS01_B=0	/		/	GOTO L320	/		/		/	 IF PASS01=0 | MPASS01_B=0  GOTO L320 
+				084	=	L310	/	WT*	/	M06_EN=1	/		/	MOV AX2 PT106 PASS PS2	/		/		/	L310 WT* M06_EN=1  MOV AX2 PT106 PASS PS2 
+				085	=		/		/		/		/	MOV AX3 PT107	/	OUT M07_EX=1	/	9	/	    MOV AX3 PT107 OUT M07_EX=1
+				086	=	L320	/	IF	/	MDS=0	/		/	GOTO L330	/		/		/	L320 IF MDS=0  GOTO L330 
+				087	=		/	WT	/	AT_PRUN_CP=1	/		/		/		/		/	 WT AT_PRUN_CP=1   
+				088	=	L330	/	WT	/	ML3=1	/	TMU_AL1=0	/	OUT AT_PRUN_CP=0	/	OUT M07_EX=0, M35_EX=0	/		/	L330 WT ML3=1 TMU_AL1=0 OUT AT_PRUN_CP=0 OUT M07_EX=0, M35_EX=0
+				089	=		/	IF	/	MD4ST=1	/		/	GOTO L335	/		/		/	 IF MD4ST=1  GOTO L335 
+				090	=		/	WT	/		/	ALARM=0	/		/		/		/	 WT  ALARM=0  
+				091	=	L335	/	IF	/	MMDR1=1 & MMDR2=0	/		/	CALL PROG 1108	/		/		/	L335 IF MMDR1=1 & MMDR2=0  CALL PROG 1108 
+				092	=		/	IF	/	STEP1=1	/		/	GOTO L110	/		/		/	 IF STEP1=1  GOTO L110 
+				093	=		/	IF	/	STEP2=1	/		/	GOTO L340	/		/		/	 IF STEP2=1  GOTO L340 
+				094	=	L340	/		/		/		/	OUT AT_STATUS=1	/		/		/	L340    OUT AT_STATUS=1 
+				095	=		/	IF	/	MDWS_K_SK=1	/		/	GOTO L750	/		/		/	 IF MDWS_K_SK=1  GOTO L750 
+				096	=		/	IF	/	MMDR2=1	/		/	CALL PROG 1107	/		/		/	 IF MMDR2=1  CALL PROG 1107 
+				097	=		/	IF	/	MMDTA=1	/		/	CALL PROG 1102	/		/		/	 IF MMDTA=1  CALL PROG 1102 
+				098	=		/	IF	/	MDS=0 & MMDSS2=1	/		/	SPRUN PROG 1802	/		/		/	 IF MDS=0 & MMDSS2=1  SPRUN PROG 1802 
+				099	=		/	IF	/	MDS=0 | MDSK=1	/		/	GOTO L400	/		/		/	 IF MDS=0 | MDSK=1  GOTO L400 
+				100	=		/	IF	/	AL_CO_EX=1	/		/	MOV AX1 AX2 PT109	/		/		/	 IF AL_CO_EX=1  MOV AX1 AX2 PT109 
+				101	=		/	IF	/	AL_CO_EX=1	/		/	MOV AX4 PT109	/		/		/	 IF AL_CO_EX=1  MOV AX4 PT109 
+				102	=		/	IF	/	AL_CO_EX=1	/		/	GOTO L350	/		/		/	 IF AL_CO_EX=1  GOTO L350 
+				103	=		/	WT*	/	M08_EN=1	/		/	MOV AX1 AX2 AX4 PT109	/		/	86	/	 WT* M08_EN=1  MOV AX1 AX2 AX4 PT109 
+				104	=	L350	/	IF	/	MMDSTA=1	/		/	CALL PROG 1104	/		/		/	L350 IF MMDSTA=1  CALL PROG 1104 
+				105	=		/	WT*	/	M36_EN=1	/		/	MOV AX5 PT110	/		/		/	 WT* M36_EN=1  MOV AX5 PT110 
+				106	=		/		/		/		/		/	DELAY TMP24	/	87	/	     DELAY TMP24
+				107	=		/	WT*	/	M37_EN=1	/		/	OUT M37_EX=1	/		/		/	 WT* M37_EN=1  OUT M37_EX=1 
+				108	=		/	WT	/	M37_CP=1	/		/	OUT M37_EX=0	/		/	88	/	 WT M37_CP=1  OUT M37_EX=0 
+				109	=		/	WT*	/	M38_EN=1	/		/	MOV AX5 PT111	/		/	89	/	 WT* M38_EN=1  MOV AX5 PT111 
+				110	=		/	IF	/		/	MDSO=1	/		/	OUT AT_MRY6=1	/		/	 IF  MDSO=1  OUT AT_MRY6=1
+				111	=		/	IF	/	MMDSTA=1 & SERVO_C=0	/		/	CALL PROG 1105	/		/		/	 IF MMDSTA=1 & SERVO_C=0  CALL PROG 1105 
+				112	=		/	IF	/	MMDSTA=1 & SERVO_C=1	/		/	MOV AX6 PT108	/	DELAY TMP09	/		/	 IF MMDSTA=1 & SERVO_C=1  MOV AX6 PT108 DELAY TMP09
+				113	=		/	IF	/	MDSO=1	/		/	GOTO L800	/		/		/	 IF MDSO=1  GOTO L800 
+				114	=	L400	/	IF	/	MDW=0 | MDK=1	/		/	GOTO L800	/		/		/	L400 IF MDW=0 | MDK=1  GOTO L800 
+				115	=		/	IF	/	MMDTF=0	/		/	GOTO L500	/		/		/	 IF MMDTF=0  GOTO L500 
+				116	=		/	IF	/	MMDSS2=1	/		/	SPRUN PROG 1802	/		/		/	 IF MMDSS2=1  SPRUN PROG 1802 
+				117	=		/	WT*	/	M08_EN=1	/		/	MOV AX1 AX2 AX4 PT112	/		/	10	/	 WT* M08_EN=1  MOV AX1 AX2 AX4 PT112 
+				118	=		/	IF	/	SERVO_C=0	/		/	CALL PROG 1105	/		/		/	 IF SERVO_C=0  CALL PROG 1105 
+				119	=		/	IF	/	SERVO_C=1	/		/	MOV AX6 PT112	/	DELAY TMP09	/	11	/	 IF SERVO_C=1  MOV AX6 PT112 DELAY TMP09
+				120	=		/	WT*	/	M10_EN=1	/		/	MOV AX3 PT113	/		/		/	 WT* M10_EN=1  MOV AX3 PT113 
+				121	=		/		/		/		/		/	DELAY TMP12	/	12	/	     DELAY TMP12
+				122	=		/	WT*	/	M11_EN=1	/		/	OUT M11_EX=1	/		/		/	 WT* M11_EN=1  OUT M11_EX=1 
+				123	=		/	WT	/	M11_CP=1	/		/	OUT M11_EX=0	/		/	13	/	 WT M11_CP=1  OUT M11_EX=0 
+				124	=		/	WT*	/	M12_EN=1	/		/	MOV AX3 PT114	/		/	14	/	 WT* M12_EN=1  MOV AX3 PT114 
+				125	=		/	IF	/	MMDSS=1 | MMDTA=1	/		/	GOTO L500	/		/		/	 IF MMDSS=1 | MMDTA=1  GOTO L500 
+				126	=		/		/		/		/	CALL PROG 1104	/		/	15	/	    CALL PROG 1104 
+				127	=	L500	/	IF	/	MNG1=0	/		/	GOTO L510	/		/		/	L500 IF MNG1=0  GOTO L510 
+				128	=		/	IF	/	MNG1=1	/		/	CALL PROG 1110	/		/		/	 IF MNG1=1  CALL PROG 1110 
+				129	=		/	IF	/	AT_MNG=1 | MDIR_CP=0	/		/	GOTO L660	/		/		/	 IF AT_MNG=1 | MDIR_CP=0  GOTO L660 
+				130	=	L510	/	IF	/	MSAMPLE=1	/		/	CALL PROG 1111	/		/		/	L510 IF MSAMPLE=1  CALL PROG 1111 
+				131	=		/	IF	/	MSAMPLE=1	/		/	GOTO L650	/		/		/	 IF MSAMPLE=1  GOTO L650 
+				132	=		/	WT	/	M08_EN=1	/		/	OUT M08_EX=1	/		/		/	 WT M08_EN=1  OUT M08_EX=1 
+				133	=		/	IF	/	MMDSS2=1 & SERVO_C=0	/		/	OUT M18_EX=1	/		/		/	 IF MMDSS2=1 & SERVO_C=0  OUT M18_EX=1 
+				134	=		/	IF	/	MDNT1=1	/		/	CALL PROG 1700	/		/		/	 IF MDNT1=1  CALL PROG 1700 
+				135	=		/	IF	/	MMDSS2=0 | SERVO_C=0	/		/	CALL PROG 1114	/		/		/	 IF MMDSS2=0 | SERVO_C=0  CALL PROG 1114 
+				136	=		/	IF	/	MMDSS2=1 & SERVO_C=1	/		/	CALL PROG 1115	/		/		/	 IF MMDSS2=1 & SERVO_C=1  CALL PROG 1115 
+				137	=		/	IF	/	MMDP1=1 & P_OFFSET=1	/		/	MOV AX1 AX2 AX4 PT061	/		/		/	 IF MMDP1=1 & P_OFFSET=1  MOV AX1 AX2 AX4 PT061 
+				138	=		/	*	/		/		/	OUT M08_EX=0	/		/	16	/	 *   OUT M08_EX=0 
+				139	=		/	IF	/	MMDR2=1 & MMDR3=0	/		/	CALL PROG 1108	/		/		/	 IF MMDR2=1 & MMDR3=0  CALL PROG 1108 
+				140	=		/	IF	/	MMDSS=0	/		/	GOTO L600	/		/		/	 IF MMDSS=0  GOTO L600 
+				141	=		/	IF	/	SERVO_C=0	/		/	CALL PROG 1105	/		/		/	 IF SERVO_C=0  CALL PROG 1105 
+				142	=		/	IF	/	SERVO_C=1	/		/	MOV AX6 PT115	/	DELAY TMP09	/	17	/	 IF SERVO_C=1  MOV AX6 PT115 DELAY TMP09
+				143	=	L600	/	IF	/	MMDSS=0	/		/	CALL PROG 1104	/		/		/	L600 IF MMDSS=0  CALL PROG 1104 
+				144	=		/	IF	/	MMDR3=1	/		/	CALL PROG 1107	/		/		/	 IF MMDR3=1  CALL PROG 1107 
+				145	=		/		/		/		/	OUT M18_EX=0	/		/		/	    OUT M18_EX=0 
+				146	=		/	WT	/	RD=1	/		/		/		/		/	 WT RD=1   
+				147	=		/	IF	/	P_SLOW=1	/		/	MOV AX3 PT062	/		/		/	 IF P_SLOW=1  MOV AX3 PT062 
+				148	=		/	IF	/	MMDP1=0 & P_SLOW=0	/		/	MOV AX3 PT116	/		/		/	 IF MMDP1=0 & P_SLOW=0  MOV AX3 PT116 
+				149	=		/	IF	/	MMDP1=0 & P_SLOW=1	/		/	MOV AX3 PT061	/		/		/	 IF MMDP1=0 & P_SLOW=1  MOV AX3 PT061 
+				150	=		/	IF	/	MMDP1=1	/		/	PMV 1 1 AX3 PT142	/		/		/	 IF MMDP1=1  PMV 1 1 AX3 PT142 
+				151	=		/	*	/		/		/		/	DELAY TMP10	/	18	/	 *    DELAY TMP10
+				152	=		/	IF	/	MMDSS3=0	/		/	GOTO L610	/		/		/	 IF MMDSS3=0  GOTO L610 
+				153	=		/	IF	/	SERVO_C=0	/		/	CALL PROG 1105	/		/		/	 IF SERVO_C=0  CALL PROG 1105 
+				154	=		/	IF	/	SERVO_C=1	/		/	MOV AX6 PT115	/	DELAY TMP09	/		/	 IF SERVO_C=1  MOV AX6 PT115 DELAY TMP09
+				155	=	L610	/	IF	/	MDCN=1	/		/	CALL PROG 1211	/		/		/	L610 IF MDCN=1  CALL PROG 1211 
+				156	=		/	WT*	/	M14_EN=1	/		/	OUT M14_EX=1	/		/		/	 WT* M14_EN=1  OUT M14_EX=1 
+				157	=		/	WT	/	M14_CP=1	/		/	OUT M14_EX=0	/		/	19	/	 WT M14_CP=1  OUT M14_EX=0 
+				158	=		/	WT*	/	M12_EN=1	/		/	MOV AX3 PT117	/		/	20	/	 WT* M12_EN=1  MOV AX3 PT117 
+				159	=		/	IF	/	MMD2K=1	/		/	CALL PROG 1116	/		/		/	 IF MMD2K=1  CALL PROG 1116 
+				160	=		/	IF	/	MMD3K=1	/		/	CALL PROG 1117	/		/		/	 IF MMD3K=1  CALL PROG 1117 
+				161	=		/	IF	/	MMD4K=1	/		/	CALL PROG 1118	/		/		/	 IF MMD4K=1  CALL PROG 1118 
+				162	=		/	WT	/	ML3=1	/		/		/	OUT AT_MRY6=1	/		/	 WT ML3=1   OUT AT_MRY6=1
+				163	=		/	IF	/	STEP2=1	/		/	GOTO L650	/		/		/	 IF STEP2=1  GOTO L650 
+				164	=	L630	/	IF	/	MMDIS=1 & ML4IS=0	/		/	CALL PROG 1600	/		/		/	L630 IF MMDIS=1 & ML4IS=0  CALL PROG 1600 
+				165	=		/	IF	/	STEP4=1	/		/	GOTO L630	/		/		/	 IF STEP4=1  GOTO L630 
+				166	=	L650	/	IF	/	MSAMPLE=0	/		/	GOTO L660	/		/		/	L650 IF MSAMPLE=0  GOTO L660 
+				167	=		/		/		/		/	OUT AT_SP_RST=1	/		/		/	    OUT AT_SP_RST=1 
+				168	=		/	WT	/	MSAMPLE=0	/		/	OUT AT_SP_RST=0	/		/		/	 WT MSAMPLE=0  OUT AT_SP_RST=0 
+				169	=	L660	/	IF	/	MMDR3=1 & MMDR2=0	/		/	CALL PROG 1108	/		/		/	L660 IF MMDR3=1 & MMDR2=0  CALL PROG 1108 
+				170	=		/	IF	/	M_NOT_L8=1	/		/	GOTO L700	/		/		/	 IF M_NOT_L8=1  GOTO L700 
+				171	=		/	IF	/	MMDSS2=1	/		/	GOTO L700	/		/		/	 IF MMDSS2=1  GOTO L700 
+				172	=		/		/		/		/	CALL PROG 1104	/		/	21	/	    CALL PROG 1104 
+				173	=	L700	/	IF	/	MMDR2=1	/		/	CALL PROG 1107	/		/		/	L700 IF MMDR2=1  CALL PROG 1107 
+				174	=		/	IF	/	MMDTB=0	/		/	GOTO L800	/		/		/	 IF MMDTB=0  GOTO L800 
+				175	=		/	WT*	/	M15_EN=1	/		/	MOV AX1 AX2 AX4 PT112	/		/	22	/	 WT* M15_EN=1  MOV AX1 AX2 AX4 PT112 
+				176	=		/	IF	/	SERVO_C=0	/		/	CALL PROG 1105	/		/		/	 IF SERVO_C=0  CALL PROG 1105 
+				177	=		/	IF	/	SERVO_C=1	/		/	MOV AX6 PT112	/	DELAY TMP09	/	23	/	 IF SERVO_C=1  MOV AX6 PT112 DELAY TMP09
+				178	=		/	WT*	/	M10_EN=1	/		/	MOV AX3 PT113	/		/		/	 WT* M10_EN=1  MOV AX3 PT113 
+				179	=		/		/		/		/		/	DELAY TMP12	/	24	/	     DELAY TMP12
+				180	=		/	WT*	/	M11_EN=1	/		/	OUT M11_EX=1	/		/		/	 WT* M11_EN=1  OUT M11_EX=1 
+				181	=		/	WT	/	M11_CP=1	/		/	OUT M11_EX=0	/		/	25	/	 WT M11_CP=1  OUT M11_EX=0 
+				182	=		/	WT*	/	M12_EN=1	/		/	MOV AX3 PT114	/		/	26	/	 WT* M12_EN=1  MOV AX3 PT114 
+				183	=		/	IF	/	MMDTA=1	/		/	GOTO L800	/		/		/	 IF MMDTA=1  GOTO L800 
+				184	=		/	IF	/	MMDSS2=1	/		/	GOTO L800	/		/		/	 IF MMDSS2=1  GOTO L800 
+				185	=		/		/		/		/	CALL PROG 1104	/		/	27	/	    CALL PROG 1104 
+				186	=		/		/		/		/	GOTO L800	/		/		/	    GOTO L800 
+				187	=	L750	/	IF	/	MDWS_K_SK=1 & MDYT=0	/		/	GOTO L920	/		/		/	L750 IF MDWS_K_SK=1 & MDYT=0  GOTO L920 
+				188	=		/	IF	/	MMDR2=1	/		/	CALL PROG 1107	/		/		/	 IF MMDR2=1  CALL PROG 1107 
+				189	=		/	IF	/	MMDTA=1	/		/	CALL PROG 1102	/		/		/	 IF MMDTA=1  CALL PROG 1102 
+				190	=	L800	/	IF	/	STEP1=1	/		/	GOTO L110	/		/		/	L800 IF STEP1=1  GOTO L110 
+				191	=		/	IF	/	STEP2=1	/		/	GOTO L340	/		/		/	 IF STEP2=1  GOTO L340 
+				192	=		/	IF	/	AL_CO_EX=1	/		/	CALL PROG 1100	/		/		/	 IF AL_CO_EX=1  CALL PROG 1100 
+				193	=		/	IF	/	MDYT=0	/		/	GOTO L900	/		/		/	 IF MDYT=0  GOTO L900 
+				194	=		/	IF	/	MMDSS2=1 & MMDTA=0	/		/	SPRUN PROG 1803	/		/		/	 IF MMDSS2=1 & MMDTA=0  SPRUN PROG 1803 
+				195	=		/	IF	/	XMO=1	/	MOPS=0	/	GOTO L810	/		/		/	 IF XMO=1 MOPS=0 GOTO L810 
+				196	=		/	WT*	/	M15_EN=1	/		/	MOV AX1 AX2 AX4 PT126	/		/	28	/	 WT* M15_EN=1  MOV AX1 AX2 AX4 PT126 
+				197	=		/	IF	/	MDAS_CP=1	/		/	GOTO L999	/		/		/	 IF MDAS_CP=1  GOTO L999 
+				198	=	L810	/	IF	/	ALCO_END=1	/		/	GOTO L950	/		/		/	L810 IF ALCO_END=1  GOTO L950 
+				199	=		/	IF	/	AL_CO_EX=0	/		/	GOTO L820	/		/		/	 IF AL_CO_EX=0  GOTO L820 
+				200	=		/		/		/		/	OUT AT_ALCO_CP=1	/		/		/	    OUT AT_ALCO_CP=1 
+				201	=		/	WT	/	AL_CO_CP=1	/		/	OUT AT_ALCO_CP=0	/		/		/	 WT AL_CO_CP=1  OUT AT_ALCO_CP=0 
+				202	=	L820	/		/		/		/		/	OUT 1CYCLE_CP=1	/		/	L820     OUT 1CYCLE_CP=1
+				203	=		/	WT	/		/	P_CYCLE=0	/		/		/		/	 WT  P_CYCLE=0  
+				204	=		/	IF	/	AT_1CYCLE_EX=0	/		/	GOTO L90	/		/		/	 IF AT_1CYCLE_EX=0  GOTO L90 
+				205	=		/	IF	/	AT_1CYCLE_EX=1	/		/	GOTO L960	/		/		/	 IF AT_1CYCLE_EX=1  GOTO L960 
+				206	=	L900	/	IF	/	MMDTA=0 | LS9=1	/		/	GOTO L910	/		/		/	L900 IF MMDTA=0 | LS9=1  GOTO L910 
+				207	=		/	IF	/	SERVO_C=0	/		/	CALL PROG 1105	/		/		/	 IF SERVO_C=0  CALL PROG 1105 
+				208	=		/	IF	/	SERVO_C=1	/		/	MOV AX6 PT108	/	DELAY TMP09	/	17	/	 IF SERVO_C=1  MOV AX6 PT108 DELAY TMP09
+				209	=	L910	/	IF	/	MMDTA=1	/		/	CALL PROG 1101	/		/		/	L910 IF MMDTA=1  CALL PROG 1101 
+				210	=		/	IF	/	MMDSS2=1	/		/	SPRUN PROG 1803	/		/		/	 IF MMDSS2=1  SPRUN PROG 1803 
+				211	=	L920	/	IF	/	MDAS_CP=1	/		/	CALL PROG 1901	/		/		/	L920 IF MDAS_CP=1  CALL PROG 1901 
+				212	=		/	IF	/	MDAS_CP=1	/		/	GOTO L999	/		/		/	 IF MDAS_CP=1  GOTO L999 
+				213	=		/	IF	/	AL_CO_EX=0	/		/	GOTO L930	/		/		/	 IF AL_CO_EX=0  GOTO L930 
+				214	=		/		/		/		/	OUT AT_ALCO_CP=1	/		/		/	    OUT AT_ALCO_CP=1 
+				215	=		/	WT	/	AL_CO_CP=1	/		/	OUT AT_ALCO_CP=0	/		/		/	 WT AL_CO_CP=1  OUT AT_ALCO_CP=0 
+				216	=	L930	/		/		/		/	GOTO L100	/		/		/	L930    GOTO L100 
+				217	=	L950	/	IF	/	CHK_CHANGE=0	/		/	GOTO L999	/		/		/	L950 IF CHK_CHANGE=0  GOTO L999 
+				218	=		/	IF	/	MMDR2=1	/		/	CALL PROG 1107	/		/		/	 IF MMDR2=1  CALL PROG 1107 
+				219	=		/	IF	/	MMDTA=1	/		/	CALL PROG 1102	/		/		/	 IF MMDTA=1  CALL PROG 1102 
+				220	=		/	WT*	/	M08_EN=1	/		/	MOV AX1 AX2 AX4 PT124	/		/		/	 WT* M08_EN=1  MOV AX1 AX2 AX4 PT124 
+				221	=		/		/		/		/	CALL PROG 1104	/		/		/	    CALL PROG 1104 
+				222	=		/	IF	/	MMDR2=1	/		/	CALL PROG 1108	/		/		/	 IF MMDR2=1  CALL PROG 1108 
+				223	=		/	WT*	/	M10_EN=1	/		/	MOV AX3 PT124	/		/		/	 WT* M10_EN=1  MOV AX3 PT124 
+				224	=		/		/		/	 	/	OUT MSG_24=1	/		/		/	     OUT MSG_24=1 
+				225	=		/	WT	/	MSG_24=1	/		/	GOTO L999	/		/		/	 WT MSG_24=1  GOTO L999 
+				226	=	L960	/		/		/		/	CALL PROG 1901	/		/		/	L960    CALL PROG 1901 
+				227	=		/		/		/		/	OUT AT_1CYCLE_CP=1	/		/		/	    OUT AT_1CYCLE_CP=1 
+				228	=	L999	/		/		/		/	OUT AT_END=1	/		/		/	L999    OUT AT_END=1 
+				229	=		/		/		/		/	END	/		/		/	    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1100">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MDW=0	/		/	MOV AX2 PT125	/		/		/	 IF MDW=0  MOV AX2 PT125 
+				002	=		/	IF	/	MDS=0	/		/	MOV AX4 PT125	/		/		/	 IF MDS=0  MOV AX4 PT125 
+				003	=		/	IF	/	MDW=0	/		/	OUT AX02_NOUSE=1,  AX03_NOUSE=1	/		/		/	 IF MDW=0  OUT AX02_NOUSE=1,  AX03_NOUSE=1 
+				004	=		/	IF	/	MDS=0	/		/	OUT AX04_NOUSE=1,  AX05_NOUSE=1	/		/		/	 IF MDS=0  OUT AX04_NOUSE=1,  AX05_NOUSE=1 
+				005	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1101">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT*	/	M21_EN=1	/		/	MOV AX1 AX2 AX4 PT108 	/		/		/	 WT* M21_EN=1  MOV AX1 AX2 AX4 PT108  
+				002	=		/		/		/		/	CALL PROG 1104	/		/		/	    CALL PROG 1104 
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1102">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	LS9=1	/		/	GOTO L1102	/		/		/	 IF LS9=1  GOTO L1102 
+				002	=		/	WT*	/	M16_EN=1	/		/	MOV AX1 AX2 AX4 PT108 	/		/		/	 WT* M16_EN=1  MOV AX1 AX2 AX4 PT108  
+				003	=		/	IF	/	SERVO_C=0	/		/	CALL PROG 1105	/		/		/	 IF SERVO_C=0  CALL PROG 1105 
+				004	=		/	IF	/	SERVO_C=1	/		/	MOV AX6 PT108	/	DELAY TMP09	/		/	 IF SERVO_C=1  MOV AX6 PT108 DELAY TMP09
+				005	=	L1102	/		/		/		/	RET	/		/		/	L1102    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1103">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT*	/	M06_EN=1	/		/	MOV AX2 PT127	/	DELAY TMP37	/		/	 WT* M06_EN=1  MOV AX2 PT127 DELAY TMP37
+				002	=		/		/		/		/	MOV AX3 PT127	/	DELAY TMP39	/		/	    MOV AX3 PT127 DELAY TMP39
+				003	=		/		/		/		/	MOV AX1 PT127	/	DELAY TMP38	/		/	    MOV AX1 PT127 DELAY TMP38
+				004	=		/	IF	/	MMDCS2=0	/		/	GOTO L1103	/		/		/	 IF MMDCS2=0  GOTO L1103 
+				005	=		/	WT*	/	M06_EN=1	/		/	MOV AX2 PT128	/	DELAY TMP40	/		/	 WT* M06_EN=1  MOV AX2 PT128 DELAY TMP40
+				006	=		/	WT*	/		/		/	MOV AX3 PT128	/	DELAY TMP42	/		/	 WT*   MOV AX3 PT128 DELAY TMP42
+				007	=		/	WT*	/		/		/	MOV AX1 PT128	/	DELAY TMP41	/		/	 WT*   MOV AX1 PT128 DELAY TMP41
+				008	=		/	IF	/	MMDCS3=0	/		/	GOTO L1103	/		/		/	 IF MMDCS3=0  GOTO L1103 
+				009	=		/	WT*	/	M06_EN=1	/		/	MOV AX2 PT129	/	DELAY TMP43	/		/	 WT* M06_EN=1  MOV AX2 PT129 DELAY TMP43
+				010	=		/	WT*	/		/		/	MOV AX3 PT129	/	DELAY TMP45	/		/	 WT*   MOV AX3 PT129 DELAY TMP45
+				011	=		/	WT*	/		/		/	MOV AX1 PT129	/	DELAY TMP44	/		/	 WT*   MOV AX1 PT129 DELAY TMP44
+				012	=	L1103	/		/		/		/	RET	/		/		/	L1103    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1104">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	M13_EN=1	/		/		/		/		/	 WT M13_EN=1   
+				002	=		/	IF	/	SERVO_C=1	/		/	GOTO L1141	/		/		/	 IF SERVO_C=1  GOTO L1141 
+				003	=		/		/		/		/	OUT M13_EX=1, M18_EX=0	/		/		/	    OUT M13_EX=1, M18_EX=0 
+				004	=		/	WT*	/	M13_CP=1	/		/	OUT M13_EX=0	/		/		/	 WT* M13_CP=1  OUT M13_EX=0 
+				005	=		/		/		/		/	GOTO L1142	/		/		/	    GOTO L1142 
+				006	=	L1141	/	*	/		/		/	MOV AX6 PT102	/		/		/	L1141 *   MOV AX6 PT102 
+				007	=	L1142	/		/		/		/	RET	/		/		/	L1142    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1105">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	M09_EN=1	/		/	OUT M09_EX=1	/		/		/	 WT M09_EN=1  OUT M09_EX=1 
+				002	=		/	WT*	/	M09_CP=1	/		/	OUT M09_EX=0	/		/		/	 WT* M09_CP=1  OUT M09_EX=0 
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1106">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/		/	OUT AT_STATUS=1	/		/	     OUT AT_STATUS=1
+				002	=		/	IF	/	MMDR1=1 & MMDR2=0	/		/	CALL PROG 1108	/		/		/	 IF MMDR1=1 & MMDR2=0  CALL PROG 1108 
+				003	=		/	IF	/	MMDR2=1	/		/	CALL PROG 1107	/		/		/	 IF MMDR2=1  CALL PROG 1107 
+				004	=		/	IF	/	MMDTA=1	/		/	CALL PROG 1102	/		/		/	 IF MMDTA=1  CALL PROG 1102 
+				005	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1107">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	M23_EN=1	/		/		/		/		/	 WT M23_EN=1   
+				002	=		/	IF	/	SERVO_A=1	/		/	GOTO L1145	/		/		/	 IF SERVO_A=1  GOTO L1145 
+				003	=		/		/		/		/	OUT M23_EX=1	/		/		/	    OUT M23_EX=1 
+				004	=		/	WT*	/	M23_CP=1	/		/	OUT M23_EX=0	/		/		/	 WT* M23_CP=1  OUT M23_EX=0 
+				005	=		/		/		/		/	GOTO L1146	/		/		/	    GOTO L1146 
+				006	=	L1145	/	*	/		/		/	MOV AX7 PT115	/	DELAY TMP36	/		/	L1145 *   MOV AX7 PT115 DELAY TMP36
+				007	=	L1146	/		/		/		/	RET	/		/		/	L1146    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1108">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	M24_EN=1	/		/		/		/		/	 WT M24_EN=1   
+				002	=		/	IF	/	SERVO_A=1	/		/	GOTO L1147	/		/		/	 IF SERVO_A=1  GOTO L1147 
+				003	=		/		/		/		/	OUT M24_EX=1	/		/		/	    OUT M24_EX=1 
+				004	=		/	WT*	/	M24_CP=1	/		/	OUT M24_EX=0	/		/		/	 WT* M24_CP=1  OUT M24_EX=0 
+				005	=		/		/		/		/	GOTO L1148	/		/		/	    GOTO L1148 
+				006	=	L1147	/	*	/		/		/	MOV AX7 PT102	/	DELAY TMP35	/		/	L1147 *   MOV AX7 PT102 DELAY TMP35
+				007	=	L1148	/		/		/		/	RET	/		/		/	L1148    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1109">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	M23_EN=1	/		/		/		/		/	 WT M23_EN=1   
+				002	=		/	IF	/	SERVO_A=1	/		/	GOTO L1149	/		/		/	 IF SERVO_A=1  GOTO L1149 
+				003	=		/		/		/		/	OUT M23_EX=1	/		/		/	    OUT M23_EX=1 
+				004	=		/	WT*	/	M23_CP=1	/		/	OUT M23_EX=0	/		/		/	 WT* M23_CP=1  OUT M23_EX=0 
+				005	=		/		/		/		/	GOTO L1150	/		/		/	    GOTO L1150 
+				006	=	L1149	/	*	/		/		/	MOV AX7 PT106	/	DELAY TMP36	/		/	L1149 *   MOV AX7 PT106 DELAY TMP36
+				007	=	L1150	/		/		/		/	RET	/		/		/	L1150    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1110">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT*	/	M08_EN=1	/		/	MOV AX1 AX2 AX4 PT118	/		/		/	 WT* M08_EN=1  MOV AX1 AX2 AX4 PT118 
+				002	=		/	IF	/	SERVO_C=0	/		/	CALL PROG 1105	/		/		/	 IF SERVO_C=0  CALL PROG 1105 
+				003	=		/	IF	/	SERVO_C=1	/		/	MOV AX6 PT118	/	DELAY TMP09	/		/	 IF SERVO_C=1  MOV AX6 PT118 DELAY TMP09
+				004	=		/	WT*	/	M10_EN=1	/		/	MOV AX3 PT119	/		/		/	 WT* M10_EN=1  MOV AX3 PT119 
+				005	=		/	IF	/	MDIR_EN=0	/		/	OUT AT_MNG=1	/		/		/	 IF MDIR_EN=0  OUT AT_MNG=1 
+				006	=		/		/		/		/		/	DELAY TMP14	/		/	     DELAY TMP14
+				007	=		/	WT*	/	M14_EN=1	/		/	OUT M14_EX=1, M51_EX=1	/	DELAY TMP15	/		/	 WT* M14_EN=1  OUT M14_EX=1, M51_EX=1 DELAY TMP15
+				008	=		/	WT	/	M14_CP=1	/		/	OUT M14_EX=0, M51_EX=0	/		/		/	 WT M14_CP=1  OUT M14_EX=0, M51_EX=0 
+				009	=		/	WT*	/	M12_EN=1	/		/	MOV AX3 PT120	/		/		/	 WT* M12_EN=1  MOV AX3 PT120 
+				010	=		/	IF	/	MMDTA=1	/		/	GOTO L1110	/		/		/	 IF MMDTA=1  GOTO L1110 
+				011	=		/		/		/		/	CALL PROG 1104	/		/		/	    CALL PROG 1104 
+				012	=	L1110	/		/		/		/	RET	/		/		/	L1110    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1111">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT*	/	M08_EN=1	/		/	MOV AX1 AX2 AX4 PT121	/		/		/	 WT* M08_EN=1  MOV AX1 AX2 AX4 PT121 
+				002	=		/	IF	/	SERVO_C=0	/		/	CALL PROG 1105	/		/		/	 IF SERVO_C=0  CALL PROG 1105 
+				003	=		/	IF	/	SERVO_C=1	/		/	MOV AX6 PT121	/	DELAY TMP09	/		/	 IF SERVO_C=1  MOV AX6 PT121 DELAY TMP09
+				004	=		/	WT*	/	M10_EN=1	/		/	MOV AX3 PT122	/		/		/	 WT* M10_EN=1  MOV AX3 PT122 
+				005	=		/		/		/		/		/	DELAY TMP16	/		/	     DELAY TMP16
+				006	=		/	WT*	/	M14_EN=1	/		/	OUT M14_EX=1	/	DELAY TMP17	/		/	 WT* M14_EN=1  OUT M14_EX=1 DELAY TMP17
+				007	=		/	WT	/	M14_CP=1	/		/	OUT M14_EX=0	/		/		/	 WT M14_CP=1  OUT M14_EX=0 
+				008	=		/	WT*	/	M12_EN=1	/		/	MOV AX3 PT123	/		/		/	 WT* M12_EN=1  MOV AX3 PT123 
+				009	=		/	IF	/	MMDTA=1	/		/	GOTO L1111	/		/		/	 IF MMDTA=1  GOTO L1111 
+				010	=		/		/		/		/	CALL PROG 1104	/		/		/	    CALL PROG 1104 
+				011	=	L1111	/		/		/		/	RET	/		/		/	L1111    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1114">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MMDP1=0 	/		/	MOV AX1 AX2 AX4 PT115 	/		/		/	 IF MMDP1=0   MOV AX1 AX2 AX4 PT115  
+				002	=		/	IF	/	MMDP1=1	/		/	PMV 1 1 AX1 AX2 AX4 PT115	/		/		/	 IF MMDP1=1  PMV 1 1 AX1 AX2 AX4 PT115 
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1115">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MMDSS2=1 & MMDP1=0 & SERVO_C=1	/		/	MOV AX1 AX2 AX4 AX6 PT115 	/		/		/	 IF MMDSS2=1 & MMDP1=0 & SERVO_C=1  MOV AX1 AX2 AX4 AX6 PT115  
+				002	=		/	IF	/	MMDSS2=1 & MMDP1=1 & SERVO_C=1	/		/	PMV 1 1 AX1 AX2 AX4 AX6 PT115	/		/		/	 IF MMDSS2=1 & MMDP1=1 & SERVO_C=1  PMV 1 1 AX1 AX2 AX4 AX6 PT115 
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1116">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	OD=1	/		/	OUT M08_EX=1	/		/		/	 WT OD=1  OUT M08_EX=1 
+				002	=		/	IF	/	MMDP2=0	/		/	MOV AX1 AX2 AX4 PT130 	/		/		/	 IF MMDP2=0  MOV AX1 AX2 AX4 PT130  
+				003	=		/	IF	/	MMDP2=1	/		/	PMV 2 1 AX1 AX2 AX4 PT130	/		/		/	 IF MMDP2=1  PMV 2 1 AX1 AX2 AX4 PT130 
+				004	=		/	IF	/	MMDP2=1 & P_OFFSET=1	/		/	MOV AX1 AX2 AX4 PT063	/		/		/	 IF MMDP2=1 & P_OFFSET=1  MOV AX1 AX2 AX4 PT063 
+				005	=		/	WT*	/	M10_EN=1	/		/	OUT M08_EX=0	/		/	31	/	 WT* M10_EN=1  OUT M08_EX=0 
+				006	=		/	IF	/	P_SLOW=1	/		/	MOV AX3 PT064	/		/		/	 IF P_SLOW=1  MOV AX3 PT064 
+				007	=		/	IF	/	MMDP2=0 & P_SLOW=1	/		/	MOV AX3 PT063	/		/		/	 IF MMDP2=0 & P_SLOW=1  MOV AX3 PT063 
+				008	=		/	IF	/	MMDP2=0 & P_SLOW=0	/		/	MOV AX3 PT131	/		/		/	 IF MMDP2=0 & P_SLOW=0  MOV AX3 PT131 
+				009	=		/	IF	/	MMDP2=1	/		/	PMV 2 1 AX3 PT144	/		/		/	 IF MMDP2=1  PMV 2 1 AX3 PT144 
+				010	=		/	*	/		/		/		/	DELAY TMP46	/	32	/	 *    DELAY TMP46
+				011	=		/	IF	/	MDCN=1	/		/	CALL PROG 1211	/		/		/	 IF MDCN=1  CALL PROG 1211 
+				012	=		/	WT*	/	M20_EN=1	/		/	OUT M20_EX=1	/		/		/	 WT* M20_EN=1  OUT M20_EX=1 
+				013	=		/	WT	/	M20_CP=1	/		/	OUT M20_EX=0	/		/	33	/	 WT M20_CP=1  OUT M20_EX=0 
+				014	=		/	WT*	/	M12_EN=1	/		/	MOV AX3 PT132	/		/	34	/	 WT* M12_EN=1  MOV AX3 PT132 
+				015	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1117">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	OD=1	/		/	OUT M08_EX=1	/		/		/	 WT OD=1  OUT M08_EX=1 
+				002	=		/	IF	/	MMDP3=0	/		/	MOV AX1 AX2 AX4 PT133	/		/		/	 IF MMDP3=0  MOV AX1 AX2 AX4 PT133 
+				003	=		/	IF	/	MMDP3=1	/		/	PMV 3 1 AX1 AX2 AX4 PT133	/		/		/	 IF MMDP3=1  PMV 3 1 AX1 AX2 AX4 PT133 
+				004	=		/	IF	/	MMDP3=1 & P_OFFSET=1	/		/	MOV AX1 AX2 AX4 PT065	/		/		/	 IF MMDP3=1 & P_OFFSET=1  MOV AX1 AX2 AX4 PT065 
+				005	=		/	WT*	/	M10_EN=1	/		/	OUT M08_EX=0	/		/	36	/	 WT* M10_EN=1  OUT M08_EX=0 
+				006	=		/	IF	/	P_SLOW=1	/		/	MOV AX3 PT066	/		/		/	 IF P_SLOW=1  MOV AX3 PT066 
+				007	=		/	IF	/	MMDP3=0 & P_SLOW=1	/		/	MOV AX3 PT065	/		/		/	 IF MMDP3=0 & P_SLOW=1  MOV AX3 PT065 
+				008	=		/	IF	/	MMDP3=0 & P_SLOW=0	/		/	MOV AX3 PT134	/		/		/	 IF MMDP3=0 & P_SLOW=0  MOV AX3 PT134 
+				009	=		/	IF	/	MMDP3=1	/		/	PMV 3 1 AX3 PT146	/		/		/	 IF MMDP3=1  PMV 3 1 AX3 PT146 
+				010	=		/	*	/		/		/		/	DELAY TMP48	/	37	/	 *    DELAY TMP48
+				011	=		/	IF	/	MDCN=1	/		/	CALL PROG 1211	/		/		/	 IF MDCN=1  CALL PROG 1211 
+				012	=		/	WT*	/	M25_EN=1	/		/	OUT M25_EX=1	/		/		/	 WT* M25_EN=1  OUT M25_EX=1 
+				013	=		/	WT	/	M25_CP=1	/		/	OUT M25_EX=0	/		/	38	/	 WT M25_CP=1  OUT M25_EX=0 
+				014	=		/	WT*	/	M12_EN=1	/		/	MOV AX3 PT135	/		/	39	/	 WT* M12_EN=1  MOV AX3 PT135 
+				015	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1118">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	OD=1	/		/	OUT M08_EX=1	/		/		/	 WT OD=1  OUT M08_EX=1 
+				002	=		/	IF	/	MMDP4=0	/		/	MOV AX1 AX2 AX4 PT136	/		/		/	 IF MMDP4=0  MOV AX1 AX2 AX4 PT136 
+				003	=		/	IF	/	MMDP4=1	/		/	PMV 4 1 AX1 AX2 AX4 PT136	/	OUT M12_EX=1	/		/	 IF MMDP4=1  PMV 4 1 AX1 AX2 AX4 PT136 OUT M12_EX=1
+				004	=		/	IF	/	MMDP3=1 & P_OFFSET=1	/		/	MOV AX1 AX2 AX4 PT067	/		/		/	 IF MMDP3=1 & P_OFFSET=1  MOV AX1 AX2 AX4 PT067 
+				005	=		/	WT*	/	M10_EN=1	/		/	OUT M08_EX=0	/		/	41	/	 WT* M10_EN=1  OUT M08_EX=0 
+				006	=		/	IF	/	P_SLOW=1	/		/	MOV AX3 PT068	/		/		/	 IF P_SLOW=1  MOV AX3 PT068 
+				007	=		/	IF	/	MMDP4=0 & P_SLOW=1	/		/	MOV AX3 PT067	/		/		/	 IF MMDP4=0 & P_SLOW=1  MOV AX3 PT067 
+				008	=		/	IF	/	MMDP4=0 & P_SLOW=0	/		/	MOV AX3 PT137	/		/		/	 IF MMDP4=0 & P_SLOW=0  MOV AX3 PT137 
+				009	=		/	IF	/	MMDP4=1	/		/	PMV 4 1 AX3 PT148	/		/		/	 IF MMDP4=1  PMV 4 1 AX3 PT148 
+				010	=		/	*	/		/		/		/	DELAY TMP50	/	42	/	 *    DELAY TMP50
+				011	=		/	IF	/	MDCN=1	/		/	CALL PROG 1211	/		/		/	 IF MDCN=1  CALL PROG 1211 
+				012	=		/	WT*	/	M26_EN=1	/		/	OUT M26_EX=1	/		/		/	 WT* M26_EN=1  OUT M26_EX=1 
+				013	=		/	WT	/	M26_CP=1	/		/	OUT M26_EX=0	/		/	43	/	 WT M26_CP=1  OUT M26_EX=0 
+				014	=		/	WT*	/	M12_EN=1	/		/	MOV AX3 PT138	/		/	44	/	 WT* M12_EN=1  MOV AX3 PT138 
+				015	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1122">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/		/	OUT AT_MRY3=1	/		/	     OUT AT_MRY3=1
+				002	=		/	WT*	/	M14_EN=1	/		/	OUT M14_EX=1	/	OUT PROD_CNT=1	/		/	 WT* M14_EN=1  OUT M14_EX=1 OUT PROD_CNT=1
+				003	=		/	WT	/	M14_CP=1	/	CNT_UP01=1	/	OUT M14_EX=0	/	OUT PROD_CNT=0	/		/	 WT M14_CP=1 CNT_UP01=1 OUT M14_EX=0 OUT PROD_CNT=0
+				004	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1123">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/		/	MDSO=1	/		/	OUT AT_MRY3=1	/		/	 IF  MDSO=1  OUT AT_MRY3=1
+				002	=		/	WT*	/	M37_EN=1	/		/	OUT M37_EX=1	/		/		/	 WT* M37_EN=1  OUT M37_EX=1 
+				003	=		/	IF	/		/	MDSO=1	/		/	OUT PROD_CNT=1	/		/	 IF  MDSO=1  OUT PROD_CNT=1
+				004	=		/	WT	/	M37_CP=1	/		/	OUT M37_EX=0	/		/		/	 WT M37_CP=1  OUT M37_EX=0 
+				005	=		/	IF	/		/	MDSO=1	/		/	OUT PROD_CNT=0	/		/	 IF  MDSO=1  OUT PROD_CNT=0
+				006	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1201">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT*	/	M43_EN=1	/		/	OUT M43_EX=1	/	OUT TM43=1	/		/	 WT* M43_EN=1  OUT M43_EX=1 OUT TM43=1
+				002	=		/	WT	/	M43_CP=1	/		/	OUT M43_EX=0	/	OUT TM43=0	/		/	 WT M43_CP=1  OUT M43_EX=0 OUT TM43=0
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1202">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT*	/	M44_EN=1	/		/	OUT M44_EX=1	/	OUT TM44=1	/		/	 WT* M44_EN=1  OUT M44_EX=1 OUT TM44=1
+				002	=		/	WT	/	M44_CP=1	/		/	OUT M44_EX=0	/	OUT TM44=0	/		/	 WT M44_CP=1  OUT M44_EX=0 OUT TM44=0
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1211">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT*	/	M41_EN=1	/		/	OUT M41_EX=1	/	DELAY TMP18	/		/	 WT* M41_EN=1  OUT M41_EX=1 DELAY TMP18
+				002	=		/	*	/		/		/	OUT M41_EX=0	/	DELAY TMP19	/		/	 *   OUT M41_EX=0 DELAY TMP19
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1300">		 		 		 		 		 		 		 		 	 
+				001	=		/	*	/		/		/	MOV AX1 AX2 PT81	/		/		/	 *   MOV AX1 AX2 PT81 
+				002	=		/	*	/		/		/	MOV AX3 PT82	/	OUT AT_L4ISCK=0	/		/	 *   MOV AX3 PT82 OUT AT_L4ISCK=0
+				003	=		/		/		/		/		/	DELAY TMP52	/		/	     DELAY TMP52
+				004	=		/	IF*	/	MDISLOW=1	/		/	MOV AX2 PT73	/		/		/	 IF* MDISLOW=1  MOV AX2 PT73 
+				005	=		/	*	/		/		/	MOV AX2 PT82	/		/		/	 *   MOV AX2 PT82 
+				006	=		/		/		/		/		/	DELAY TMP53	/		/	     DELAY TMP53
+				007	=		/	IF	/	MDWCY=1	/		/	CALL PROG 1353	/		/		/	 IF MDWCY=1  CALL PROG 1353 
+				008	=		/		/		/		/	OUT M47_EX=1	/	OUT AT_WCO=1	/		/	    OUT M47_EX=1 OUT AT_WCO=1
+				009	=		/	*WT	/	M47_CP=1	/		/	OUT M47_EX=0	/		/		/	 *WT M47_CP=1  OUT M47_EX=0 
+				010	=		/	IF	/	MDWPS=0	/		/	GOTO L1302	/		/		/	 IF MDWPS=0  GOTO L1302 
+				011	=	L1301	/	IF	/	MDWPS=1	/		/	CALL PROG 1351	/		/		/	L1301 IF MDWPS=1  CALL PROG 1351 
+				012	=		/	IF	/	MDWPS=1	/		/	CALL PROG 1352	/		/		/	 IF MDWPS=1  CALL PROG 1352 
+				013	=		/	IF	/	W_CNT_CP=0	/		/	GOTO L1301	/		/		/	 IF W_CNT_CP=0  GOTO L1301 
+				014	=	L1302	/	IF	/	MDWCY=1	/		/	CALL PROG 1354	/		/		/	L1302 IF MDWCY=1  CALL PROG 1354 
+				015	=		/	IF*	/	MDISLOW=1	/		/	MOV AX2 PT74	/		/		/	 IF* MDISLOW=1  MOV AX2 PT74 
+				016	=		/	*	/		/		/	MOV AX2 PT83	/	OUT AT_WCO=0	/		/	 *   MOV AX2 PT83 OUT AT_WCO=0
+				017	=		/		/		/		/		/	DELAY TMP55	/		/	     DELAY TMP55
+				018	=		/	IF	/	MDISF=1	/		/	MOV AX1 PT102	/		/		/	 IF MDISF=1  MOV AX1 PT102 
+				019	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1351">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	OUT M52_EX=1	/		/		/	    OUT M52_EX=1 
+				002	=		/	WT*	/	M52_CP=1	/		/	OUT M52_EX=0	/		/		/	 WT* M52_CP=1  OUT M52_EX=0 
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1352">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	OUT M53_EX=1	/		/		/	    OUT M53_EX=1 
+				002	=		/	WT*	/	M53_CP=1	/		/	OUT M53_EX=0	/		/		/	 WT* M53_CP=1  OUT M53_EX=0 
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1353">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	OUT M54_EX=1	/		/		/	    OUT M54_EX=1 
+				002	=		/	WT*	/	M54_CP=1	/		/	OUT M54_EX=0	/		/		/	 WT* M54_CP=1  OUT M54_EX=0 
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1354">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	OUT M55_EX=1	/		/		/	    OUT M55_EX=1 
+				002	=		/	WT*	/	M55_CP=1	/		/	OUT M55_EX=0	/		/		/	 WT* M55_CP=1  OUT M55_EX=0 
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1355">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	OUT M56_EX=1	/		/		/	    OUT M56_EX=1 
+				002	=		/	WT*	/	M56_CP=1	/		/	OUT M56_EX=0	/		/		/	 WT* M56_CP=1  OUT M56_EX=1 
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1356">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	OUT M57_EX=1	/		/		/	    OUT M57_EX=1 
+				002	=		/	WT*	/	M57_CP=1	/		/	OUT M57_EX=0	/		/		/	 WT* M57_CP=1  OUT M57_EX=1 
+				003	=		/		/		/		/		/		/		/	 
+			</PROG>		 		 		 		 		 		 		 		 	 			
+			<PROG NO="1600">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	AT_STATUS=0 & ML4IS=0	/		/	CALL PROG 1106	/		/		/	 IF AT_STATUS=0 & ML4IS=0  CALL PROG 1106 
+				002	=		/	WT*	/	M08_EN=1	/		/	OUT M39_EX=0	/		/		/	 WT* M08_EN=1  OUT M39_EX=0 
+				003	=		/	IF	/	MDFL8=1	/		/	GOTO L1601	/		/		/	 IF MDFL8=1  GOTO L1601 
+				004	=		/	IF	/	MDIS1=1 & MDFL8=0	/		/	CALL PROG 1610	/		/		/	 IF MDIS1=1 & MDFL8=0  CALL PROG 1610 
+				005	=		/	IF	/	MDIS2=1 & MDFL8=0	/		/	CALL PROG 1620	/		/		/	 IF MDIS2=1 & MDFL8=0  CALL PROG 1620 
+				006	=		/	IF	/	MDIS3=1 & MDFL8=0	/		/	CALL PROG 1630	/		/		/	 IF MDIS3=1 & MDFL8=0  CALL PROG 1630 
+				007	=		/	IF	/	MDIS4=1 & MDFL8=0	/		/	CALL PROG 1640	/		/		/	 IF MDIS4=1 & MDFL8=0  CALL PROG 1640 
+				008	=	L1601	/	IF	/	MDIS1=1 & MDFL8=1	/		/	CALL PROG 1611	/		/		/	L1601 IF MDIS1=1 & MDFL8=1  CALL PROG 1611 
+				009	=		/	IF	/	MDIS2=1 & MDFL8=1	/		/	CALL PROG 1621	/		/		/	 IF MDIS2=1 & MDFL8=1  CALL PROG 1621 
+				010	=		/	IF	/	MDIS3=1 & MDFL8=1	/		/	CALL PROG 1631	/		/		/	 IF MDIS3=1 & MDFL8=1  CALL PROG 1631 
+				011	=		/	IF	/	MDIS4=1 & MDFL8=1	/		/	CALL PROG 1641	/		/		/	 IF MDIS4=1 & MDFL8=1  CALL PROG 1641 
+				012	=		/		/		/		/	OUT AT_L4ISCK=1	/		/		/	    OUT AT_L4ISCK=1 
+				013	=		/		/		/		/	OUT M39_EX=1, AT_F_POS=0	/		/		/	    OUT M39_EX=1, AT_F_POS=0 
+				014	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1610">		 		 		 		 		 		 		 		 	 
+				001	=		/	*	/		/		/	MOV AX1 AX2 AX4 PT85	/		/		/	 *   MOV AX1 AX2 AX4 PT85 
+				002	=		/	*	/		/		/	OUT AT_F_POS=1	/		/		/	 *   OUT AT_F_POS=1 
+				003	=		/	*	/		/		/	CALL PROG 1105	/		/		/	 *   CALL PROG 1105 
+				004	=		/	WT*	/	WRD=1	/		/	OUT AT_F_DOWN=1	/		/		/	 WT* WRD=1  OUT AT_F_DOWN=1 
+				005	=		/	*	/		/		/	MOV AX3 PT71	/		/		/	 *   MOV AX3 PT71 
+				006	=		/	*	/		/		/	MOV AX3 PT86	/	DELAY TMP62	/		/	 *   MOV AX3 PT86 DELAY TMP62
+				007	=		/	*	/		/		/	OUT AT_F_DOWN=0	/		/		/	 *   OUT AT_F_DOWN=0 
+				008	=		/	*	/		/		/	OUT M27_EX=1	/	OUT AT_WCK1=1	/		/	 *   OUT M27_EX=1 OUT AT_WCK1=1
+				009	=		/	WT*	/	M27_CP=1	/		/	OUT M27_EX=0	/		/		/	 WT* M27_CP=1  OUT M27_EX=0 
+				010	=		/	*	/		/		/	MOV AX3 PT72	/		/		/	 *   MOV AX3 PT72 
+				011	=		/	*	/		/		/	MOV AX3 PT85	/		/		/	 *   MOV AX3 PT85 
+				012	=		/	WT	/		/	TMU_AL8=0	/		/		/		/	 WT  TMU_AL8=0  
+				013	=		/	WT	/		/	ALARM=0	/		/	OUT AT_WCK1=0	/		/	 WT  ALARM=0  OUT AT_WCK1=0
+				014	=		/		/		/		/		/	DELAY TMP64	/		/	     DELAY TMP64
+				015	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1620">		 		 		 		 		 		 		 		 	 
+				001	=		/	*	/		/		/	MOV AX1 AX2 AX4 PT87	/		/		/	 *   MOV AX1 AX2 AX4 PT87 
+				002	=		/	*	/		/		/	OUT AT_F_POS=1	/		/		/	 *   OUT AT_F_POS=1 
+				003	=		/	*	/		/		/	CALL PROG 1105	/		/		/	 *   CALL PROG 1105 
+				004	=		/	WT*	/	WRD=1	/		/	OUT AT_F_DOWN=1	/		/		/	 WT* WRD=1  OUT AT_F_DOWN=1 
+				005	=		/	*	/		/		/	MOV AX3 PT71	/		/		/	 *   MOV AX3 PT71 
+				006	=		/	*	/		/		/	MOV AX3 PT88	/	DELAY TMP65	/		/	 *   MOV AX3 PT88 DELAY TMP65
+				007	=		/	*	/		/		/	OUT AT_F_DOWN=0	/		/		/	 *   OUT AT_F_DOWN=0 
+				008	=		/	*	/		/		/	OUT M28_EX=1	/	OUT AT_WCK2=1	/		/	 *   OUT M28_EX=1 OUT AT_WCK2=1
+				009	=		/	WT*	/	M28_CP=1	/		/	OUT M28_EX=0	/		/		/	 WT* M28_CP=1  OUT M28_EX=0 
+				010	=		/	*	/		/		/	MOV AX3 PT72	/		/		/	 *   MOV AX3 PT72 
+				011	=		/	*	/		/		/	MOV AX3 PT87	/		/		/	 *   MOV AX3 PT87 
+				012	=		/	WT	/		/	TMU_AL8=0	/		/		/		/	 WT  TMU_AL8=0  
+				013	=		/	WT	/		/	ALARM=0	/		/	OUT AT_WCK2=0	/		/	 WT  ALARM=0  OUT AT_WCK2=0
+				014	=		/		/		/		/		/	DELAY TMP67	/		/	     DELAY TMP67
+				015	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1630">		 		 		 		 		 		 		 		 	 
+				001	=		/	*	/		/		/	MOV AX1 AX2 AX4 PT89	/		/		/	 *   MOV AX1 AX2 AX4 PT89 
+				002	=		/		/		/		/	OUT AT_F_POS=1	/		/		/	    OUT AT_F_POS=1 
+				003	=		/		/		/		/	CALL PROG 1105	/		/		/	    CALL PROG 1105 
+				004	=		/	WT*	/	WRD=1	/		/	OUT AT_F_DOWN=1	/		/		/	 WT* WRD=1  OUT AT_F_DOWN=1 
+				005	=		/	*	/		/		/	MOV AX3 PT71	/		/		/	 *   MOV AX3 PT71 
+				006	=		/	*	/		/		/	MOV AX3 PT90	/	DELAY TMP68	/		/	 *   MOV AX3 PT90 DELAY TMP68
+				007	=		/		/		/		/	OUT AT_F_DOWN=0	/		/		/	    OUT AT_F_DOWN=0 
+				008	=		/		/		/		/	OUT M29_EX=1	/	OUT AT_WCK3=1	/		/	    OUT M29_EX=1 OUT AT_WCK3=1
+				009	=		/	WT*	/	M29_CP=1	/		/	OUT M29_EX=0	/		/		/	 WT* M29_CP=1  OUT M29_EX=0 
+				010	=		/	*	/		/		/	MOV AX3 PT72	/		/		/	 *   MOV AX3 PT72 
+				011	=		/	*	/		/		/	MOV AX3 PT89	/		/		/	 *   MOV AX3 PT89 
+				012	=		/	WT	/		/	TMU_AL8=0	/		/		/		/	 WT  TMU_AL8=0  
+				013	=		/	WT	/		/	ALARM=0	/		/	OUT AT_WCK3=0	/		/	 WT  ALARM=0  OUT AT_WCK3=0
+				014	=		/		/		/		/		/	DELAY TMP70	/		/	     DELAY TMP70
+				015	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1640">		 		 		 		 		 		 		 		 	 
+				001	=		/	*	/		/		/	MOV AX1 AX2 AX4 PT91	/		/		/	 *   MOV AX1 AX2 AX4 PT91 
+				002	=		/		/		/		/	OUT AT_F_POS=1	/		/		/	    OUT AT_F_POS=1 
+				003	=		/		/		/		/	CALL PROG 1105	/		/		/	    CALL PROG 1105 
+				004	=		/	WT*	/	WRD=1	/		/	OUT AT_F_DOWN=1	/		/		/	 WT* WRD=1  OUT AT_F_DOWN=1 
+				005	=		/	*	/		/		/	MOV AX3 PT71	/		/		/	 *   MOV AX3 PT71 
+				006	=		/	*	/		/		/	MOV AX3 PT92	/	DELAY TMP71	/		/	 *   MOV AX3 PT92 DELAY TMP71
+				007	=	L1602	/		/		/		/	OUT AT_F_DOWN=0	/		/		/	L1602    OUT AT_F_DOWN=0 
+				008	=		/		/		/		/	OUT M30_EX=1	/	OUT AT_WCK4=1	/		/	    OUT M30_EX=1 OUT AT_WCK4=1
+				009	=		/	WT*	/	M30_CP=1	/		/	OUT M30_EX=0	/		/		/	 WT* M30_CP=1  OUT M30_EX=0 
+				010	=		/	*	/		/		/	MOV AX3 PT72	/		/		/	 *   MOV AX3 PT72 
+				011	=		/	*	/		/		/	MOV AX3 PT91	/		/		/	 *   MOV AX3 PT91 
+				012	=	L1604	/	WT	/		/	TMU_AL8=0	/		/		/		/	L1604 WT  TMU_AL8=0  
+				013	=		/	WT	/		/	ALARM=0	/		/	OUT AT_WCK4=0	/		/	 WT  ALARM=0  OUT AT_WCK4=0
+				014	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1611">		 		 		 		 		 		 		 		 	 
+				001	=		/	*	/		/		/	MOV AX1 AX2 AX4 PT85	/		/		/	 *   MOV AX1 AX2 AX4 PT85 
+				002	=		/	*	/		/		/	OUT AT_F_POS=1	/		/		/	 *   OUT AT_F_POS=1 
+				003	=		/	*	/		/		/	CALL PROG 1104	/		/		/	 *   CALL PROG 1104 
+				004	=		/	WT*	/	WRD=1	/		/	OUT AT_F_DOWN=1	/		/		/	 WT* WRD=1  OUT AT_F_DOWN=1 
+				005	=		/	*	/		/		/	MOV AX3 PT86	/		/		/	 *   MOV AX3 PT86 
+				006	=		/	IF	/	MDFSLOW=1	/		/	MOV AX2 PT71	/		/		/	 IF MDFSLOW=1  MOV AX2 PT71 
+				007	=		/	*	/		/		/	MOV AX2 PT86	/	DELAY TMP62	/		/	 *   MOV AX2 PT86 DELAY TMP62
+				008	=		/	*	/		/		/	OUT AT_F_DOWN=0	/		/		/	 *   OUT AT_F_DOWN=0 
+				009	=		/	*	/		/		/	OUT M27_EX=1	/	OUT AT_WCK1=1	/		/	 *   OUT M27_EX=1 OUT AT_WCK1=1
+				010	=		/	WT*	/	M27_CP=1	/		/	OUT M27_EX=0	/		/		/	 WT* M27_CP=1  OUT M27_EX=0 
+				011	=		/	IF	/	MDFSLOW=1	/		/	MOV AX2 PT72	/		/		/	 IF MDFSLOW=1  MOV AX2 PT72 
+				012	=		/	*	/		/		/	MOV AX2 PT85	/		/		/	 *   MOV AX2 PT85 
+				013	=		/	*	/		/		/	MOV AX3 PT85	/		/		/	 *   MOV AX3 PT85 
+				014	=		/	WT	/		/	TMU_AL8=0	/		/		/		/	 WT  TMU_AL8=0  
+				015	=		/	WT	/		/	ALARM=0	/		/	OUT AT_WCK1=0	/		/	 WT  ALARM=0  OUT AT_WCK1=0
+				016	=		/		/		/		/		/	DELAY TMP64	/		/	     DELAY TMP64
+				017	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1621">		 		 		 		 		 		 		 		 	 
+				001	=		/	*	/		/		/	MOV AX1 AX2 AX4 PT87	/		/		/	 *   MOV AX1 AX2 AX4 PT87 
+				002	=		/	*	/		/		/	OUT AT_F_POS=1	/		/		/	 *   OUT AT_F_POS=1 
+				003	=		/	*	/		/		/	CALL PROG 1104	/		/		/	 *   CALL PROG 1104 
+				004	=		/	WT*	/	WRD=1	/		/	OUT AT_F_DOWN=1	/		/		/	 WT* WRD=1  OUT AT_F_DOWN=1 
+				005	=		/	*	/		/		/	MOV AX3 PT88	/		/		/	 *   MOV AX3 PT88 
+				006	=		/	IF	/	MDFSLOW=1	/		/	MOV AX2 PT71	/		/		/	 IF MDFSLOW=1  MOV AX2 PT71 
+				007	=		/	*	/		/		/	MOV AX2 PT88	/	DELAY TMP65	/		/	 *   MOV AX2 PT88 DELAY TMP65
+				008	=		/	*	/		/		/	OUT AT_F_DOWN=0	/		/		/	 *   OUT AT_F_DOWN=0 
+				009	=		/	*	/		/		/	OUT M28_EX=1	/	OUT AT_WCK2=1	/		/	 *   OUT M28_EX=1 OUT AT_WCK2=1
+				010	=		/	WT*	/	M28_CP=1	/		/	OUT M28_EX=0	/		/		/	 WT* M28_CP=1  OUT M28_EX=0 
+				011	=		/	IF	/	MDFSLOW=1	/		/	MOV AX2 PT72	/		/		/	 IF MDFSLOW=1  MOV AX2 PT72 
+				012	=		/	*	/		/		/	MOV AX2 PT87	/		/		/	 *   MOV AX2 PT87 
+				013	=		/	*	/		/		/	MOV AX3 PT87	/		/		/	 *   MOV AX3 PT87 
+				014	=		/	WT	/		/	TMU_AL8=0	/		/		/		/	 WT  TMU_AL8=0  
+				015	=		/	WT	/		/	ALARM=0	/		/	OUT AT_WCK2=0	/		/	 WT  ALARM=0  OUT AT_WCK2=0
+				016	=		/		/		/		/		/	DELAY TMP67	/		/	     DELAY TMP67
+				017	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1631">		 		 		 		 		 		 		 		 	 
+				001	=		/	*	/		/		/	MOV AX1 AX2 AX4 PT89	/		/		/	 *   MOV AX1 AX2 AX4 PT89 
+				002	=		/	*	/		/		/	OUT AT_F_POS=1	/		/		/	 *   OUT AT_F_POS=1 
+				003	=		/	*	/		/		/	CALL PROG 1104	/		/		/	 *   CALL PROG 1104 
+				004	=		/	WT*	/	WRD=1	/		/	OUT AT_F_DOWN=1	/		/		/	 WT* WRD=1  OUT AT_F_DOWN=1 
+				005	=		/	*	/		/		/	MOV AX3 PT90	/		/		/	 *   MOV AX3 PT90 
+				006	=		/	IF	/	MDFSLOW=1	/		/	MOV AX2 PT71	/		/		/	 IF MDFSLOW=1  MOV AX2 PT71 
+				007	=		/	*	/		/		/	MOV AX2 PT90	/	DELAY TMP68	/		/	 *   MOV AX2 PT90 DELAY TMP68
+				008	=		/	*	/		/		/	OUT AT_F_DOWN=0	/		/		/	 *   OUT AT_F_DOWN=0 
+				009	=		/	*	/		/		/	OUT M29_EX=1	/	OUT AT_WCK3=1	/		/	 *   OUT M29_EX=1 OUT AT_WCK3=1
+				010	=		/	WT*	/	M29_CP=1	/		/	OUT M29_EX=0	/		/		/	 WT* M29_CP=1  OUT M29_EX=0 
+				011	=		/	IF	/	MDFSLOW=1	/		/	MOV AX2 PT72	/		/		/	 IF MDFSLOW=1  MOV AX2 PT72 
+				012	=		/	*	/		/		/	MOV AX2 PT89	/		/		/	 *   MOV AX2 PT89 
+				013	=		/	*	/		/		/	MOV AX3 PT89	/		/		/	 *   MOV AX3 PT89 
+				014	=		/	WT	/		/	TMU_AL8=0	/		/		/		/	 WT  TMU_AL8=0  
+				015	=		/	WT	/		/	ALARM=0	/		/	OUT AT_WCK3=0	/		/	 WT  ALARM=0  OUT AT_WCK3=0
+				016	=		/		/		/		/		/	DELAY TMP70	/		/	     DELAY TMP70
+				017	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1641">		 		 		 		 		 		 		 		 	 
+				001	=		/	*	/		/		/	MOV AX1 AX2 AX4 PT91	/		/		/	 *   MOV AX1 AX2 AX4 PT91 
+				002	=		/	*	/		/		/	OUT AT_F_POS=1	/		/		/	 *   OUT AT_F_POS=1 
+				003	=		/	*	/		/		/	CALL PROG 1104	/		/		/	 *   CALL PROG 1104 
+				004	=		/	WT*	/	WRD=1	/		/	OUT AT_F_DOWN=1	/		/		/	 WT* WRD=1  OUT AT_F_DOWN=1 
+				005	=		/	*	/		/		/	MOV AX3 PT92	/		/		/	 *   MOV AX3 PT92 
+				006	=		/	IF	/	MDFSLOW=1	/		/	MOV AX2 PT71	/		/		/	 IF MDFSLOW=1  MOV AX2 PT71 
+				007	=		/	*	/		/		/	MOV AX2 PT92	/	DELAY TMP71	/		/	 *   MOV AX2 PT92 DELAY TMP71
+				008	=		/	*	/		/		/	OUT AT_F_DOWN=0	/		/		/	 *   OUT AT_F_DOWN=0 
+				009	=		/	*	/		/		/	OUT M30_EX=1	/	OUT AT_WCK4=1	/		/	 *   OUT M30_EX=1 OUT AT_WCK4=1
+				010	=		/	WT*	/	M30_CP=1	/		/	OUT M30_EX=0	/		/		/	 WT* M30_CP=1  OUT M30_EX=0 
+				011	=		/	IF	/	MDFSLOW=1	/		/	MOV AX2 PT72	/		/		/	 IF MDFSLOW=1  MOV AX2 PT72 
+				012	=		/	*	/		/		/	MOV AX2 PT91	/		/		/	 *   MOV AX2 PT91 
+				013	=		/	*	/		/		/	MOV AX3 PT91	/		/		/	 *   MOV AX3 PT91 
+				014	=		/	WT	/		/	TMU_AL8=0	/		/		/		/	 WT  TMU_AL8=0  
+				015	=		/	WT	/		/	ALARM=0	/		/	OUT AT_WCK4=0	/		/	 WT  ALARM=0  OUT AT_WCK4=0
+				017	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1700">		 		 		 		 		 		 		 		 	 
+				001	=		/	*	/		/		/	MOV AX1 AX2 AX4 PT075	/		/		/	 *   MOV AX1 AX2 AX4 PT075 
+				002	=		/	WT*	/	M13_EN=1	/		/	OUT M13_EX=1	/		/		/	 WT* M13_EN=1  OUT M13_EX=1 
+				003	=		/	WT	/	M13_CP=1	/		/	OUT M13_EX=0	/		/		/	 WT M13_CP=1  OUT M13_EX=0 
+				004	=		/	*	/		/		/	MOV AX3 PT076	/		/		/	 *   MOV AX3 PT076 
+				005	=		/	*	/		/		/	OUT M148_EX=1	/		/		/	 *   OUT M148_EX=1 
+				006	=		/	*	/		/		/	MOV AX2 PT076	/	DELAY TMP74	/		/	 *   MOV AX2 PT076 DELAY TMP74
+				007	=		/		/		/		/	OUT M146_EX=1	/	DELAY TMP75	/		/	    OUT M146_EX=1 DELAY TMP75
+				008	=		/		/		/		/	OUT M147_EX=1	/	DELAY TMP76	/		/	    OUT M147_EX=1 DELAY TMP76
+				009	=		/		/		/		/	OUT M147_EX=0	/	DELAY TMP77	/		/	    OUT M147_EX=0 DELAY TMP77
+				010	=		/		/		/		/	OUT M146_EX=0	/	DELAY TMP78	/		/	    OUT M146_EX=0 DELAY TMP78
+				011	=		/	*	/		/		/	OUT M148_EX=0	/		/		/	 *   OUT M148_EX=0 
+				012	=		/	*	/		/		/	MOV AX2 PT075	/		/		/	 *   MOV AX2 PT075 
+				013	=		/	IF	/	MDNT2=1	/		/	GOTO L1710	/		/		/	 IF MDNT2=1  GOTO L1710 
+				014	=		/	*	/		/		/	MOV AX3 PT075	/		/		/	 *   MOV AX3 PT075 
+				015	=		/	IF	/	MDNT2=0	/		/	GOTO L1720	/		/		/	 IF MDNT2=0  GOTO L1720 
+				016	=	L1710	/	*	/		/		/	MOV AX1 AX2 AX4 PT077	/		/		/	L1710 *   MOV AX1 AX2 AX4 PT077 
+				017	=		/	*	/		/		/	MOV AX3 PT078	/		/		/	 *   MOV AX3 PT078 
+				018	=		/	*	/		/		/	OUT M148_EX=1	/		/		/	 *   OUT M148_EX=1 
+				019	=		/	*	/		/		/	MOV AX2 PT078	/	DELAY TMP79	/		/	 *   MOV AX2 PT078 DELAY TMP79
+				020	=		/		/		/		/	OUT M146_EX=1	/	DELAY TMP75	/		/	    OUT M146_EX=1 DELAY TMP75
+				021	=		/		/		/		/	OUT M147_EX=1	/	DELAY TMP76	/		/	    OUT M147_EX=1 DELAY TMP76
+				022	=		/		/		/		/	OUT M147_EX=0	/	DELAY TMP77	/		/	    OUT M147_EX=0 DELAY TMP77
+				023	=		/		/		/		/	OUT M146_EX=0	/	DELAY TMP78	/		/	    OUT M146_EX=0 DELAY TMP78
+				024	=		/	*	/		/		/	OUT M148_EX=0	/		/		/	 *   OUT M148_EX=0 
+				025	=		/	*	/		/		/	MOV AX2 PT077	/		/		/	 *   MOV AX2 PT077 
+				026	=		/	*	/		/		/	MOV AX3 PT077	/		/		/	 *   MOV AX3 PT077 
+				027	=	L1720	/		/		/		/	RET	/		/		/	L1720    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1801">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	PASS01=1	/		/	GOTO L1810	/		/		/	 IF PASS01=1  GOTO L1810 
+				002	=		/	WT	/	M31_EN=1	/	MOPS=0	/	OUT AT_FL3S=0	/		/		/	 WT M31_EN=1 MOPS=0 OUT AT_FL3S=0 
+				003	=		/	*	/		/		/	MOV AX5 PT104	/	OUT M31_EX=1, AT_MA_CK=1	/		/	 *   MOV AX5 PT104 OUT M31_EX=1, AT_MA_CK=1
+				004	=		/		/		/		/		/	DELAY TMP20	/	81	/	     DELAY TMP20
+				005	=		/	WT*	/	M32_EN=1	/		/	MOV AX4 PT105	/		/		/	 WT* M32_EN=1  MOV AX4 PT105 
+				006	=		/	IF	/	PASS01=0	/		/	GOTO L1820	/		/		/	 IF PASS01=0  GOTO L1820 
+				007	=	L1810	/	WT*	/	M31_EN=1	/	MOPS=0	/	OUT AT_FL3S=0	/		/		/	L1810 WT* M31_EN=1 MOPS=0 OUT AT_FL3S=0 
+				008	=		/		/		/		/		/	OUT M31_EX=1	/		/	     OUT M31_EX=1
+				009	=		/		/		/		/	MOV AX5 PT104 PASS PS1	/		/		/	    MOV AX5 PT104 PASS PS1 
+				010	=		/		/		/		/	MOV AX4 PT105	/		/		/	    MOV AX4 PT105 
+				011	=	L1820	/	IF	/	ARM_RLS=0	/		/	GOTO L1830	/		/		/	L1820 IF ARM_RLS=0  GOTO L1830 
+				012	=		/		/		/		/	SVFON AX4	/		/		/	    SVFON AX4 
+				013	=		/		/		/		/		/	DELAY TMP159	/		/	     DELAY TMP159
+				014	=	L1830	/		/		/		/		/	DELAY TMP21	/	82	/	L1830     DELAY TMP21
+				015	=		/	WT	/		/	MME=1	/		/	OUT M31_EX=0	/		/	 WT  MME=1  OUT M31_EX=0
+				016	=		/	IF	/	ARM_RLS=0	/		/	GOTO L1835	/		/		/	 IF ARM_RLS=0  GOTO L1835 
+				017	=		/		/		/		/	SVFOFF AX4	/		/		/	    SVFOFF AX4 
+				018	=		/		/		/		/		/	DELAY TMP159	/		/	     DELAY TMP159
+				019	=	L1835	/	WT*	/		/	M33_EN=1	/		/	OUT M33_EX=1	/		/	L1835 WT*  M33_EN=1  OUT M33_EX=1
+				020	=		/	WT	/		/	M33_CP=1	/		/	OUT M33_EX=0	/	83	/	 WT  M33_CP=1  OUT M33_EX=0
+				021	=		/	IF	/	MPASS01_B=1	/		/	GOTO L1850	/		/		/	 IF MPASS01_B=1  GOTO L1850 
+				022	=		/	WT*	/	M34_EN=1	/		/	MOV  AX4 PT106	/	OUT M34_EX=1	/		/	 WT* M34_EN=1  MOV  AX4 PT106 OUT M34_EX=1
+				023	=		/		/		/		/		/	DELAY TMP23	/	84	/	     DELAY TMP23
+				024	=		/	IF	/	MDSK=0	/		/	GOTO L1840	/		/		/	 IF MDSK=0  GOTO L1840 
+				025	=		/	IF	/	MDSK=1	/		/	CALL PROG 1123	/		/		/	 IF MDSK=1  CALL PROG 1123 
+				026	=	L1840	/	WT	/		/	MMEB=1	/		/	OUT M34_EX=0	/		/	L1840 WT  MMEB=1  OUT M34_EX=0
+				027	=		/	WT*	/	M35_EN=1	/		/	MOV AX5 PT107	/	OUT M35_EX=1	/	85	/	 WT* M35_EN=1  MOV AX5 PT107 OUT M35_EX=1
+				028	=		/	IF	/	PASS01=0 | MPASS01_B=0	/		/	GOTO L1860	/		/		/	 IF PASS01=0 | MPASS01_B=0  GOTO L1860 
+				029	=	L1850	/	WT*	/	M34_EN=1	/		/	MOV AX4 PT106 PASS PS2	/		/		/	L1850 WT* M34_EN=1  MOV AX4 PT106 PASS PS2 
+				030	=		/	WT*	/	M35_EN=1	/		/	MOV AX5 PT107	/	OUT M35_EX=1	/	85	/	 WT* M35_EN=1  MOV AX5 PT107 OUT M35_EX=1
+				031	=	L1860	/		/		/		/	OUT AT_PRUN_CP=1	/		/		/	L1860    OUT AT_PRUN_CP=1 
+				032	=		/		/		/		/	END	/		/		/	    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1802">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	SERVO_C=0	/		/	OUT M18_EX=1	/		/		/	 IF SERVO_C=0  OUT M18_EX=1 
+				002	=		/	IF	/	SERVO_C=1	/		/	MOV AX6 PT115	/		/		/	 IF SERVO_C=1  MOV AX6 PT115 
+				003	=		/		/		/		/	END	/		/		/	    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1803">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	SERVO_C=0	/		/	OUT M19_EX=1	/		/		/	 IF SERVO_C=0  OUT M19_EX=1 
+				002	=		/	IF	/	SERVO_C=1	/		/	MOV AX6 PT102	/		/		/	 IF SERVO_C=1  MOV AX6 PT102 
+				003	=		/		/		/		/	END	/		/		/	    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="1901">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	ORG_EN=1	/		/		/	OUT AT_ORG=1	/	91	/	 WT ORG_EN=1   OUT AT_ORG=1
+				002	=		/	IF	/	MDAS_CP=1	/		/	GOTO L1901	/		/		/	 IF MDAS_CP=1  GOTO L1901 
+				003	=		/	IF	/	MORG=0	/		/	CALL PROG 2001	/		/		/	 IF MORG=0  CALL PROG 2001 
+				004	=		/	IF	/	I_S_ORGCP=1	/		/	GOTO L1910	/		/		/	 IF I_S_ORGCP=1  GOTO L1910 
+				005	=	L1901	/	IF	/	ORG07_EN=0	/		/	GOTO L1905	/		/		/	L1901 IF ORG07_EN=0  GOTO L1905 
+				006	=		/	IF	/	MDW=0 | LS3=1	/		/	OUT AX02_NOUSE=1	/		/		/	 IF MDW=0 | LS3=1  OUT AX02_NOUSE=1 
+				007	=		/	IF	/	MDS=0 | LS3S=1	/		/	OUT AX04_NOUSE=1	/		/		/	 IF MDS=0 | LS3S=1  OUT AX04_NOUSE=1 
+				008	=		/	IF	/	ORG07_EN=1 & ORG10_EN=1	/		/	MOV AX2 AX4 PT106	/		/	92	/	 IF ORG07_EN=1 & ORG10_EN=1  MOV AX2 AX4 PT106 
+				009	=		/	IF	/	ORG07_EN=1 & ORG10_EN=0	/		/	MOV AX2 PT106	/		/	92	/	 IF ORG07_EN=1 & ORG10_EN=0  MOV AX2 PT106 
+				010	=		/	IF	/	ORG07_EN=0 & ORG10_EN=1	/		/	MOV AX4 PT106	/		/	93	/	 IF ORG07_EN=0 & ORG10_EN=1  MOV AX4 PT106 
+				011	=		/		/		/		/	OUT AX02_NOUSE=0, AX04_NOUSE=0	/		/		/	    OUT AX02_NOUSE=0, AX04_NOUSE=0 
+				012	=		/	IF	/	MMDR1=1	/		/	CALL PROG 2027	/		/		/	 IF MMDR1=1  CALL PROG 2027 
+				013	=	L1905	/	WT*	/	ORG01_EN=1	/		/	MOV AX3 AX5 PT101	/		/	94	/	L1905 WT* ORG01_EN=1  MOV AX3 AX5 PT101 
+				014	=		/	IF	/	MDYT=0	/	 	/	CALL PROG 2011	/		/		/	 IF MDYT=0   CALL PROG 2011 
+				015	=		/	IF	/	MDYT=1	/	 	/	CALL PROG 2013	/		/		/	 IF MDYT=1   CALL PROG 2013 
+				016	=		/		/		/		/	OUT I_S_ORGCP=1	/		/		/	    OUT I_S_ORGCP=1 
+				017	=		/	WT	/	ML3=1	/		/	OUT M37_EX=1, M11_EX=1, M14_EX=1	/		/		/	 WT ML3=1  OUT M37_EX=1, M11_EX=1, M14_EX=1 
+				018	=	L1910	/		/		/		/	OUT I_S_ORGCP=0	/		/	99	/	L1910    OUT I_S_ORGCP=0 
+				019	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+		</GROUP>																		 
+		<GROUP TYPE="HOME" MAIN="2000">																		 
+			<PROG NO="2000">																	 
+				001	=		/	IF	/	ARM_RLS=1 & MDW=1	/		/	SVFOFF AX2	/		/		/	 IF ARM_RLS=1 & MDW=1  SVFOFF AX2 
+				002	=		/	IF	/	ARM_RLS=1 & MDS=1	/		/	SVFOFF AX4	/		/		/	 IF ARM_RLS=1 & MDS=1  SVFOFF AX4 
+				003	=		/	WT	/	ORG_EN=1	/		/		/		/	91	/	 WT ORG_EN=1   
+				004	=		/	IF	/	MORG=0	/		/	CALL PROG 2001	/		/		/	 IF MORG=0  CALL PROG 2001 
+				005	=		/	IF	/	I_S_ORGCP=1	/		/	GOTO L2010	/		/		/	 IF I_S_ORGCP=1  GOTO L2010 
+				006	=		/	IF	/	ORG07_EN=0 & ORG10_EN=0	/		/	GOTO L2005	/		/		/	 IF ORG07_EN=0 & ORG10_EN=0  GOTO L2005 
+				007	=		/	IF	/	MDW=0 | LS3=1	/		/	OUT AX02_NOUSE=1	/		/		/	 IF MDW=0 | LS3=1  OUT AX02_NOUSE=1 
+				008	=		/	IF	/	MDS=0 | LS3S=1	/		/	OUT AX04_NOUSE=1	/		/		/	 IF MDS=0 | LS3S=1  OUT AX04_NOUSE=1 
+				009	=		/	IF*	/	ORG07_EN=1 & ORG10_EN=1	/		/	MOV AX2 AX4 PT106	/		/	92	/	 IF* ORG07_EN=1 & ORG10_EN=1  MOV AX2 AX4 PT106 
+				010	=		/	IF*	/	ORG07_EN=1 & ORG10_EN=0	/		/	MOV AX2 PT106	/		/	92	/	 IF* ORG07_EN=1 & ORG10_EN=0  MOV AX2 PT106 
+				011	=		/	IF*	/	ORG07_EN=0 & ORG10_EN=1	/		/	MOV AX4 PT106	/		/	93	/	 IF* ORG07_EN=0 & ORG10_EN=1  MOV AX4 PT106 
+				012	=		/		/		/		/	OUT AX02_NOUSE=0, AX04_NOUSE=0	/		/		/	    OUT AX02_NOUSE=0, AX04_NOUSE=0 
+				013	=		/	IF	/	MMDR1=1	/		/	CALL PROG 2027	/		/		/	 IF MMDR1=1  CALL PROG 2027 
+				014	=	L2005	/	WT*	/	ORG01_EN=1	/		/	MOV AX3 AX5 PT101	/		/	94	/	L2005 WT* ORG01_EN=1  MOV AX3 AX5 PT101 
+				015	=		/	IF	/	MDYT=0	/	 	/	CALL PROG 2011	/		/		/	 IF MDYT=0   CALL PROG 2011 
+				016	=		/	IF	/	MDYT=1	/	 	/	CALL PROG 2013	/		/		/	 IF MDYT=1   CALL PROG 2013 
+				017	=		/		/		/		/	OUT I_S_ORGCP=1	/		/	99	/	    OUT I_S_ORGCP=1 
+				018	=	L2010	/	WT	/	MSG_01=1 | MSG_43=1	/		/	OUT I_S_ORGCP=0	/		/		/	L2010 WT MSG_01=1 | MSG_43=1  OUT I_S_ORGCP=0 
+				019	=		/		/		/		/	END	/		/		/	    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2001">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	S_ORGCP_AX03=1 & S_ORGCP_AX05=1	/		/	GOTO L2011	/		/		/	 IF S_ORGCP_AX03=1 & S_ORGCP_AX05=1  GOTO L2011 
+				002	=		/	WT*	/	ORG01_EN=1	/		/	HOME AX3 AX5	/		/	94	/	 WT* ORG01_EN=1  HOME AX3 AX5 
+				003	=		/	IF	/	S_ORGCP_AX06=0 & SERVO_C=1	/		/	HOME AX6	/		/		/	 IF S_ORGCP_AX06=0 & SERVO_C=1  HOME AX6 
+				004	=		/	IF	/	S_ORGCP_AX07=0 & SERVO_A=1	/		/	HOME AX7	/		/		/	 IF S_ORGCP_AX07=0 & SERVO_A=1  HOME AX7 
+				005	=	L2011	/	IF	/	LS1=1	/		/	GOTO L2012	/		/		/	L2011 IF LS1=1  GOTO L2012 
+				006	=		/	IF	/	MMDR2=1	/		/	CALL PROG 2027	/		/		/	 IF MMDR2=1  CALL PROG 2027 
+				007	=		/	IF	/	MMDR2=0	/		/	CALL PROG 2028	/		/		/	 IF MMDR2=0  CALL PROG 2028 
+				008	=		/	IF	/	MMDTA=1	/		/	CALL PROG 2002	/		/		/	 IF MMDTA=1  CALL PROG 2002 
+				009	=		/	IF	/	MMDTA=0	/		/	CALL PROG 2003	/		/		/	 IF MMDTA=0  CALL PROG 2003 
+				010	=	L2012	/	IF	/	MORG=1	/		/	GOTO L2020	/		/		/	L2012 IF MORG=1  GOTO L2020 
+				011	=		/		/		/		/	CALL PROG 2024	/		/		/	    CALL PROG 2024 
+				012	=		/		/		/		/	CALL PROG 2028	/		/		/	    CALL PROG 2028 
+				013	=		/	IF	/	S_ORGCP_AX04=1 | USE_1ARM =1	/		/	GOTO L2013	/		/		/	 IF S_ORGCP_AX04=1 | USE_1ARM =1  GOTO L2013 
+				014	=		/	IF	/	LS6=1	/		/	CALL PROG 2300	/		/		/	 IF LS6=1  CALL PROG 2300 
+				015	=		/	WT*	/	ORG04_EN=1	/		/	HOME AX4	/		/	95	/	 WT* ORG04_EN=1  HOME AX4 
+				016	=	L2013	/	IF	/	S_ORGCP_AX02=1 	/		/	GOTO L2014	/		/		/	L2013 IF S_ORGCP_AX02=1   GOTO L2014 
+				017	=		/	WT*	/	ORG04_EN=1	/		/	HOME AX2	/		/	96	/	 WT* ORG04_EN=1  HOME AX2 
+				018	=	L2014	/	IF	/	S_ORGCP_AX01=1 	/		/	GOTO L2020	/		/		/	L2014 IF S_ORGCP_AX01=1   GOTO L2020 
+				019	=		/	WT*	/	ORG05_EN=1	/		/	HOME AX1	/		/	97	/	 WT* ORG05_EN=1  HOME AX1 
+				020	=	L2020	/	WT	/	MORG=1	/		/		/		/		/	L2020 WT MORG=1   
+				021	=		/	IF	/	MDYT=1	/		/	CALL PROG 2013	/		/		/	 IF MDYT=1  CALL PROG 2013 
+				022	=		/		/		/		/	OUT I_S_ORGCP=1	/		/	99	/	    OUT I_S_ORGCP=1 
+				023	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>																	 
+			<PROG NO="2002">																	 
+				001	=		/		/		/		/	CALL PROG 2024	/		/		/	    CALL PROG 2024 
+				002	=		/	IF	/	S_ORGCP_AX04=1 | USE_1ARM =1	/		/	GOTO L2021	/		/		/	 IF S_ORGCP_AX04=1 | USE_1ARM =1  GOTO L2021 
+				003	=		/	IF	/	LS6=1	/		/	CALL PROG 2300	/		/		/	 IF LS6=1  CALL PROG 2300 
+				004	=		/	WT*	/	ORG04_EN=1	/		/	HOME AX4	/		/		/	 WT* ORG04_EN=1  HOME AX4 
+				005	=	L2021	/	IF	/	S_ORGCP_AX02=1 	/		/	GOTO L2022	/		/		/	L2021 IF S_ORGCP_AX02=1   GOTO L2022 
+				006	=		/	WT*	/	ORG04_EN=1	/		/	HOME AX2	/		/		/	 WT* ORG04_EN=1  HOME AX2 
+				007	=		/	WT*	/	LS6=1 & LS6S=1	/		/		/		/		/	 WT* LS6=1 & LS6S=1   
+				008	=	L2022	/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 1100	/		/		/	L2022 IF MDW=0 | MDS=0  CALL PROG 1100 
+				009	=		/	WT*	/	ORG04_EN=1	/		/	MOV AX2 PT108	/		/		/	 WT* ORG04_EN=1  MOV AX2 PT108 
+				010	=		/	WT*	/	ORG04_EN=1	/		/	MOV AX4 PT108	/		/		/	 WT* ORG04_EN=1  MOV AX4 PT108 
+				011	=		/		/		/		/	CALL PROG 2025	/		/		/	    CALL PROG 2025 
+				012	=		/	IF	/	S_ORGCP_AX01=1 	/		/	GOTO L2023	/		/		/	 IF S_ORGCP_AX01=1   GOTO L2023 
+				013	=		/	WT*	/	ORG05_EN=1	/		/	HOME AX1	/		/		/	 WT* ORG05_EN=1  HOME AX1 
+				014	=	L2023	/	WT	/	MORG=1	/		/		/		/		/	L2023 WT MORG=1   
+				015	=		/	IF	/	MDYT=1	/		/	CALL PROG 2021	/		/		/	 IF MDYT=1  CALL PROG 2021 
+				016	=		/	IF	/	MDYT=0 & MMDTA=1	/		/	CALL PROG 2014	/		/		/	 IF MDYT=0 & MMDTA=1  CALL PROG 2014 
+				017	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>																	 
+			<PROG NO="2003">																	 
+				001	=		/		/		/		/	CALL PROG 2024	/		/		/	    CALL PROG 2024 
+				002	=		/	IF	/	S_ORGCP_AX04=1 | USE_1ARM =1	/		/	GOTO L2031	/		/		/	 IF S_ORGCP_AX04=1 | USE_1ARM =1  GOTO L2031 
+				003	=		/	IF	/	LS6=1	/		/	CALL PROG 2300	/		/		/	 IF LS6=1  CALL PROG 2300 
+				004	=		/	WT*	/	ORG04_EN=1	/		/	HOME AX4	/		/		/	 WT* ORG04_EN=1  HOME AX4 
+				005	=	L2031	/	IF	/	S_ORGCP_AX02=1 	/		/	GOTO L2032	/		/		/	L2031 IF S_ORGCP_AX02=1   GOTO L2032 
+				006	=		/	WT*	/	ORG04_EN=1	/		/	HOME AX2	/		/		/	 WT* ORG04_EN=1  HOME AX2 
+				007	=	L2032	/	IF	/	S_ORGCP_AX01=1 	/		/	GOTO L2033	/		/		/	L2032 IF S_ORGCP_AX01=1   GOTO L2033 
+				008	=		/	WT*	/	ORG05_EN=1	/		/	HOME AX1	/		/		/	 WT* ORG05_EN=1  HOME AX1 
+				009	=	L2033	/	WT	/	MORG=1	/		/		/		/		/	L2033 WT MORG=1   
+				010	=		/	IF	/	MDYT=1	/		/	CALL PROG 2021	/		/		/	 IF MDYT=1  CALL PROG 2021 
+				011	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2011">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	LS1=1	/		/	GOTO L2101	/		/		/	 IF LS1=1  GOTO L2101 
+				002	=		/	IF	/	MMDR2=1	/		/	CALL PROG 2027	/		/		/	 IF MMDR2=1  CALL PROG 2027 
+				003	=		/	IF	/	MMDTA=1	/		/	CALL PROG 2031	/		/		/	 IF MMDTA=1  CALL PROG 2031 
+				004	=		/	IF	/	MMDTA=1	/		/	GOTO L2101	/		/		/	 IF MMDTA=1  GOTO L2101 
+				005	=		/	IF	/	MMDTA=0	/		/	CALL PROG 2032	/		/		/	 IF MMDTA=0  CALL PROG 2032 
+				006	=	L2101	/		/		/		/	CALL PROG 2028	/		/		/	L2101    CALL PROG 2028 
+				007	=		/		/		/		/	CALL PROG 2024	/		/		/	    CALL PROG 2024 
+				008	=		/	IF	/	CHK_CHANGE=1	/		/	GOTO L2102	/		/		/	 IF CHK_CHANGE=1  GOTO L2102 
+				009	=		/	IF	/		/	MDAS_CP=0 & I_S_AUTO=1	/		/	GOTO L2600	/		/	 IF  MDAS_CP=0 & I_S_AUTO=1  GOTO L2600
+				010	=		/	WT*	/	ORG03_EN=1	/		/	MOV AX4 PT101	/		/		/	 WT* ORG03_EN=1  MOV AX4 PT101 
+				011	=		/	WT*	/	ORG04_EN=1	/		/	MOV AX2 PT101	/		/	96	/	 WT* ORG04_EN=1  MOV AX2 PT101 
+				012	=		/	WT*	/	ORG05_EN=1	/		/	MOV AX1 PT101	/		/	97	/	 WT* ORG05_EN=1  MOV AX1 PT101 
+				013	=	L2102	/		/		/		/	RET	/		/		/	L2102    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2013">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MMDR2=1	/		/	CALL PROG 2027	/		/		/	 IF MMDR2=1  CALL PROG 2027 
+				002	=		/	IF	/	MMDR2=0	/		/	CALL PROG 2028	/		/		/	 IF MMDR2=0  CALL PROG 2028 
+				003	=		/	IF	/	MMDTA=1	/		/	CALL PROG 2022	/		/		/	 IF MMDTA=1  CALL PROG 2022 
+				004	=		/	IF	/	MMDTA=0	/		/	CALL PROG 2023	/		/		/	 IF MMDTA=0  CALL PROG 2023 
+				005	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 1100	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 1100 
+				006	=		/	WT*	/	M15_EN=1	/		/	MOV AX1 AX2 AX4 PT126	/		/	98	/	 WT* M15_EN=1  MOV AX1 AX2 AX4 PT126 
+				007	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2014">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	CALL PROG 2024	/		/		/	    CALL PROG 2024 
+				002	=		/	WT*	/	ORG03_EN=1	/		/	MOV AX4 PT101	/		/		/	 WT* ORG03_EN=1  MOV AX4 PT101 
+				003	=		/	WT*	/	ORG04_EN=1	/		/	MOV AX2 PT101	/		/	96	/	 WT* ORG04_EN=1  MOV AX2 PT101 
+				004	=		/	WT*	/	ORG05_EN=1	/		/	MOV AX1 PT101	/		/	97	/	 WT* ORG05_EN=1  MOV AX1 PT101 
+				005	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2021">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 1100	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 1100 
+				002	=		/	IF	/	MMDTA=1	/		/	CALL PROG 2022	/		/		/	 IF MMDTA=1  CALL PROG 2022 
+				003	=		/	WT*	/	M15_EN=1	/		/	MOV AX1 AX2 AX4 PT126	/		/		/	 WT* M15_EN=1  MOV AX1 AX2 AX4 PT126 
+				004	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2022">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 1100	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 1100 
+				002	=		/	WT*	/	ORG04_EN=1	/		/	MOV AX2 PT108	/		/		/	 WT* ORG04_EN=1  MOV AX2 PT108 
+				003	=		/	WT*	/	ORG04_EN=1	/		/	MOV AX4 PT108	/		/		/	 WT* ORG04_EN=1  MOV AX4 PT108 
+				004	=		/		/		/		/	CALL PROG 2025	/		/		/	    CALL PROG 2025 
+				005	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2023">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 1100	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 1100 
+				002	=		/		/		/		/	CALL PROG 2024	/		/		/	    CALL PROG 2024 
+				003	=		/	WT*	/	M15_EN=1	/		/	MOV AX1 AX2 AX4 PT126	/		/		/	 WT* M15_EN=1  MOV AX1 AX2 AX4 PT126 
+				004	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2024">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	ORG02_EN=1	/		/		/		/		/	 WT ORG02_EN=1   
+				002	=		/	IF	/	SERVO_C=1	/		/	GOTO L2141	/		/		/	 IF SERVO_C=1  GOTO L2141 
+				003	=		/		/		/		/	OUT ORG02_EX=1	/		/		/	    OUT ORG02_EX=1 
+				004	=		/	WT	/	ORG02_CP=1	/		/	OUT ORG02_EX=0	/		/		/	 WT ORG02_CP=1  OUT ORG02_EX=0 
+				005	=		/		/		/		/	GOTO L2142	/		/		/	    GOTO L2142 
+				006	=	L2141	/	IF	/	S_ORGCP_AX06=0	/		/	HOME AX6	/		/		/	L2141 IF S_ORGCP_AX06=0  HOME AX6 
+				007	=		/	IF	/	S_ORGCP_AX06=1	/		/	MOV AX6 PT101	/		/		/	 IF S_ORGCP_AX06=1  MOV AX6 PT101 
+				008	=	L2142	/		/		/		/	RET	/		/		/	L2142    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2025">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	ORG06_EN=1	/		/		/		/		/	 WT ORG06_EN=1   
+				002	=		/	IF	/	SERVO_C=1	/		/	GOTO L2143	/		/		/	 IF SERVO_C=1  GOTO L2143 
+				003	=		/		/		/		/	OUT ORG06_EX=1	/		/		/	    OUT ORG06_EX=1 
+				004	=		/	WT	/	ORG06_CP=1	/		/	OUT ORG06_EX=0	/		/		/	 WT ORG06_CP=1  OUT ORG06_EX=0 
+				005	=		/		/		/		/	GOTO L2144	/		/		/	    GOTO L2144 
+				006	=	L2143	/	*	/		/		/	MOV AX6 PT115	/		/		/	L2143 *   MOV AX6 PT 
+				007	=	L2144	/		/		/		/	RET	/		/		/	L2144    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2027">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	ORG09_EN=1	/		/		/		/		/	 WT ORG09_EN=1   
+				002	=		/	IF	/	SERVO_A=1	/		/	GOTO L2145	/		/		/	 IF SERVO_A=1  GOTO L2145 
+				003	=		/		/		/		/	OUT ORG09_EX=1	/		/		/	    OUT ORG09_EX=1 
+				004	=		/	WT	/	ORG09_CP=1	/		/	OUT ORG09_EX=0	/		/		/	 WT ORG09_CP=1  OUT ORG09_EX=0 
+				005	=		/		/		/		/	GOTO L2146	/		/		/	    GOTO L2146 
+				006	=	L2145	/	*	/		/		/	MOV AX7 PT115	/		/		/	L2145 *   MOV AX7 PT 
+				007	=	L2146	/		/		/		/	RET	/		/		/	L2146    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2028">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	ORG08_EN=1	/		/		/		/		/	 WT ORG08_EN=1   
+				002	=		/	IF	/	SERVO_A=1	/		/	GOTO L2147	/		/		/	 IF SERVO_A=1  GOTO L2147 
+				003	=		/		/		/		/	OUT ORG08_EX=1	/		/		/	    OUT ORG08_EX=1 
+				004	=		/	WT	/	ORG08_CP=1	/		/	OUT ORG08_EX=0	/		/		/	 WT ORG08_CP=1  OUT ORG08_EX=0 
+				005	=		/		/		/		/	GOTO L2148	/		/		/	    GOTO L2148 
+				006	=	L2147	/	IF	/	S_ORGCP_AX07=0	/		/	HOME AX7	/		/		/	L2147 IF S_ORGCP_AX06=0  HOME AX7 
+				007	=		/	IF	/	S_ORGCP_AX07=1	/		/	MOV AX7 PT101	/		/		/	 IF S_ORGCP_AX06=1  MOV AX7 PT101 
+				008	=	L2148	/		/		/		/	RET	/		/		/	L2148    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2031">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MMDR2=1	/		/	CALL PROG 2027	/		/		/	 IF MMDR2=1  CALL PROG 2027 
+				002	=		/	IF	/	MMDR2=0	/		/	CALL PROG 2028	/		/		/	 IF MMDR2=0  CALL PROG 2028 
+				003	=		/	IF	/	MMDTA=1	/		/	CALL PROG 2022	/		/		/	 IF MMDTA=1  CALL PROG 2022 
+				004	=		/	WT*	/	ORG05_EN=1	/		/	MOV AX1 AX2 AX4 PT108	/		/		/	 WT* ORG05_EN=1  MOV AX1 AX2 AX4 PT108 
+				005	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2032">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MMDR2=1	/		/	CALL PROG 2027	/		/		/	 IF MMDR2=1  CALL PROG 2027 
+				002	=		/	IF	/	MMDR2=0	/		/	CALL PROG 2028	/		/		/	 IF MMDR2=0  CALL PROG 2028 
+				003	=		/	IF	/	MMDTA=0	/		/	CALL PROG 2024	/		/		/	 IF MMDTA=0  CALL PROG 2024 
+				004	=		/	WT*	/	ORG03_EN=1	/		/	MOV AX4 PT101	/		/		/	 WT* ORG03_EN=1  MOV AX4 PT101 
+				005	=		/	WT*	/	ORG04_EN=1	/		/	MOV AX2 PT101	/		/	96	/	 WT* ORG04_EN=1  MOV AX2 PT101 
+				006	=		/	WT*	/	ORG05_EN=1	/		/	MOV AX1 PT101	/		/	97	/	 WT* ORG05_EN=1  MOV AX1 PT101 
+				007	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="2100">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	LS1=1	/		/		/		/		/	 WT LS1=1   
+				002	=		/		/		/		/	CALL PROG 2024	/		/		/	    CALL PROG 2024 
+				003	=		/		/		/		/	CALL PROG 2028	/		/		/	    CALL PROG 2028 
+				004	=		/		/		/		/	END	/		/		/	    END 
+			</PROG>				 		 		 		 		 				 	 
+			<PROG NO="2300">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	USE_1ARM=1 | X_ORG=1	/		/	GOTO L2300	/		/		/	 IF USE_1ARM=1 | X_ORG=1  GOTO L2300 
+				002	=		/		/		/		/	INC AX2 = 50	/		/		/	    INC AX2 = 50 
+				003	=	L2300	/		/		/		/	RET	/		/		/	L2300    RET 
+			</PROG>				 		 		 		 		 				 	
+		</GROUP>					 		 		 		 		 				 	
+		<GROUP TYPE="PTP" MAIN="3000">																		 
+			<PROG NO="3000">																	 
+				001	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 3900	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 3900 
+				002	=		/	IF	/	LS12=1	/		/	GOTO L3010	/		/		/	 IF LS12=1  GOTO L3010 
+				003	=		/	IF	/	LS12=0 & LS1=0	/		/	GOTO L3020	/		/		/	 IF LS12=0 & LS1=0  GOTO L3020 
+				004	=		/	IF	/	LS1=1	/		/	GOTO L3030	/		/		/	 IF LS1=1  GOTO L3030 
+				005	=	L3010	/	IF	/	MMDTA=1 & LS9=0	/		/	CALL PROG 3912	/		/		/	L3010 IF MMDTA=1 & LS9=0  CALL PROG 3912 
+				006	=		/	IF	/	MMDTA=0 & LS8=0 & MV4RX=0	/		/	CALL PROG 3921	/		/		/	 IF MMDTA=0 & LS8=0 & MV4RX=0  CALL PROG 3921 
+				007	=	L3020	/	IF	/	MMDTA=1	/		/	CALL PROG 3912	/		/		/	L3020 IF MMDTA=1  CALL PROG 3912 
+				008	=		/	IF	/	MMDTA=1	/		/	MOV AX1 AX2 AX4 PT108	/		/		/	 IF MMDTA=1  MOV AX1 AX2 AX4 PT108 
+				009	=	L3030	/	IF	/	MMDTA=1	/		/	CALL PROG 3911	/		/		/	L3030 IF MMDTA=1  CALL PROG 3911 
+				010	=		/	IF	/	MMDTA=0 & LS9=1	/		/	CALL PROG 1104	/		/		/	 IF MMDTA=0 & LS9=1  CALL PROG 1104 
+				011	=		/	IF	/	MMDIS=0	/	 	/	GOTO L3040	/		/		/	 IF MMDIS=0   GOTO L3040 
+				012	=		/	IF	/	MMDIS=1 & MDISF=0	/	 	/	GOTO L3040	/		/		/	 IF MMDIS=1 & MDISF=0   GOTO L3040 
+				013	=		/	IF	/	MMDIS=1 & MDISF=1	/	 	/	MOV AX1 AX2 AX4 PT81	/		/		/	 IF MMDIS=1 & MDISF=1   MOV AX1 AX2 AX4 PT81 
+				014	=		/		/		/	 	/	OUT MSG_51=1	/		/		/	     OUT MSG_51=1 
+				015	=		/	WT	/	MSG_51=1	/	 	/	GOTO L3099	/		/		/	 WT MSG_51=1   GOTO L3099 
+				016	=	L3040	/		/		/	 	/	MOV AX1 AX2 AX4 PT102	/		/		/	L3040     MOV AX1 AX2 AX4 PT102 
+				017	=		/		/		/		/	OUT MSG_11=1	/		/		/	    OUT MSG_11=1 
+				018	=		/	WT	/	MSG_11=1	/		/		/		/		/	 WT MSG_11=1   
+				019	=	L3099	/		/		/		/	END	/		/		/	L3099    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3100">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 3900	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 3900 
+				002	=		/	IF	/	MMDTA=1	/		/	CALL PROG 3912	/		/		/	 IF MMDTA=1  CALL PROG 3912 
+				003	=		/	IF	/	MMDTA=0 & LS8=0 & MV4RX=0	/		/	CALL PROG 3921	/		/		/	 IF MMDTA=0 & LS8=0 & MV4RX=0  CALL PROG 3921 
+				004	=		/	IF	/	MDNT1=1 & Z_CW02=0	/		/	GOTO L3110	/		/		/	 IF MDNT1=1 & Z_CW02=0  GOTO L3110 
+				005	=		/	IF	/	MDS=1 & Z_CW04=0 	/		/	GOTO L3120	/		/		/	 IF MDS=1 & Z_CW04=0   GOTO L3120 
+				006	=		/	IF	/	MMDTF=1 & Z_CW06=0	/		/	GOTO L3130	/		/		/	 IF MMDTF=1 & Z_CW06=0  GOTO L3130 
+				007	=		/	IF	/	MDW=1 & Z_CW09=0	/		/	GOTO L3140	/		/		/	 IF MDW=1 & Z_CW09=0  GOTO L3140 
+				008	=		/	IF	/	MMD2K=1 & Z_CW10=0	/		/	GOTO L3141	/		/		/	 IF MMD2K=1 & Z_CW10=0  GOTO L3141 
+				009	=		/	IF	/	MMD3K=1 & Z_CW11=0	/		/	GOTO L3142	/		/		/	 IF MMD3K=1 & Z_CW11=0  GOTO L3142 
+				010	=		/	IF	/	MMD4K=1 & Z_CW12=0	/		/	GOTO L3143	/		/		/	 IF MMD4K=1 & Z_CW12=0  GOTO L3143 
+				011	=		/	IF	/	MMDTB=1 & Z_CW06=0	/		/	GOTO L3130	/		/		/	 IF MMDTB=1 & Z_CW06=0  GOTO L3130 
+				012	=		/	IF	/	MDIS1=1 & Z_CW13=0	/		/	GOTO L3181	/		/		/	 IF MDIS1=1 & Z_CW13=0  GOTO L3181 
+				013	=		/	IF	/	MDIS2=1 & Z_CW14=0	/		/	GOTO L3182	/		/		/	 IF MDIS2=1 & Z_CW14=0  GOTO L3182 
+				014	=		/	IF	/	MDIS3=1 & Z_CW15=0	/		/	GOTO L3183	/		/		/	 IF MDIS3=1 & Z_CW15=0  GOTO L3183 
+				015	=		/	IF	/	MDIS4=1 & Z_CW16=0	/		/	GOTO L3184	/		/		/	 IF MDIS4=1 & Z_CW16=0  GOTO L3184 
+				016	=		/		/		/		/	GOTO L3199	/		/		/	    GOTO L3199 
+				017	=	L3120	/		/		/		/	MOV AX1 AX2 AX4 PT109	/		/		/	L3120    MOV AX1 AX2 AX4 PT109 
+				018	=		/		/		/	 	/	OUT MSG_18=1	/		/		/	     OUT MSG_18=1 
+				019	=		/	WT	/	MSG_18=1	/		/	GOTO L3199	/		/		/	 WT MSG_18=1  GOTO L3199 
+				020	=	L3130	/		/		/		/	MOV AX1 AX2 AX4 PT112	/		/		/	L3130    MOV AX1 AX2 AX4 PT112 
+				021	=		/		/		/	 	/	OUT MSG_21=1	/		/		/	     OUT MSG_21=1 
+				022	=		/	WT	/	MSG_21=1	/		/	GOTO L3199	/		/		/	 WT MSG_21=1  GOTO L3199 
+				023	=	L3140	/	IF	/	MMDP1=0	/		/	MOV AX1 AX2 AX4 PT115 	/		/		/	L3140 IF MMDP1=0  MOV AX1 AX2 AX4 PT115  
+				024	=		/	IF	/	MMDP1=1	/		/	PMV 1 1 AX1 AX2 AX4 PT115	/		/		/	 IF MMDP1=1  PMV 1 1 AX1 AX2 AX4 PT115 
+				025	=		/		/		/	 	/	OUT MSG_24=1	/		/		/	     OUT MSG_24=1 
+				026	=		/	WT	/	MSG_24=1	/		/	GOTO L3199	/		/		/	 WT MSG_24=1  GOTO L3199 
+				027	=	L3141	/	IF	/	MMDP2=0	/		/	MOV AX1 AX2 AX4 PT130 	/		/		/	L3141 IF MMDP2=0  MOV AX1 AX2 AX4 PT130  
+				028	=		/	IF	/	MMDP2=1	/		/	PMV 2 1 AX1 AX2 AX4 PT130	/		/		/	 IF MMDP2=1  PMV 2 1 AX1 AX2 AX4 PT130 
+				029	=		/		/		/	 	/	OUT MSG_39=1	/		/		/	     OUT MSG_39=1 
+				030	=		/	WT	/	MSG_39=1	/		/	GOTO L3199	/		/		/	 WT MSG_39=1  GOTO L3199 
+				031	=	L3142	/	IF	/	MMDP3=0	/		/	MOV AX1 AX2 AX4 PT133	/		/		/	L3142 IF MMDP3=0  MOV AX1 AX2 AX4 PT133 
+				032	=		/	IF	/	MMDP3=1	/		/	PMV 3 1 AX1 AX2 AX4 PT133	/		/		/	 IF MMDP3=1  PMV 3 1 AX1 AX2 AX4 PT133 
+				033	=		/		/		/	 	/	OUT MSG_42=1	/		/		/	     OUT MSG_42=1 
+				034	=		/	WT	/	MSG_42=1	/		/	GOTO L3199	/		/		/	 WT MSG_42=1  GOTO L3199 
+				035	=	L3143	/	IF	/	MMDP4=0	/		/	MOV AX1 AX2 AX4 PT136	/		/		/	L3143 IF MMDP4=0  MOV AX1 AX2 AX4 PT136 
+				036	=		/	IF	/	MMDP4=1	/		/	PMV 4 1 AX1 AX2 AX4 PT136	/		/		/	 IF MMDP4=1  PMV 4 1 AX1 AX2 AX4 PT136 
+				037	=		/		/		/	 	/	OUT MSG_45=1	/		/		/	     OUT MSG_45=1 
+				038	=		/	WT	/	MSG_45=1	/		/	GOTO L3199	/		/		/	 WT MSG_45=1  GOTO L3199 
+				039	=	L3181	/		/		/		/	MOV AX1 AX2 AX4 PT085	/		/		/	L3181    MOV AX1 AX2 AX4 PT085 
+				040	=		/		/		/	 	/	OUT MSG_54=1	/		/		/	     OUT MSG_54=1 
+				041	=		/	WT	/	MSG_54=1	/		/	GOTO L3199	/		/		/	 WT MSG_54=1  GOTO L3199 
+				042	=	L3182	/		/		/		/	MOV AX1 AX2 AX4 PT087	/		/		/	L3182    MOV AX1 AX2 AX4 PT087 
+				043	=		/		/		/	 	/	OUT MSG_56=1	/		/		/	     OUT MSG_56=1 
+				044	=		/	WT	/	MSG_56=1	/		/	GOTO L3199	/		/		/	 WT MSG_56=1  GOTO L3199 
+				045	=	L3183	/		/		/		/	MOV AX1 AX2 AX4 PT089	/		/		/	L3183    MOV AX1 AX2 AX4 PT089 
+				046	=		/		/		/	 	/	OUT MSG_58=1	/		/		/	     OUT MSG_58=1 
+				047	=		/	WT	/	MSG_58=1	/		/	GOTO L3199	/		/		/	 WT MSG_58=1  GOTO L3199 
+				048	=	L3184	/		/		/		/	MOV AX1 AX2 AX4 PT091	/		/		/	L3184    MOV AX1 AX2 AX4 PT091 
+				049	=		/		/		/	 	/	OUT MSG_60=1	/		/		/	     OUT MSG_60=1 
+				050	=		/	WT	/	MSG_60=1	/		/	GOTO L3199	/		/		/	 WT MSG_60=1  GOTO L3199 
+				051	=	L3199	/		/		/		/	END	/		/		/	L3199    END 
+			</PROG>																	 
+			<PROG NO="3200">																	 
+				001	=		/	IF	/	ARM_RLS=1 & MDW=1	/		/	SVFOFF AX2	/		/		/	 IF ARM_RLS=1 & MDW=1  SVFOFF AX2 
+				002	=		/	IF	/	ARM_RLS=1 & MDS=1	/		/	SVFOFF AX4	/		/		/	 IF ARM_RLS=1 & MDS=1  SVFOFF AX4 
+				003	=		/	IF	/	ML3=1 	/		/	GOTO L3210	/		/		/	 IF ML3=1   GOTO L3210 
+				004	=		/	IF	/	M104EX=1 | M127EX=1	/		/	GOTO L3220	/		/		/	 IF M104EX=1 | M127EX=1  GOTO L3220 
+				005	=		/	IF	/	MDISLOW=1 & M074EX=0	/		/	GOTO L3229	/		/		/	 IF MDISLOW=1 & M074EX=0  GOTO L3229 
+				006	=		/	IF	/	M082EX=1	/		/	GOTO L3230	/		/		/	 IF M082EX=1  GOTO L3230 
+				007	=		/	IF	/	MFD_POS=1 & MMDIS=1 & MDFL8=1 & MDFSLOW=1	/		/	GOTO L3280	/		/		/	 IF MFD_POS=1 & MMDIS=1 & MDFL8=1 & MDFSLOW=1  GOTO L3280 
+				008	=		/	IF	/	MFD_POS_X=1 & MMDIS=1 & MDFL8=1 & MDFSLOW=1	/		/	GOTO L3280	/		/		/	 IF MFD_POS_X=1 & MMDIS=1 & MDFL8=1 & MDFSLOW=1  GOTO L3280 
+				009	=		/	IF	/	M086EX=1 & EAX2#85	/		/	GOTO L3281	/		/		/	 IF M086EX=1 & EAX2#85  GOTO L3281 
+				010	=		/	IF	/	M088EX=1 & EAX2#87	/		/	GOTO L3282	/		/		/	 IF M088EX=1 & EAX2#87  GOTO L3282 
+				011	=		/	IF	/	M090EX=1 & EAX2#89	/		/	GOTO L3283	/		/		/	 IF M090EX=1 & EAX2#89  GOTO L3283 
+				012	=		/	IF	/	M092EX=1 & EAX2#91	/		/	GOTO L3284	/		/		/	 IF M092EX=1 & EAX2#91  GOTO L3284 
+				013	=		/		/		/		/	GOTO L3299	/		/		/	    GOTO L3299 
+				014	=	L3210	/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 3902	/		/		/	L3210 IF MDW=0 | MDS=0  CALL PROG 3902 
+				015	=		/		/		/	 	/	OUT MSG_34=1	/		/		/	     OUT MSG_34=1 
+				016	=		/	WT	/	MSG_34=1	/		/	GOTO L3299	/		/		/	 WT MSG_34=1  GOTO L3299 
+				017	=	L3220	/	IF	/	MDS=0	/		/	MOV AX2 PT106	/		/		/	L3220 IF MDS=0  MOV AX2 PT106 
+				018	=		/	IF	/	MDW=0	/		/	MOV AX4 PT106	/		/		/	 IF MDW=0  MOV AX4 PT106 
+				019	=		/	IF	/	MDW=1 & MDS=1	/		/	MOV AX2 AX4 PT106	/		/		/	 IF MDW=1 & MDS=1  MOV AX2 AX4 PT106 
+				020	=		/		/		/	 	/	OUT MSG_15=1	/		/		/	     OUT MSG_15=1 
+				021	=		/	WT	/	MSG_15=1	/		/	GOTO L3299	/		/		/	 WT MSG_15=1  GOTO L3299 
+				022	=	L3229	/	IF	/	M082EX=1	/		/	MOV AX2 PT074	/		/		/	L3229 IF M082EX=1  MOV AX2 PT074 
+				023	=		/		/		/	 	/	OUT MSG_72=1	/		/		/	     OUT MSG_72=1 
+				024	=		/	WT	/	MSG_72=1	/		/	GOTO L3299	/		/		/	 WT MSG_72=1  GOTO L3299 
+				025	=	L3230	/		/		/		/	MOV AX2 PT083	/		/		/	L3230    MOV AX2 PT083 
+				026	=		/		/		/	 	/	OUT MSG_52=1	/		/		/	     OUT MSG_52=1 
+				027	=		/	WT	/	MSG_52=1	/		/	GOTO L3299	/		/		/	 WT MSG_52=1  GOTO L3299 
+				028	=	L3280	/	IF	/	MDFSLOW=0	/		/	GOTO L3281	/		/		/	L3280 IF MDFSLOW=0  GOTO L3281 
+				029	=		/	IF	/	MDFL8=1 & M072EX=1	/		/	GOTO L3281	/		/		/	 IF MDFL8=1 & M072EX=1  GOTO L3281 
+				030	=		/	IF	/	MDFL8=1 & M072EX=0	/		/	MOV AX2 PT072	/		/		/	 IF MDFL8=1 & M072EX=0  MOV AX2 PT072 
+				031	=		/	IF	/		/		/	OUT MSG_74=1	/		/		/	 IF   OUT MSG_74=1 
+				032	=		/	WT	/	MSG_74=1	/		/	GOTO L3299	/		/		/	 WT MSG_74=1  GOTO L3299 
+				033	=	L3281	/	IF	/	M086EX=1	/		/	GOTO L3282	/		/		/	L3281 IF M086EX=1  GOTO L3282 
+				034	=		/	IF	/	M088EX=1	/		/	GOTO L3283	/		/		/	 IF M088EX=1  GOTO L3283 
+				035	=		/	IF	/	M090EX=1	/		/	GOTO L3284	/		/		/	 IF M090EX=1  GOTO L3284 
+				036	=		/	IF	/	M092EX=1	/		/	GOTO L3285	/		/		/	 IF M092EX=1  GOTO L3285 
+				037	=	L3282	/	IF	/	MDFL8=1	/		/	MOV AX2 PT085	/		/		/	L3282 IF MDFL8=1  MOV AX2 PT085 
+				038	=		/		/		/	 	/	OUT MSG_54=1	/		/		/	     OUT MSG_54=1 
+				039	=		/	WT	/	MSG_54=1	/		/	GOTO L3299	/		/		/	 WT MSG_54=1  GOTO L3299 
+				040	=	L3283	/	IF	/	MDFL8=1	/		/	MOV AX2 PT087	/		/		/	L3283 IF MDFL8=1  MOV AX2 PT087 
+				041	=		/		/		/	 	/	OUT MSG_56=1	/		/		/	     OUT MSG_56=1 
+				042	=		/	WT	/	MSG_56=1	/		/	GOTO L3299	/		/		/	 WT MSG_56=1  GOTO L3299 
+				043	=	L3284	/	IF	/	MDFL8=1	/		/	MOV AX2 PT089	/		/		/	L3284 IF MDFL8=1  MOV AX2 PT089 
+				044	=		/		/		/	 	/	OUT MSG_58=1	/		/		/	     OUT MSG_58=1 
+				045	=		/	WT	/	MSG_58=1	/		/	GOTO L3299	/		/		/	 WT MSG_58=1  GOTO L3299 
+				046	=	L3285	/	IF	/	MDFL8=1	/		/	MOV AX2 PT091	/		/		/	L3285 IF MDFL8=1  MOV AX2 PT091 
+				047	=		/		/		/	 	/	OUT MSG_60=1	/		/		/	     OUT MSG_60=1 
+				048	=		/	WT	/	MSG_60=1	/		/	GOTO L3299	/		/		/	 WT MSG_60=1  GOTO L3299 
+				049	=	L3299	/		/		/		/	END	/		/		/	L3299    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3300">																	 
+				001	=		/	IF	/	ML3=1 	/		/	GOTO L3310	/		/		/	 IF ML3=1   GOTO L3310 
+				002	=		/	IF	/	M104EX=1	/		/	GOTO L3320	/		/		/	 IF M104EX=1  GOTO L3320 
+				003	=		/	IF	/	MDISLOW=1 & M073EX=0	/		/	GOTO L3329	/		/		/	 IF MDISLOW=1 & M073EX=0  GOTO L3329 
+				004	=		/	IF	/	M082EX=1	/		/	GOTO L3330	/		/		/	 IF M082EX=1  GOTO L3330 
+				005	=		/	IF	/	MFD_POS=1 & MMDIS=1 & MDFL8=1	/		/	GOTO L3380	/		/		/	 IF MFD_POS=1 & MMDIS=1 & MDFL8=1  GOTO L3380 
+				006	=		/	IF	/	MFD_POS_X=1 & MMDIS=1 & MDFL8=1	/		/	GOTO L3380	/		/		/	 IF MFD_POS_X=1 & MMDIS=1 & MDFL8=1  GOTO L3380 
+				007	=		/		/		/		/	GOTO L3399	/		/		/	    GOTO L3399 
+				008	=	L3310	/	IF	/	USE_1ARM=1 & MMDTA=1	/		/	GOTO L3315	/		/		/	L3310 IF USE_1ARM=1 & MMDTA=1  GOTO L3315 
+				009	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 3902	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 3902 
+				010	=		/	IF	/	EAX1=102 & MMDTA=1	/		/	GOTO L3315	/		/		/	 IF EAX1=102 & MMDTA=1  GOTO L3315 
+				011	=		/	IF	/	EAX1=108 & MMDTA=1	/		/	GOTO L3315	/		/		/	 IF EAX1=108 & MMDTA=1  GOTO L3315 
+				012	=		/		/		/	 	/	OUT MSG_34=1	/		/		/	     OUT MSG_34=1 
+				013	=		/	WT	/	MSG_34=1	/	 	/		/		/		/	 WT MSG_34=1    
+				014	=		/	IF	/	MMDTA=0	/		/	GOTO L3399	/		/		/	 IF MMDTA=0  GOTO L3399 
+				015	=	L3315	/	IF	/	MMDTA=1	/		/	MOV AX2 AX4 PT108	/		/		/	L3315 IF MMDTA=1  MOV AX2 AX4 PT108 
+				016	=		/		/		/	 	/	OUT MSG_17=1	/		/		/	     OUT MSG_17=1 
+				017	=		/	WT	/	MSG_17=1	/		/	GOTO L3399	/		/		/	 WT MSG_17=1  GOTO L3399 
+				018	=	L3320	/	IF	/	MDS=0	/		/	MOV AX2 PT105	/		/		/	L3320 IF MDS=0  MOV AX2 PT105 
+				019	=		/	IF	/	MDW=0	/		/	MOV AX4 PT105	/		/		/	 IF MDW=0  MOV AX4 PT105 
+				020	=		/	IF	/	MDW=1 & MDS=1	/		/	MOV AX2 AX4 PT105	/		/		/	 IF MDW=1 & MDS=1  MOV AX2 AX4 PT105 
+				021	=		/		/		/	 	/	OUT MSG_14=1	/		/		/	     OUT MSG_14=1 
+				022	=		/	WT	/	MSG_14=1	/		/	GOTO L3399	/		/		/	 WT MSG_14=1  GOTO L3399 
+				023	=	L3329	/	IF	/	M082EX=1	/		/	MOV AX2 PT073	/		/		/	L3329 IF M082EX=1  MOV AX2 PT073 
+				024	=		/		/		/	 	/	OUT MSG_71=1	/		/		/	     OUT MSG_71=1 
+				025	=		/	WT	/	MSG_71=1	/		/	GOTO L3399	/		/		/	 WT MSG_71=1  GOTO L3399 
+				026	=	L3330	/		/		/		/	MOV AX2 PT082	/		/		/	L3330    MOV AX2 PT082 
+				027	=		/		/		/	 	/	OUT MSG_51=1	/		/		/	     OUT MSG_51=1 
+				028	=		/	WT	/	MSG_51=1	/		/	GOTO L3399	/		/		/	 WT MSG_51=1  GOTO L3399 
+				029	=	L3380	/	IF	/	MDFSLOW=0	/		/	GOTO L3381	/		/		/	L3380 IF MDFSLOW=0  GOTO L3381 
+				030	=		/	IF	/	MDFL8=1 & M071EX=1	/		/	GOTO L3381	/		/		/	 IF MDFL8=1 & M071EX=1  GOTO L3381 
+				031	=		/		/	MDFL8=1 & M071EX=0	/		/	MOV AX2 PT071	/		/		/	  MDFL8=1 & M071EX=0  MOV AX2 PT071 
+				032	=		/		/		/		/	OUT MSG_73=1	/		/		/	    OUT MSG_73=1 
+				033	=		/	WT	/	MSG_73=1	/		/	GOTO L3399	/		/		/	 WT MSG_73=1  GOTO L3399 
+				034	=	L3381	/	IF	/	M086EX=1	/		/	GOTO L3382	/		/		/	L3381 IF M086EX=1  GOTO L3382 
+				035	=		/	IF	/	M088EX=1	/		/	GOTO L3383	/		/		/	 IF M088EX=1  GOTO L3383 
+				036	=		/	IF	/	M090EX=1	/		/	GOTO L3384	/		/		/	 IF M090EX=1  GOTO L3384 
+				037	=		/	IF	/	M092EX=1	/		/	GOTO L3385	/		/		/	 IF M092EX=1  GOTO L3385 
+				038	=	L3382	/	IF	/	MDFL8=1	/		/	MOV AX2 PT086	/		/		/	L3382 IF MDFL8=1  MOV AX2 PT086 
+				039	=		/		/		/	 	/	OUT MSG_55=1	/		/		/	     OUT MSG_55=1 
+				040	=		/	WT	/	MSG_55=1	/		/	GOTO L3399	/		/		/	 WT MSG_55=1  GOTO L3399 
+				041	=	L3383	/	IF	/	MDFL8=1	/		/	MOV AX2 PT088	/		/		/	L3383 IF MDFL8=1  MOV AX2 PT088 
+				042	=		/		/		/	 	/	OUT MSG_57=1	/		/		/	     OUT MSG_57=1 
+				043	=		/	WT	/	MSG_57=1	/		/	GOTO L3399	/		/		/	 WT MSG_57=1  GOTO L3399 
+				044	=	L3384	/	IF	/	MDFL8=1	/		/	MOV AX2 PT090	/		/		/	L3384 IF MDFL8=1  MOV AX2 PT090 
+				045	=		/		/		/	 	/	OUT MSG_59=1	/		/		/	     OUT MSG_59=1 
+				046	=		/	WT	/	MSG_59=1	/		/	GOTO L3399	/		/		/	 WT MSG_59=1  GOTO L3399 
+				047	=	L3385	/	IF	/	MDFL8=1	/		/	MOV AX2 PT092	/		/		/	L3385 IF MDFL8=1  MOV AX2 PT092 
+				048	=		/		/		/	 	/	OUT MSG_61=1	/		/		/	     OUT MSG_61=1 
+				049	=		/	WT	/	MSG_61=1	/		/	GOTO L3399	/		/		/	 WT MSG_61=1  GOTO L3399 
+				050	=	L3399	/		/		/		/	END	/		/		/	L3399    END 
+			</PROG>		 		 		 		 		 		 		 		 	 			
+			<PROG NO="3400">																	 
+				001	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 3901	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 3901 
+				002	=		/	IF	/	M102EY=1	/		/	GOTO L3410	/		/		/	 IF M102EY=1  GOTO L3410 
+				003	=		/	IF	/	M083EY=1	/		/	GOTO L3420	/		/		/	 IF M083EY=1  GOTO L3420 
+				004	=		/	IF	/	M106EY=1	/		/	GOTO L3420	/		/		/	 IF M106EY=1  GOTO L3420 
+				005	=		/	IF	/	M084EY=1 & MDISF=1	/		/	GOTO L3430	/		/		/	 IF M084EY=1 & MDISF=1  GOTO L3430 
+				006	=		/	IF	/	M109EY=1 & M115EY=0	/		/	GOTO L3450	/		/		/	 IF M109EY=1 & M115EY=0  GOTO L3450 
+				007	=		/	IF	/	M112EY=1	/		/	GOTO L3460	/		/		/	 IF M112EY=1  GOTO L3460 
+				008	=		/	IF	/	M115EY=1 & EAX3#117 & ML3=0	/		/	GOTO L3470	/		/		/	 IF M115EY=1 & EAX3#117 & ML3=0  GOTO L3470 
+				009	=		/	IF	/	M130EY=1 & EAX3#132 & ML3=0	/		/	GOTO L3471	/		/		/	 IF M130EY=1 & EAX3#132 & ML3=0  GOTO L3471 
+				010	=		/	IF	/	M133EY=1 & EAX3#135 & ML3=0	/		/	GOTO L3472	/		/		/	 IF M133EY=1 & EAX3#135 & ML3=0  GOTO L3472 
+				011	=		/	IF	/	M136EY=1	/		/	GOTO L3473	/		/		/	 IF M136EY=1  GOTO L3473 
+				012	=		/	IF	/	EAX3=117 | EAX3=132 | EAX3=135	/		/	GOTO L3490	/		/		/	 IF EAX3=117 | EAX3=132 | EAX3=135  GOTO L3490 
+				013	=		/	IF	/	M118EY=1 | M121EY=1 | M124EY=1	/		/	GOTO L3490	/		/		/	 IF M118EY=1 | M121EY=1 | M124EY=1  GOTO L3490 
+				014	=		/	IF	/	MFD_POS=1 & ML3=0	/		/	GOTO L3480	/		/		/	 IF MFD_POS=1 & ML3=0  GOTO L3480 
+				015	=		/	IF	/	EAX3=85	/		/	GOTO L3490	/		/		/	 IF EAX3=85  GOTO L3490 
+				016	=		/		/		/		/	GOTO L3499	/		/		/	    GOTO L3499 
+				017	=	L3410	/		/		/		/	MOV AX3 AX5 PT102	/		/		/	L3410    MOV AX3 AX5 PT102 
+				018	=		/		/		/	 	/	OUT MSG_11=1	/		/		/	     OUT MSG_11=1 
+				019	=		/	WT	/	MSG_11=1	/		/	GOTO L3499	/		/		/	 WT MSG_11=1  GOTO L3499 
+				020	=	L3420	/		/		/		/	MOV AX3 AX5 PT107	/		/		/	L3420    MOV AX3 AX5 PT107 
+				021	=		/		/		/	 	/	OUT MSG_16=1	/		/		/	     OUT MSG_16=1 
+				022	=		/	WT	/	MSG_16=1	/		/	GOTO L3499	/		/		/	 WT MSG_16=1  GOTO L3499 
+				023	=	L3430	/		/		/		/	MOV AX3 AX5 PT107	/		/		/	L3430    MOV AX3 AX5 PT107 
+				024	=		/		/		/	 	/	OUT MSG_16=1	/		/		/	     OUT MSG_16=1 
+				025	=		/	WT	/	MSG_16=1	/		/	GOTO L3499	/		/		/	 WT MSG_16=1  GOTO L3499 
+				026	=	L3450	/		/		/		/	MOV AX5 PT111	/		/		/	L3450    MOV AX5 PT111 
+				027	=		/		/		/	 	/	OUT MSG_20=1	/		/		/	     OUT MSG_20=1 
+				028	=		/	WT	/	MSG_20=1	/		/	GOTO L3499	/		/		/	 WT MSG_20=1  GOTO L3499 
+				029	=	L3460	/		/		/		/	MOV AX3 PT114	/		/		/	L3460    MOV AX3 PT114 
+				030	=		/		/		/	 	/	OUT MSG_23=1	/		/		/	     OUT MSG_23=1 
+				031	=		/	WT	/	MSG_23=1	/		/	GOTO L3499	/		/		/	 WT MSG_23=1  GOTO L3499 
+				032	=	L3470	/		/		/		/	MOV AX3 PT117	/		/		/	L3470    MOV AX3 PT117 
+				033	=		/		/		/	 	/	OUT MSG_26=1	/		/		/	     OUT MSG_26=1 
+				034	=		/	WT	/	MSG_26=1	/		/	GOTO L3499	/		/		/	 WT MSG_26=1  GOTO L3499 
+				035	=	L3471	/		/		/		/	MOV AX3 PT132	/		/		/	L3471    MOV AX3 PT132 
+				036	=		/		/		/	 	/	OUT MSG_41=1	/		/		/	     OUT MSG_41=1 
+				037	=		/	WT	/	MSG_41=1	/		/	GOTO L3499	/		/		/	 WT MSG_41=1  GOTO L3499 
+				038	=	L3472	/		/		/		/	MOV AX3 PT135	/		/		/	L3472    MOV AX3 PT135 
+				039	=		/		/		/	 	/	OUT MSG_44=1	/		/		/	     OUT MSG_44=1 
+				040	=		/	WT	/	MSG_44=1	/		/	GOTO L3499	/		/		/	 WT MSG_44=1  GOTO L3499 
+				041	=	L3473	/		/		/		/	MOV AX3 PT138	/		/		/	L3473    MOV AX3 PT138 
+				042	=		/		/		/	 	/	OUT MSG_47=1	/		/		/	     OUT MSG_47=1 
+				043	=		/	WT	/	MSG_47=1	/		/	GOTO L3499	/		/		/	 WT MSG_47=1  GOTO L3499 
+				044	=	L3480	/	IF	/	MDFL8=1	/		/	GOTO L3481	/		/		/	L3480 IF MDFL8=1  GOTO L3481 
+				045	=		/	IF	/	MDFSLOW=0	/		/	GOTO L3481	/		/		/	 IF MDFSLOW=0  GOTO L3481 
+				046	=		/	IF	/	M072EY=1 & MDFL8=0	/		/	GOTO L3481	/		/		/	 IF M072EY=1 & MDFL8=0  GOTO L3481 
+				047	=		/		/	M072EY=0 & MDFL8=0	/		/	MOV AX3 PT072	/		/		/	  M072EY=0 & MDFL8=0  MOV AX3 PT072 
+				048	=		/		/		/		/	OUT MSG_49=1	/		/		/	    OUT MSG_49=1 
+				049	=		/	WT	/	MSG_49=1	/		/	GOTO L3499	/		/		/	 WT MSG_49=1  GOTO L3499 
+				050	=	L3481	/	IF	/	M085EY=1 & ML3=0	/		/	GOTO L3482	/		/		/	L3481 IF M085EY=1 & ML3=0  GOTO L3482 
+				051	=		/	IF	/	M087EY=1 & ML3=0	/		/	GOTO L3483	/		/		/	 IF M087EY=1 & ML3=0  GOTO L3483 
+				052	=		/	IF	/	M089EY=1 & ML3=0	/		/	GOTO L3484	/		/		/	 IF M089EY=1 & ML3=0  GOTO L3484 
+				053	=		/	IF	/	M091EY=1	/		/	GOTO L3485	/		/		/	 IF M091EY=1  GOTO L3485 
+				054	=	L3482	/		/		/		/	MOV AX3 PT85	/		/		/	L3482    MOV AX3 PT85 
+				055	=		/		/		/		/	OUT MSG_54=1	/		/		/	    OUT MSG_54=1 
+				056	=		/	WT	/	MSG_54=1	/		/	GOTO L3499	/		/		/	 WT MSG_54=1  GOTO L3499 
+				057	=	L3483	/		/		/		/	MOV AX3 PT87	/		/		/	L3483    MOV AX3 PT87 
+				058	=		/		/		/		/	OUT MSG_56=1	/		/		/	    OUT MSG_56=1 
+				059	=		/	WT	/	MSG_56=1	/		/	GOTO L3499	/		/		/	 WT MSG_56=1  GOTO L3499 
+				060	=	L3484	/		/		/		/	MOV AX3 PT89	/		/		/	L3484    MOV AX3 PT89 
+				061	=		/		/		/		/	OUT MSG_58=1	/		/		/	    OUT MSG_58=1 
+				062	=		/	WT	/	MSG_58=1	/		/	GOTO L3499	/		/		/	 WT MSG_58=1  GOTO L3499 
+				063	=	L3485	/		/		/		/	MOV AX3 PT91	/		/		/	L3485    MOV AX3 PT91 
+				064	=		/		/		/		/	OUT MSG_60=1	/		/		/	    OUT MSG_60=1 
+				065	=		/	WT	/	MSG_60=1	/		/	GOTO L3499	/		/		/	 WT MSG_60=1  GOTO L3499 
+				066	=	L3490	/		/		/		/	MOV AX3 AX5 PT138	/		/		/	L3490    MOV AX3 AX5 PT138 
+				067	=		/		/		/	 	/	OUT MSG_29=1	/		/		/	     OUT MSG_29=1 
+				068	=		/	WT	/	MSG_29=1	/		/		/		/		/	 WT MSG_29=1   
+				069	=	L3499	/		/		/		/	END	/		/		/	L3499    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3500">																	 
+				001	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 3901	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 3901 
+				002	=		/	IF	/	M102EY=1 & Y_CW01=0 & MDKT=1	/		/	GOTO L3501	/		/		/	 IF M102EY=1 & Y_CW01=0 & MDKT=1  GOTO L3501 
+				003	=		/	IF	/	M083EY=1 & MDISF=1	/		/	GOTO L3507	/		/		/	 IF M083EY=1 & MDISF=1  GOTO L3507 
+				004	=		/	IF	/	M102EY=1 & Y_CW01=1 & MDISF=1  & MMDIS=1	/		/	GOTO L3506	/		/		/	 IF M102EY=1 & Y_CW01=1 & MDISF=1  & MMDIS=1  GOTO L3506 
+				005	=		/	IF	/	M083EY=1 & MDISF=0 & ML3=1	/		/	GOTO L3530	/		/		/	 IF M083EY=1 & MDISF=0 & ML3=1  GOTO L3530 
+				006	=		/	IF	/	M102EY=1 & Y_CW01=1 & MDISF=0	/		/	GOTO L3510	/		/		/	 IF M102EY=1 & Y_CW01=1 & MDISF=0  GOTO L3510 
+				007	=		/	IF	/	M106EY=1 & MMDIS=0	/		/	GOTO L3520	/		/		/	 IF M106EY=1 & MMDIS=0  GOTO L3520 
+				008	=		/	IF	/	M106EY=1 & MMDIS=1 & MDISF=0 & ML3=1	/		/	GOTO L3520	/		/		/	 IF M106EY=1 & MMDIS=1 & MDISF=0 & ML3=1  GOTO L3520 
+				009	=		/	IF	/	M106EY=1 & MMDIS=1 & MDISF=0 & ML3=0	/		/	GOTO L3530	/		/		/	 IF M106EY=1 & MMDIS=1 & MDISF=0 & ML3=0  GOTO L3530 
+				010	=		/	IF	/	SAX1=81 | SAX2=81	/		/	GOTO L3530	/		/		/	 IF SAX1=81 | SAX2=81  GOTO L3530 
+				011	=		/	IF	/	M081EY=1 & MMDIS=1 & MDISF=0	/		/	GOTO L3530	/		/		/	 IF M081EY=1 & MMDIS=1 & MDISF=0  GOTO L3530 
+				012	=		/	IF	/	M084EY=1 & MMDIS=1 & MDISF=1	/		/	GOTO L3540	/		/		/	 IF M084EY=1 & MMDIS=1 & MDISF=1  GOTO L3540 
+				013	=		/	IF	/	M109EY=1 & M115EY=0	/		/	GOTO L3550	/		/		/	 IF M109EY=1 & M115EY=0  GOTO L3550 
+				014	=		/	IF	/	M112EY=1	/		/	GOTO L3560	/		/		/	 IF M112EY=1  GOTO L3560 
+				015	=		/	IF	/	M115EY=1	/		/	GOTO L3570	/		/		/	 IF M115EY=1  GOTO L3570 
+				016	=		/	IF	/	M130EY=1	/		/	GOTO L3571	/		/		/	 IF M130EY=1  GOTO L3571 
+				017	=		/	IF	/	M133EY=1	/		/	GOTO L3572	/		/		/	 IF M133EY=1  GOTO L3572 
+				018	=		/	IF	/	M136EY=1	/		/	GOTO L3573	/		/		/	 IF M136EY=1  GOTO L3573 
+				019	=		/	IF	/	M118EY=1	/		/	GOTO L3541	/		/		/	 IF M118EY=1  GOTO L3541 
+				020	=		/	IF	/	M121EY=1	/		/	GOTO L3542	/		/		/	 IF M121EY=1  GOTO L3542 
+				021	=		/	IF	/	M124EY=1	/		/	GOTO L3543	/		/		/	 IF M124EY=1  GOTO L3543 
+				022	=		/	IF	/	MFD_POS=1 & MMDIS=1	/		/	GOTO L3580	/		/		/	 IF MFD_POS=1 & MMDIS=1  GOTO L3580 
+				023	=		/		/		/		/	GOTO L3599	/		/		/	    GOTO L3599 
+				024	=	L3501	/		/		/		/	MOV AX3 AX5 PT103	/		/		/	L3501    MOV AX3 AX5 PT103 
+				025	=		/		/		/	 	/	OUT MSG_12=1	/		/		/	     OUT MSG_12=1 
+				026	=		/	WT	/	MSG_12=1	/		/	GOTO L3599	/		/		/	 WT MSG_12=1  GOTO L3599 
+				027	=	L3506	/	IF	/	MDISF=1	/		/	MOV AX3 AX5 PT082	/		/		/	L3506 IF MDISF=1  MOV AX3 AX5 PT082 
+				028	=		/		/		/	 	/	OUT MSG_51=1	/		/		/	     OUT MSG_51=1 
+				029	=		/	WT	/	MSG_51=1	/		/	GOTO L3599	/		/		/	 WT MSG_51=1  GOTO L3599 
+				030	=	L3507	/	IF	/	MDISF=1	/		/	MOV AX1 AX2 PT102	/		/		/	L3507 IF MDISF=1  MOV AX1 AX2 PT102 
+				031	=	L3510	/		/		/		/	MOV AX3 AX5 PT104	/		/		/	L3510    MOV AX3 AX5 PT104 
+				032	=		/		/		/	 	/	OUT MSG_13=1	/		/		/	     OUT MSG_13=1 
+				033	=		/	WT	/	MSG_13=1	/		/	GOTO L3599	/		/		/	 WT MSG_13=1  GOTO L3599 
+				034	=	L3520	/		/		/		/	MOV AX3 AX5 PT106	/		/		/	L3520    MOV AX3 AX5 PT106 
+				035	=		/		/		/	 	/	OUT MSG_15=1	/		/		/	     OUT MSG_15=1 
+				036	=		/	WT	/	MSG_15=1	/		/	GOTO L3599	/		/		/	 WT MSG_15=1  GOTO L3599 
+				037	=	L3530	/	IF	/	M083EY=1 & MDISF=0 & ML3=1	/		/	GOTO L3531	/		/		/	L3530 IF M083EY=1 & MDISF=0 & ML3=1  GOTO L3531 
+				038	=		/	IF	/	MMDIS=1 & MDISF=0	/		/	MOV AX1 AX2 PT081	/		/		/	 IF MMDIS=1 & MDISF=0  MOV AX1 AX2 PT081 
+				039	=	L3531	/	IF	/	MMDIS=1 & MDISF=0	/		/	MOV AX3 PT082	/		/		/	L3531 IF MMDIS=1 & MDISF=0  MOV AX3 PT082 
+				040	=		/		/		/	 	/	OUT MSG_51=1	/		/		/	     OUT MSG_51=1 
+				041	=		/	WT	/	MSG_51=1	/		/	GOTO L3599	/		/		/	 WT MSG_51=1  GOTO L3599 
+				042	=	L3540	/	IF	/	MMDIS=1 & MDISF=1	/		/	MOV AX3 PT082	/		/		/	L3540 IF MMDIS=1 & MDISF=1  MOV AX3 PT082 
+				043	=		/		/		/		/	OUT MSG_50=1	/		/		/	    OUT MSG_50=1 
+				044	=		/	WT	/	MSG_50=1	/		/	GOTO L3599	/		/		/	 WT MSG_50=1  GOTO L3599 
+				045	=	L3541	/	IF	/	MDNG=1 | MDIR=1	/		/	CALL PROG 3931	/		/		/	L3541 IF MDNG=1 | MDIR=1  CALL PROG 3931 
+				046	=		/		/		/		/	MOV AX3 PT119	/		/		/	    MOV AX3 PT119 
+				047	=		/		/		/	 	/	OUT MSG_28=1	/		/		/	     OUT MSG_28=1 
+				048	=		/	WT	/	MSG_28=1	/		/	GOTO L3599	/		/		/	 WT MSG_28=1  GOTO L3599 
+				049	=	L3542	/	IF	/	MDSP=1	/		/	CALL PROG 3931	/		/		/	L3542 IF MDSP=1  CALL PROG 3931 
+				050	=		/		/		/		/	MOV AX3  PT122	/		/		/	    MOV AX3  PT122 
+				051	=		/		/		/	 	/	OUT MSG_31=1	/		/		/	     OUT MSG_31=1 
+				052	=		/	WT	/	MSG_31=1	/		/	GOTO L3599	/		/		/	 WT MSG_31=1  GOTO L3599 
+				053	=	L3543	/	IF	/	M124EY=1	/		/	CALL PROG 3921	/		/		/	L3543 IF M124EY=1  CALL PROG 3921 
+				054	=		/		/		/		/	MOV AX3 PT124	/		/		/	    MOV AX3 PT124 
+				055	=		/		/		/	 	/	OUT MSG_33=1	/		/		/	     OUT MSG_33=1 
+				056	=		/	WT	/	MSG_33=1	/		/	GOTO L3599	/		/		/	 WT MSG_33=1  GOTO L3599 
+				057	=	L3550	/	IF	/	MMDSTA=1	/		/	CALL PROG 3921	/		/		/	L3550 IF MMDSTA=1  CALL PROG 3921 
+				058	=		/		/		/		/	MOV AX5 PT110	/		/		/	    MOV AX5 PT110 
+				059	=		/		/		/	 	/	OUT MSG_19=1	/		/		/	     OUT MSG_19=1 
+				060	=		/	WT	/	MSG_19=1	/		/	GOTO L3599	/		/		/	 WT MSG_19=1  GOTO L3599 
+				061	=	L3560	/	WT	/	MMDTF=1 | MMDTB=1	/		/	CALL PROG 3931	/		/		/	L3560 WT MMDTF=1 | MMDTB=1  CALL PROG 3931 
+				062	=		/		/		/		/	MOV AX3 PT113	/		/		/	    MOV AX3 PT113 
+				063	=		/		/		/	 	/	OUT MSG_22=1	/		/		/	     OUT MSG_22=1 
+				064	=		/	WT	/	MSG_22=1	/		/	GOTO L3599	/		/		/	 WT MSG_22=1  GOTO L3599 
+				065	=	L3570	/	IF	/	MMDP1=0	/		/	MOV AX3 PT116	/		/		/	L3570 IF MMDP1=0  MOV AX3 PT116 
+				066	=		/	IF	/	MMDP1=1	/		/	PMV 1 1 AX3 PT142	/		/		/	 IF MMDP1=1  PMV 1 1 AX3 PT142 
+				067	=		/		/		/	 	/	OUT MSG_25=1	/		/		/	     OUT MSG_25=1 
+				068	=		/	WT	/	MSG_25=1	/		/	GOTO L3599	/		/		/	 WT MSG_25=1  GOTO L3599 
+				069	=	L3571	/	IF	/	MMDP2=0	/		/	MOV AX3 PT131	/		/		/	L3571 IF MMDP2=0  MOV AX3 PT131 
+				070	=		/	IF	/	MMDP2=1	/		/	PMV 2 1 AX3 PT144	/		/		/	 IF MMDP2=1  PMV 2 1 AX3 PT144 
+				071	=		/		/		/	 	/	OUT MSG_40=1	/		/		/	     OUT MSG_40=1 
+				072	=		/	WT	/	MSG_40=1	/		/	GOTO L3599	/		/		/	 WT MSG_40=1  GOTO L3599 
+				073	=	L3572	/	IF	/	MMDP3=0	/		/	MOV AX3 PT134	/		/		/	L3572 IF MMDP3=0  MOV AX3 PT134 
+				074	=		/	IF	/	MMDP3=1	/		/	PMV 3 1 AX3 PT146	/		/		/	 IF MMDP3=1  PMV 3 1 AX3 PT146 
+				075	=		/		/		/	 	/	OUT MSG_43=1	/		/		/	     OUT MSG_43=1 
+				076	=		/	WT	/	MSG_43=1	/		/	GOTO L3599	/		/		/	 WT MSG_43=1  GOTO L3599 
+				077	=	L3573	/	IF	/	MMDP4=0	/		/	MOV AX3 PT137	/		/		/	L3573 IF MMDP4=0  MOV AX3 PT137 
+				078	=		/	IF	/	MMDP4=1	/		/	PMV 4 1 AX3 PT148	/		/		/	 IF MMDP4=1  PMV 4 1 AX3 PT148 
+				079	=		/		/		/	 	/	OUT MSG_46=1	/		/		/	     OUT MSG_46=1 
+				080	=		/	WT	/	MSG_46=1	/		/	GOTO L3599	/		/		/	 WT MSG_46=1  GOTO L3599 
+				081	=	L3580	/	IF	/	MDFL8=1	/		/	CALL PROG 3921	/		/		/	L3580 IF MDFL8=1  CALL PROG 3921 
+				082	=		/	IF	/	MDFL8=1	/		/	GOTO L3581	/		/		/	 IF MDFL8=1  GOTO L3581 
+				083	=		/	IF	/	MDFL8=0	/		/	CALL PROG 3931	/		/		/	 IF MDFL8=0  CALL PROG 3931 
+				084	=		/	IF	/	MDFSLOW=0	/		/	GOTO L3581	/		/		/	 IF MDFSLOW=0  GOTO L3581 
+				085	=		/	IF	/	M071EY=1 & MDFL8=0	/		/	GOTO L3581	/		/		/	 IF M071EY=1 & MDFL8=0  GOTO L3581 
+				086	=		/	IF	/	M071EY=0 & MDFL8=0	/		/	MOV AX3 PT071	/		/		/	 IF M071EY=0 & MDFL8=0  MOV AX3 PT071 
+				087	=		/		/		/	 	/	OUT MSG_48=1	/		/		/	     OUT MSG_48=1 
+				088	=		/	WT	/	MSG_48=1	/		/	GOTO L3599	/		/		/	 WT MSG_48=1  GOTO L3599 
+				089	=	L3581	/	IF	/	M085EY=1 & MDIS1=1	/		/	GOTO L3582	/		/		/	L3581 IF M085EY=1 & MDIS1=1  GOTO L3582 
+				090	=		/	IF	/	M087EY=1 & MDIS2=1	/		/	GOTO L3583	/		/		/	 IF M087EY=1 & MDIS2=1  GOTO L3583 
+				091	=		/	IF	/	M089EY=1 & MDIS3=1	/		/	GOTO L3584	/		/		/	 IF M089EY=1 & MDIS3=1  GOTO L3584 
+				092	=		/	IF	/	M091EY=1 & MDIS4=1	/		/	GOTO L3585	/		/		/	 IF M091EY=1 & MDIS4=1  GOTO L3585 
+				093	=	L3582	/		/		/		/	MOV AX3 PT086	/		/		/	L3582    MOV AX3 PT086 
+				094	=		/		/		/	 	/	OUT MSG_55=1	/		/		/	     OUT MSG_55=1 
+				095	=		/	WT	/	MSG_55=1	/		/	GOTO L3599	/		/		/	 WT MSG_55=1  GOTO L3599 
+				096	=	L3583	/		/		/		/	MOV AX3 PT088	/		/		/	L3583    MOV AX3 PT088 
+				097	=		/		/		/	 	/	OUT MSG_57=1	/		/		/	     OUT MSG_57=1 
+				098	=		/	WT	/	MSG_57=1	/		/	GOTO L3599	/		/		/	 WT MSG_57=1  GOTO L3599 
+				099	=	L3584	/		/		/		/	MOV AX3 PT090	/		/		/	L3584    MOV AX3 PT090 
+				100	=		/		/		/	 	/	OUT MSG_59=1	/		/		/	     OUT MSG_59=1 
+				101	=		/	WT	/	MSG_59=1	/		/	GOTO L3599	/		/		/	 WT MSG_59=1  GOTO L3599 
+				102	=	L3585	/		/		/		/	MOV AX3 PT092	/		/		/	L3585    MOV AX3 PT092 
+				103	=		/		/		/	 	/	OUT MSG_61=1	/		/		/	     OUT MSG_61=1 
+				104	=		/	WT	/	MSG_61=1	/		/	GOTO L3599	/		/		/	 WT MSG_61=1  GOTO L3599 
+				105	=	L3599	/		/		/		/	END	/		/		/	L3599    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3601">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	SAX2=127 | EAX2=105	/		/	GOTO L3601	/		/		/	 IF SAX2=127 | EAX2=105  GOTO L3601 
+				002	=		/		/		/		/	OUT ER_101=1	/		/		/	    OUT ER_101=1 
+				003	=		/	WT	/	ER_101=1	/		/	GOTO L3611	/		/		/	 WT ER_101=1  GOTO L3611 
+				004	=	L3601	/	IF	/	SAX2=127 | EAX2=105	/		/	MOV AX2 PT127	/		/		/	L3601 IF SAX2=127 | EAX2=105  MOV AX2 PT127 
+				005	=		/	WT	/	EAX2=127	/		/	OUT MSG_36=1	/		/		/	 WT EAX2=127  OUT MSG_36=1 
+				006	=		/	WT	/	MSG_36=1	/		/		/		/		/	 WT MSG_36=1   
+				007	=	L3611	/		/		/		/	END	/		/		/	L3611    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3602">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	SAX3=127 | EAX2=127	/		/	GOTO L3602	/		/		/	 IF SAX3=127 | EAX2=127  GOTO L3602 
+				002	=		/		/		/		/	OUT ER_101=1	/		/		/	    OUT ER_101=1 
+				003	=		/	WT	/	ER_101=1	/		/	GOTO L3612	/		/		/	 WT ER_101=1  GOTO L3612 
+				004	=	L3602	/	IF	/	SAX3=127 | EAX2=127	/		/	MOV AX3 PT127	/		/		/	L3602 IF SAX3=127 | EAX2=127  MOV AX3 PT127 
+				005	=		/	WT	/	EAX3=127	/		/	OUT MSG_37=1	/		/		/	 WT EAX3=127  OUT MSG_37=1 
+				006	=		/	WT	/	MSG_37=1	/		/		/		/		/	 WT MSG_37=1   
+				007	=	L3612	/		/		/		/	END	/		/		/	L3612    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3603">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	SAX1=127 | EAX3=127	/		/	GOTO L3603	/		/		/	 IF SAX1=127 | EAX3=127  GOTO L3603 
+				002	=		/		/		/		/	OUT ER_101=1	/		/		/	    OUT ER_101=1 
+				003	=		/	WT	/	ER_101=1	/		/	GOTO L3613	/		/		/	 WT ER_101=1  GOTO L3613 
+				004	=	L3603	/	IF	/	SAX1=127 | EAX3=127	/		/	MOV AX1 PT127	/		/		/	L3603 IF SAX1=127 | EAX3=127  MOV AX1 PT127 
+				005	=		/	WT	/	EAX1=127	/		/	OUT MSG_38=1	/		/		/	 WT EAX1=127  OUT MSG_38=1 
+				006	=		/	WT	/	MSG_38=1	/		/		/		/		/	 WT MSG_38=1   
+				007	=	L3613	/		/		/		/	END	/		/		/	L3613    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3604">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	SAX2=128 | EAX1=127	/		/	GOTO L3604	/		/		/	 IF SAX2=128 | EAX1=127  GOTO L3604 
+				002	=		/		/		/		/	OUT ER_101=1	/		/		/	    OUT ER_101=1 
+				003	=		/	WT	/	ER_101=1	/		/	GOTO L3614	/		/		/	 WT ER_101=1  GOTO L3614 
+				004	=	L3604	/	IF	/	SAX2=128 | EAX1=127	/		/	MOV AX2 PT128	/		/		/	L3604 IF SAX2=128 | EAX1=127  MOV AX2 PT128 
+				005	=		/	WT	/	EAX2=128	/		/	OUT MSG_36=1	/		/		/	 WT EAX2=128  OUT MSG_36=1 
+				006	=		/	WT	/	MSG_36=1	/		/		/		/		/	 WT MSG_36=1   
+				007	=	L3614	/		/		/		/	END	/		/		/	L3614    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3605">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	SAX3=128 | EAX2=128	/		/	GOTO L3605	/		/		/	 IF SAX3=128 | EAX2=128  GOTO L3605 
+				002	=		/		/		/		/	OUT ER_101=1	/		/		/	    OUT ER_101=1 
+				003	=		/	WT	/	ER_101=1	/		/	GOTO L3615	/		/		/	 WT ER_101=1  GOTO L3615 
+				004	=	L3605	/	IF	/	SAX3=128 | EAX2=128	/		/	MOV AX3 PT128	/		/		/	L3605 IF SAX3=128 | EAX2=128  MOV AX3 PT128 
+				005	=		/	WT	/	EAX3=128	/		/	OUT MSG_37=1	/		/		/	 WT EAX3=128  OUT MSG_37=1 
+				006	=		/	WT	/	MSG_37=1	/		/		/		/		/	 WT MSG_37=1   
+				007	=	L3615	/		/		/		/	END	/		/		/	L3615    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3606">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	SAX1=128 | EAX3=128	/		/	GOTO L3606	/		/		/	 IF SAX1=128 | EAX3=128  GOTO L3606 
+				002	=		/		/		/		/	OUT ER_101=1	/		/		/	    OUT ER_101=1 
+				003	=		/	WT	/	ER_101=1	/		/	GOTO L3616	/		/		/	 WT ER_101=1  GOTO L3616 
+				004	=	L3606	/	IF	/	SAX1=128 | EAX3=128	/		/	MOV AX1 PT128	/		/		/	L3606 IF SAX1=128 | EAX3=128  MOV AX1 PT128 
+				005	=		/	WT	/	EAX1=128	/		/	OUT MSG_38=1	/		/		/	 WT EAX1=128  OUT MSG_38=1 
+				006	=		/	WT	/	MSG_38=1	/		/		/		/		/	 WT MSG_38=1   
+				007	=	L3616	/		/		/		/	END	/		/		/	L3616    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3607">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	SAX2=129 | EAX1=128	/		/	GOTO L3607	/		/		/	 IF SAX2=129 | EAX1=128  GOTO L3607 
+				002	=		/		/		/		/	OUT ER_101=1	/		/		/	    OUT ER_101=1 
+				003	=		/	WT	/	ER_101=1	/		/	GOTO L3617	/		/		/	 WT ER_101=1  GOTO L3617 
+				004	=	L3607	/	IF	/	SAX2=129 | EAX1=128	/		/	MOV AX2 PT129	/		/		/	L3607 IF SAX2=129 | EAX1=128  MOV AX2 PT129 
+				005	=		/	WT	/	EAX2=129	/		/	OUT MSG_36=1	/		/		/	 WT EAX2=129  OUT MSG_36=1 
+				006	=		/	WT	/	MSG_36=1	/		/		/		/		/	 WT MSG_36=1   
+				007	=	L3617	/		/		/		/	END	/		/		/	L3617    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3608">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	SAX3=129 | EAX2=129	/		/	GOTO L3608	/		/		/	 IF SAX3=129 | EAX2=129  GOTO L3608 
+				002	=		/		/		/		/	OUT ER_101=1	/		/		/	    OUT ER_101=1 
+				003	=		/	WT	/	ER_101=1	/		/	GOTO L3618	/		/		/	 WT ER_101=1  GOTO L3618 
+				004	=	L3608	/	IF	/	SAX3=129 | EAX2=129	/		/	MOV AX3 PT129	/		/		/	L3608 IF SAX3=129 | EAX2=129  MOV AX3 PT129 
+				005	=		/	WT	/	EAX3=129	/		/	OUT MSG_37=1	/		/		/	 WT EAX3=129  OUT MSG_37=1 
+				006	=		/	WT	/	MSG_37=1	/		/		/		/		/	 WT MSG_37=1   
+				007	=	L3618	/		/		/		/	END	/		/		/	L3618    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3609">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	SAX1=129 | EAX3=129	/		/	GOTO L3609	/		/		/	 IF SAX1=129 | EAX3=129  GOTO L3609 
+				002	=		/		/		/		/	OUT ER_101=1	/		/		/	    OUT ER_101=1 
+				003	=		/	WT	/	ER_101=1	/		/	GOTO L3619	/		/		/	 WT ER_101=1  GOTO L3619 
+				004	=	L3609	/	IF	/	SAX1=129 | EAX3=129	/		/	MOV AX1 PT129	/		/		/	L3609 IF SAX1=129 | EAX3=129  MOV AX1 PT129 
+				005	=		/	WT	/	EAX1=129	/		/	OUT MSG_38=1	/		/		/	 WT EAX1=129  OUT MSG_38=1 
+				006	=		/	WT	/	MSG_38=1	/		/		/		/		/	 WT MSG_38=1   
+				007	=	L3619	/		/		/		/	END	/		/		/	L3619    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3611">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	CALL PROG 3691	/		/		/	    CALL PROG 3691 
+				002	=		/		/		/		/	MOV AX1 AX2 AX4 PT118	/		/		/	    MOV AX1 AX2 AX4 PT118 
+				003	=		/	WT	/	M118EY=1	/	 	/	OUT MSG_27=1	/		/		/	 WT M118EY=1   OUT MSG_27=1 
+				004	=		/	WT	/	MSG_27=1	/		/		/		/		/	 WT MSG_27=1   
+				005	=		/		/		/		/	END	/		/		/	    END 
+			</PROG>																	 
+			<PROG NO="3621">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	CALL PROG 3691	/		/		/	    CALL PROG 3691 
+				002	=		/		/		/		/	MOV AX1 AX2 AX4 PT121	/		/		/	    MOV AX1 AX2 AX4 PT121 
+				003	=		/	WT	/	M121EY=1	/	 	/	OUT MSG_30=1	/		/		/	 WT M121EY=1   OUT MSG_30=1 
+				004	=		/	WT	/	MSG_30=1	/		/		/		/		/	 WT MSG_30=1   
+				005	=		/		/		/		/	END	/		/		/	    END 
+			</PROG>																	 
+			<PROG NO="3631">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	CALL PROG 3691	/		/		/	    CALL PROG 3691 
+				002	=		/		/		/		/	MOV AX1 AX2 AX4 PT124	/		/		/	    MOV AX1 AX2 AX4 PT124 
+				003	=		/	WT	/	M124EY=1	/	 	/	OUT MSG_33=1	/		/		/	 WT M124EY=1   OUT MSG_33=1 
+				004	=		/	WT	/	MSG_33=1	/		/		/		/		/	 WT MSG_33=1   
+				005	=		/		/		/		/	END	/		/		/	    END 
+			</PROG>																	 
+			<PROG NO="3691">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MDW=0 | MDS=0	/		/	CALL PROG 3900	/		/		/	 IF MDW=0 | MDS=0  CALL PROG 3900 
+				002	=		/	IF	/	MMDTA=1	/		/	CALL PROG 3912	/		/		/	 IF MMDTA=1  CALL PROG 3912 
+				003	=		/	IF	/	MMDTA=0 & LS9=1 & MV4RX=0	/		/	CALL PROG 3921	/		/		/	 IF MMDTA=0 & LS9=1 & MV4RX=0  CALL PROG 3921 
+				004	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>																	 
+			<PROG NO="3900">																	 
+				001	=		/	IF	/	MDW=0	/		/	MOV AX2 PT125	/		/		/	 IF MDW=0  MOV AX2 PT125 
+				002	=		/	IF	/	MDS=0	/		/	MOV AX4 PT125	/		/		/	 IF MDS=0  MOV AX4 PT125 
+				003	=		/	IF	/	MDW=0 | LS3=1	/		/	OUT AX02_NOUSE=1	/		/		/	 IF MDW=0 | LS3=1  OUT AX02_NOUSE=1 
+				004	=		/	IF	/	MDS=0 | LS3S=1	/		/	OUT AX04_NOUSE=1	/		/		/	 IF MDS=0 | LS3S=1  OUT AX04_NOUSE=1 
+				005	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3901">																	 
+				001	=		/	IF	/	MDW=0 | LS3=1	/		/	OUT AX03_NOUSE=1	/		/		/	 IF MDW=0 | LS3=1  OUT AX03_NOUSE=1 
+				002	=		/	IF	/	MDS=0 | LS3S=1	/		/	OUT AX05_NOUSE=1	/		/		/	 IF MDS=0 | LS3S=1  OUT AX05_NOUSE=1 
+				003	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3902">																	 
+				001	=		/	IF	/	MDW=0	/		/	MOV AX2 PT125	/		/		/	 IF MDW=0  MOV AX2 PT125 
+				002	=		/	IF	/	MDS=0	/		/	MOV AX4 PT125	/		/		/	 IF MDS=0  MOV AX4 PT125 
+				003	=		/		/		/	 	/	OUT MSG_25=1	/		/		/	     OUT MSG_25=1 
+				004	=		/	WT	/	MSG_25=1	/		/	OUT MSG_25=0	/		/		/	 WT MSG_25=1  OUT MSG_25=0 
+				005	=		/	IF	/	MDW=0 | LS3=1	/		/	OUT AX02_NOUSE=1	/		/		/	 IF MDW=0 | LS3=1  OUT AX02_NOUSE=1 
+				006	=		/	IF	/	MDS=0 | LS3S=1	/		/	OUT AX04_NOUSE=1	/		/		/	 IF MDS=0 | LS3S=1  OUT AX04_NOUSE=1 
+				007	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3905">																	 
+				001	=		/	IF	/	MDW=0 & EAX1=102 & EAX2=102	/		/	MOV AX2 PT125	/		/		/	 IF MDW=0 & EAX1=102 & EAX2=102  MOV AX2 PT125 
+				002	=		/	IF	/	MDS=0 & EAX1=102 & EAX4=102	/		/	MOV AX4 PT125	/		/		/	 IF MDS=0 & EAX1=102 & EAX4=102  MOV AX4 PT125 
+				003	=		/	IF	/	MDW=0 | LS3=1	/		/	OUT AX02_NOUSE=1	/		/		/	 IF MDW=0 | LS3=1  OUT AX02_NOUSE=1 
+				004	=		/	IF	/	MDS=0 | LS3S=1	/		/	OUT AX04_NOUSE=1	/		/		/	 IF MDS=0 | LS3S=1  OUT AX04_NOUSE=1 
+				005	=		/		/		/		/	RET	/		/		/	    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3911">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MMDTA=1 & LS8=1	/		/	GOTO L3911	/		/		/	 IF MMDTA=1 & LS8=1  GOTO L3911 
+				002	=		/		/		/		/	MOV AX2 PT108	/		/		/	    MOV AX2 PT108 
+				003	=		/		/		/		/	CALL PROG 3921	/		/		/	    CALL PROG 3921 
+				004	=	L3911	/		/		/		/	RET	/		/		/	L3911    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3912">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	MMDTA=1 & LS9=1	/		/	GOTO L3912	/		/		/	 IF MMDTA=1 & LS9=1  GOTO L3912 
+				002	=		/		/		/		/	MOV AX2 PT108	/		/		/	    MOV AX2 PT108 
+				003	=		/		/		/		/	CALL PROG 3931	/		/		/	    CALL PROG 3931 
+				004	=	L3912	/		/		/		/	RET	/		/		/	L3912    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3921">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	M13_EN=1	/		/		/		/		/	 WT M13_EN=1   
+				002	=		/	IF	/	SERVO_C=0	/		/	GOTO L3921	/		/		/	 IF SERVO_C=0  GOTO L3921 
+				003	=		/	IF	/	SERVO_C=1	/		/	GOTO L3922	/		/		/	 IF SERVO_C=1  GOTO L3922 
+				004	=	L3921	/	IF	/	LS8=1	/		/	GOTO L3923	/		/		/	L3921 IF LS8=1  GOTO L3923 
+				005	=		/		/		/		/	OUT M13_EX=1, M18_EX=0	/		/		/	    OUT M13_EX=1, M18_EX=0 
+				006	=		/	WT*	/	M13_CP=1	/		/	OUT M13_EX=0	/		/		/	 WT* M13_CP=1  OUT M13_EX=0 
+				007	=		/		/		/		/	GOTO L3923	/		/		/	    GOTO L3923 
+				008	=	L3922	/	*	/		/		/	MOV AX6 PT102	/		/		/	L3922 *   MOV AX6 PT102 
+				009	=	L3923	/		/		/		/	RET	/		/		/	L3923    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3931">		 		 		 		 		 		 		 		 	 
+				001	=		/	WT	/	M09_EN=1	/		/		/		/		/	 WT M09_EN=1   
+				002	=		/	IF	/	SERVO_C=0	/		/	GOTO L3931	/		/		/	 IF SERVO_C=0  GOTO L3931 
+				003	=		/	IF	/	SERVO_C=1 & EAX2=108	/		/	GOTO L3932	/		/		/	 IF SERVO_C=1 & EAX2=108  GOTO L3932 
+				004	=		/	IF	/	SERVO_C=1 & M112EY=1	/		/	GOTO L3933	/		/		/	 IF SERVO_C=1 & M112EY=1  GOTO L3933 
+				005	=		/	IF	/	SERVO_C=1 & M115EY=1	/		/	GOTO L3934	/		/		/	 IF SERVO_C=1 & M115EY=1  GOTO L3934 
+				006	=		/	IF	/	SERVO_C=1 & M118EY=1	/		/	GOTO L3935	/		/		/	 IF SERVO_C=1 & M118EY=1  GOTO L3935 
+				007	=		/	IF	/	SERVO_C=1 & M121EY=1	/		/	GOTO L3936	/		/		/	 IF SERVO_C=1 & M121EY=1  GOTO L3936 
+				008	=		/	IF	/	SERVO_C=1 & M085EY=1	/		/	GOTO L3937	/		/		/	 IF SERVO_C=1 & M085EY=1  GOTO L3937 
+				009	=	L3931	/	IF	/	LS9=1	/		/	GOTO L3939	/		/		/	L3931 IF LS9=1  GOTO L3939 
+				010	=		/		/		/		/	OUT M09_EX=1	/		/		/	    OUT M09_EX=1 
+				011	=		/	WT	/	M09_CP=1	/		/	OUT M09_EX=0	/		/		/	 WT M09_CP=1  OUT M09_EX=0 
+				012	=		/		/		/		/	GOTO L3939	/		/		/	    GOTO L3939 
+				013	=	L3932	/		/		/		/	MOV AX6 PT108	/		/		/	L3932    MOV AX6 PT108 
+				014	=		/		/		/		/	GOTO L3939	/		/		/	    GOTO L3939 
+				015	=	L3933	/		/		/		/	MOV AX6 PT112	/		/		/	L3933    MOV AX6 PT112 
+				016	=		/		/		/		/	GOTO L3939	/		/		/	    GOTO L3939 
+				017	=	L3934	/		/		/		/	MOV AX6 PT115	/		/		/	L3934    MOV AX6 PT115 
+				018	=		/		/		/		/	GOTO L3939	/		/		/	    GOTO L3939 
+				019	=	L3935	/		/		/		/	MOV AX6 PT118	/		/		/	L3935    MOV AX6 PT118 
+				020	=		/		/		/		/	GOTO L3939	/		/		/	    GOTO L3939 
+				021	=	L3936	/		/		/		/	MOV AX6 PT121	/		/		/	L3936    MOV AX6 PT121 
+				022	=		/		/		/		/	GOTO L3939	/		/		/	    GOTO L3939 
+				023	=	L3937	/		/		/		/	MOV AX6 PT085	/		/		/	L3937    MOV AX6 PT085 
+				024	=	L3939	/		/		/		/	RET	/		/		/	L3939    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3941">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	LS14=1	/		/	GOTO L3949	/		/		/	 IF LS14=1  GOTO L3949 
+				002	=		/	WT	/	M24_EN=1	/		/		/		/		/	 WT M24_EN=1   
+				003	=		/	IF	/	SERVO_A=0	/		/	GOTO L3941	/		/		/	 IF SERVO_A=0  GOTO L3941 
+				003	=		/	IF	/	SERVO_A=1	/		/	GOTO L3942	/		/		/	 IF SERVO_A=1  GOTO L3942 
+				004	=	L3941	/		/		/		/	OUT M24_EX=1	/		/		/	L3941    OUT M24_EX=1 
+				005	=		/	WT*	/	M24_CP=1	/		/	OUT M24_EX=0	/		/		/	 WT* M24_CP=1  OUT M24_EX=0 
+				006	=		/		/		/		/	GOTO L3942	/		/		/	    GOTO L3942 
+				007	=	L3942	/	*	/		/		/	MOV AX7 PT102	/		/		/	L3942 *   MOV AX7 PT102 
+				008	=	L3949	/		/		/		/	RET	/		/		/	L3949    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3951">		 		 		 		 		 		 		 		 	 
+				001	=		/	IF	/	LS15=1	/		/	GOTO L3959	/		/		/	 IF LS15=1  GOTO L3959 
+				002	=		/	WT	/	M23_EN=1	/		/		/		/		/	 WT M23_EN=1   
+				003	=		/	IF	/	SERVO_A=0	/		/	GOTO L3951	/		/		/	 IF SERVO_A=0  GOTO L3951 
+				004	=		/	IF	/	SERVO_A=1 & M106EY=1 & EAX2=106	/		/	GOTO L3952	/		/		/	 IF SERVO_A=1 & M106EY=1 & EAX2=106  GOTO L3952 
+				005	=		/	IF	/	SERVO_A=1 & M106EY=1 & EAX3=107	/		/	GOTO L3953	/		/		/	 IF SERVO_A=1 & M106EY=1 & EAX3=107  GOTO L3953 
+				006	=		/	IF	/	SERVO_A=1 & M102EY=1	/		/	GOTO L3953	/		/		/	 IF SERVO_A=1 & M102EY=1  GOTO L3953 
+				007	=		/	IF	/	SERVO_A=1 & MREL_POS=1	/		/	GOTO L3953	/		/		/	 IF SERVO_A=1 & MREL_POS=1  GOTO L3953 
+				008	=	L3951	/		/		/		/	OUT M23_EX=1	/		/		/	L3951    OUT M23_EX=1 
+				009	=		/	WT*	/	M23_CP=1	/		/	OUT M23_EX=0	/		/		/	 WT* M23_CP=1  OUT M23_EX=0 
+				010	=		/		/		/		/	GOTO L3959	/		/		/	    GOTO L3959 
+				011	=	L3952	/		/		/		/	MOV AX7 PT106	/		/		/	L3952    MOV AX7 PT106 
+				012	=		/		/		/		/	GOTO L3959	/		/		/	    GOTO L3959 
+				013	=	L3953	/		/		/		/	MOV AX7 PT115	/		/		/	L3953    MOV AX7 PT115 
+				014	=	L3959	/		/		/		/	RET	/		/		/	L3959    RET 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3961">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	CALL PROG 3921	/		/		/	    CALL PROG 3921 
+				002	=		/		/		/	 	/	OUT MSG_07=1	/		/		/	     OUT MSG_07=1 
+				003	=		/	WT	/	MSG_07=1	/		/	END	/		/		/	 WT MSG_07=1  END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3962">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	CALL PROG 3931	/		/		/	    CALL PROG 3931 
+				002	=		/		/		/	 	/	OUT MSG_08=1	/		/		/	     OUT MSG_08=1 
+				003	=		/	WT	/	MSG_08=1	/		/	END	/		/		/	 WT MSG_08=1  END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3963">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	CALL PROG 3941	/		/		/	    CALL PROG 3941 
+				002	=		/		/		/	 	/	OUT MSG_09=1	/		/		/	     OUT MSG_09=1 
+				003	=		/	WT	/	MSG_09=1	/		/	END	/		/		/	 WT MSG_09=1  END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3964">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	CALL PROG 3951	/		/		/	    CALL PROG 3951 
+				002	=		/		/		/	 	/	OUT MSG_10=1	/		/		/	     OUT MSG_10=1 
+				003	=		/	WT	/	MSG_10=1	/		/	END	/		/		/	 WT MSG_10=1  END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+			<PROG NO="3999">		 		 		 		 		 		 		 		 	 
+				001	=		/		/		/		/	END	/		/		/	    END 
+			</PROG>		 		 		 		 		 		 		 		 	 
+		</GROUP>					 		 		 		 		 				 	 
+		<GROUP TYPE="FREE_PROG">
+		</GROUP>
+	</PROGRAM>
+
+	<ALIAS>
+		<AXIS>
+		</AXIS>
+
+		<RELAY>
+			<ITEM TYPE="X">
+				X0=DI_LS1
+				X1=DI_LS2
+				X2=DI_LS6
+				X3=DI_LS7
+				X4=DI_LS3
+				X5=DI_LS5
+				X6=DI_LS6S
+				X7=DI_LS7S
+				X8=DI_LS3S
+				X9=DI_LS5S
+				X10=DI_LS8
+				X11=DI_LS9
+				X12=DI_LS14
+				X13=DI_LS15
+				X32=DI_LS4_1
+				X33=DI_LS4V1
+				X34=DI_LS4T1
+				X35=DI_LS4_2
+				X36=DI_LS4V2
+				X37=DI_LS4T2
+				X38=DI_LS12
+				X39=DI_PS
+				X40=DI_LS4S
+				X41=DI_LS33
+				X42=DI_SP1
+				X43=DI_SP2
+				X44=DI_SP3
+				X45=DI_SP4
+				X46=DI_SP5
+				X47=DI_SP6
+				X48=DI_MO
+				X49=DI_MD
+				X50=DI_MN
+				X51=DI_MC
+				X52=DI_ME
+				X53=DI_MA
+				X54=DI_MEB
+				X55=DI_IMM_SP1
+				X56=DI_OD
+				X57=DI_RD
+				X58=DI_IMM_SP2
+				X59=DI_SP8
+				X60=DI_SP9
+				X61=DI_SP10
+				X62=DI_SP11
+				X63=DI_SP12
+				X64=DI_LS4_3
+				X65=DI_LS4V3
+				X66=DI_LS4_4
+				X67=DI_LS4V4
+				X68=DI_U5
+				X69=DI_U6
+				X70=DI_U7
+				X71=DI_U8
+				X72=DI_U9
+				X73=DI_U10
+				X74=DI_U11
+				X75=DI_U12
+				X76=DI_U13
+				X77=DI_U14
+				X78=DI_U15
+				X79=DI_U16
+				X240=DI_EMG
+			</ITEM>
+			<ITEM TYPE="TMO">
+				TMO0=TMO00
+				TMO1=TMO01
+				TMO2=TMO02
+				TMO3=TMO03
+				TMO4=TMO04
+				TMO5=TMO05
+				TMO6=TMO06
+				TMO7=TMO07
+				TMO8=TMO08
+				TMO9=TMO09
+				TMO10=TMO10
+				TMO11=TMO11
+				TMO12=TMO12
+				TMO13=TMO13
+				TMO14=TMO14
+				TMO15=TMO15
+				TMO16=TMO16
+				TMO17=TMO17
+				TMO18=TMO18
+				TMO19=TMO19
+				TMO20=TMO20
+				TMO21=TMO21
+				TMO22=TMO22
+				TMO23=TMO23
+				TMO24=TMO24
+				TMO25=TMO25
+				TMO26=TMO26
+				TMO27=TMO27
+				TMO28=TMO28
+				TMO29=TMO29
+				TMO30=TMO30
+				TMO31=TMO31
+				TMO32=TMO32
+				TMO33=TMO33
+				TMO34=TMO34
+				TMO35=TMO35
+				TMO36=TMO36
+				TMO37=TMO37
+				TMO38=TMO38
+				TMO39=TMO39
+				TMO40=TMO40
+				TMO41=TMO41
+				TMO42=TMO42
+				TMO43=TMO43
+				TMO44=TMO44
+				TMO45=TMO45
+				TMO46=TMO46
+				TMO47=TMO47
+				TMO48=TMO48
+				TMO49=TMO49
+				TMO50=TMO50
+				TMO51=TMO51
+				TMO52=TMO52
+				TMO53=TMO53
+				TMO54=TMO54
+				TMO55=TMO55
+				TMO56=TMO56
+				TMO57=TMO57
+				TMO58=TMO58
+				TMO59=TMO59
+				TMO60=TMO60
+				TMO61=TMO61
+				TMO62=TMO62
+				TMO63=TMO63
+				TMO64=TMO64
+				TMO65=TMO65
+				TMO66=TMO66
+				TMO67=TMO67
+				TMO68=TMO68
+				TMO69=TMO69
+				TMO70=TMO70
+				TMO71=TMO71
+				TMO72=TMO72
+				TMO73=TMO73
+				TMO74=TMO74
+				TMO75=TMO75
+				TMO76=TMO76
+				TMO77=TMO77
+				TMO78=TMO78
+				TMO79=TMO79
+				TMO80=TMO80
+				
+				TMO120=TMO_AL0
+				TMO121=TMO_AL1
+				TMO122=TMO_AL2
+				TMO123=TMO_AL3
+				TMO124=TMO_AL4
+				TMO125=TMO_AL5
+				TMO126=TMO_AL6
+				TMO127=TMO_AL7
+			</ITEM>
+			<ITEM TYPE="CTO">	
+				CTO0=CTO01
+				CTO1=CTO02
+				CTO2=CTO03
+				CTO3=CTO04
+				CTO4=CTO05
+				CTO5=CTO06
+				CTO6=CTO07
+				CTO7=CTO08
+				CTO8=CTO09
+				CTO9=CTO10
+				CTO10=CTO11
+				CTO11=CTO12
+				CTO12=CTO13
+				CTO13=CTO14
+				CTO14=CTO15
+				CTO15=CTO16
+				CTO16=CTO17
+				CTO17=CTO18
+				CTO18=CTO19
+				CTO19=CTO20
+			</ITEM>
+			<ITEM TYPE="Y">
+				Y0=DO_V31_1
+				Y1=DO_V32_1
+				Y2=DO_V3VO1
+				Y3=DO_V3VC1
+				Y4=DO_V31_2
+				Y5=DO_V32_2
+				Y6=DO_V3VO2
+				Y7=DO_V3VC2
+				Y8=DO_V4R
+				Y9=DO_V4P
+				Y10=DO_V5
+				Y11=DO_V6
+				Y12=DO_V3S
+				Y13=DO_LED1
+				Y14=DO_LED2
+				Y15=DO_LED3
+				Y16=DO_RY1
+				Y17=DO_RY2
+				Y18=DO_RY3
+				Y19=DO_RY4
+				Y20=DO_RY5
+				Y21=DO_RY6
+				Y22=DO_RY7
+				Y23=DO_RY8
+				Y24=DO_IMM_SP1
+				Y25=DO_IMM_SP2
+				Y26=DO_V7
+				Y27=DO_V8
+				Y28=DO_V14
+				Y29=DO_V12
+				Y30=DO_SP2
+				Y31=DO_BZ
+				Y32=DO_VCP1
+				Y33=DO_VCP2
+				Y34=DO_V31_3
+				Y35=DO_V32_3
+				Y36=DO_V3VO3
+				Y37=DO_V3VC3
+				Y38=DO_V31_4
+				Y39=DO_V32_4
+				Y40=DO_V3VO4
+				Y41=DO_V3VC4
+				Y42=DO_U11
+				Y43=DO_U12
+				Y44=DO_U13
+				Y45=DO_U14
+				Y46=DO_U15
+				Y47=DO_U16
+			</ITEM>
+			<ITEM TYPE="R">
+				R0=LS1
+				R1=LS2
+				R2=LS6
+				R3=LS7
+				R4=LS3
+				R5=LS5
+				R6=LS6S
+				R7=LS7S
+				R8=LS3S
+				R9=LS5S
+				R10=LS8
+				R11=LS9
+				R12=LS14
+				R13=LS15
+				R31=EMG
+				R32=LS4_1
+				R33=LS4V1
+				R34=LS4T1
+				R35=LS4_2
+				R36=LS4V2
+				R37=LS4T2
+				R38=LS12
+				R39=PS
+				R40=LS4S
+				R48=MO
+				R49=MD
+				R50=MN
+				R51=MC
+				R52=ME
+				R53=MA
+				R54=MEB
+				R55=IN_IMM_SP1
+				R56=OD
+				R57=RD
+
+				R60=WRD
+				R61=WRU
+
+				R160=V31_1
+				R161=V32_1
+				R162=V3VO1
+				R163=V3VC1
+				R164=V31_2
+				R165=V32_2
+				R166=V3VO2
+				R167=V3VC2
+				R168=V4R
+				R169=V4P
+				R170=V5
+				R171=V6
+				R172=V3S
+				R173=LED1
+				R174=LED2
+				R175=LED3
+				R176=RY1
+				R177=RY2
+				R178=RY3
+				R179=RY4
+				R180=RY5
+				R181=RY6
+				R182=RY7
+				R183=RY8
+				R184=OUT_IMM_SP1
+				R185=OUT_IMM_SP2
+				R186=V7
+				R187=V8
+				R188=V14
+				R189=V12
+				R190=SP2
+				R191=BZ
+				R192=VCP1
+				R193=VCP2
+				R194=V31_3
+				R195=V32_3
+				R196=V3VO3
+				R197=V3VC3
+				R198=V31_4
+				R199=V32_4
+				R200=V3VO4
+				R201=V3VC4
+				R202=U11
+				R203=U12
+				R204=U13
+				R205=U14
+				R206=U15
+				R207=U16
+
+				R256=MCC
+				R257=ML4
+				R258=ML3
+				R259=ML4_ON
+				R260=ML4E
+				R261=ML4TE
+				R262=ML4VE
+				R263=ML4SE
+				R264=MCO
+				R265=ML6
+				
+				R267=MSCO
+				R268=PS_TM_EN
+				R270=CNT_UP
+				R271=CNT_UP_NG
+				R272=MOPS
+				R273=XMO
+				
+				R275=MSPRUE_EX
+				R277=M_NOT_L8
+				
+				R279=JMP_KT
+				R280=MSAMPLE
+				
+				R282=NO_RY3_AS
+				R283=MDAS_CP
+				R284=MDIR_EN
+				R285=MDIR_EX
+				R286=MDIR_CP
+				
+				R290=ML4IS
+
+				R292=NO_INIT
+				R296=NG_MOV
+				R297=MME
+				R298=MNG
+				R299=MNG1
+				R300=MNGM
+				R301=MW_NG
+				R302=MCM
+				
+				R304=MMEB
+				R308=MRY6
+				R309=W_CNT_CP
+				R318=ML4W
+				R319=ML4S
+				
+				R321=RY7_START
+				R322=YT_K_RY3
+				R323=MDK_RY3
+				R326=YDK_RY3_M
+				R327=YDK_RY3
+				R328=YDYT_RY3_INT
+				R329=YDYT_RY3_M
+				R330=YDYT_RY3
+				R331=YDYT_RY3/-M2
+				
+				R336=MR2
+				R337=MR2_2
+				R338=MR3
+				
+				R344=NO_RY3
+				R345=NO_RY2
+				R346=NO_RY2M
+				R347=RY3_ONM
+				R348=O_MEM_RY3
+				R349=MR3A_M1
+				R350=MR3A_M2
+				R351=MR3A_M3
+				R352=MR3B
+				R353=MR3B_M
+				R354=MR3C
+				R355=MR3D
+				R356=MR3D_M
+				R357=MR3E
+				R358=MR3F
+				R359=MR3A
+				R360=DANGER
+
+				R363=MT123
+				
+				R365=MT25C_STD
+				R366=MT25C_EU
+				
+				
+				
+				R376=PROD_CNT_EX
+				R377=CNT_UP01
+				R378=CNT_UP02
+				R379=CNT_UP03
+				R384=MMANU
+				R385=FREE_MD
+				
+				R389=KEY01
+				R390=KEY02
+				R391=KEY03
+				R392=JOG_K01
+				R393=JOG_K02
+				R394=JOG_K03
+				R395=JOG_K04
+				R396=JOG_K05
+				R397=JOG_K06
+				
+				R401=MPASS01_B
+				
+				R408=STEP1
+				R409=STEP2
+				R410=STEP3
+				R411=STEP4
+				R412=STEP5
+				R413=STEP6
+				
+				R416=INF00
+				R417=INF01
+				R418=INF02
+				R419=INF03
+				R420=INF04
+				R421=INF05
+				R422=INF06
+				R423=INF
+				R432=MER00
+				R433=MER01
+				R434=MER02
+				R435=MER03
+				R436=MER04
+				R437=MER05
+				R438=MER06
+				R439=MER07
+				R440=MER08
+				R441=MER09
+				R442=MER10
+				R443=MER11
+				R444=MER12
+				R445=MER13
+				R446=MER14
+				R447=MER
+				R448=MAL00
+				R449=MAL01
+				R450=MAL02
+				R451=MAL03
+				R452=MAL04
+				R453=MAL05
+				R454=MAL06
+				R455=MAL07
+				R456=MAL08
+				R457=MAL09
+				R458=MAL10
+				R459=MAL11
+				R460=MAL12
+				R461=MAL13
+				R462=MAL_PAUSE
+				R463=MAL_STOP
+				R464=MMSG00
+				R465=MMSG01
+				R466=MMSG02
+				R467=MMSG03
+				R468=MMSG04
+				R469=MMSG05
+				R470=MMSG06
+				R471=MMSG
+				R480=ALARM
+				R481=AL_LAMP
+				R482=SYS_AL
+				R484=ER_AL
+				R485=MBZ
+				
+				R492=POPUP_CK
+				
+				R495=OP_MD
+				R496=PR_AT
+				R497=M_PRAT
+				R498=M_AT
+				R499=MA_AUTO
+				R500=AUTO_EN
+				R501=ORG_EN
+				R502=MORG
+				R503=NO_ORG
+				R504=JOG_SCR
+				R505=M_ORG_SYS
+				R506=Drv_ORG_CP
+				R507=S_DEADMAN
+				R509=AUTO_EX
+				R510=STEP_EX
+				R511=ORG_EX
+				R512=I_O_RESET
+				R513=I_O_MANU
+				R514=I_O_AUTO
+				R516=I_O_ORG
+				R517=I_O_EMERGENCY
+				R518=I_O_ORGCP
+				R519=I_O_STEP
+				R520=I_O_START
+				R521=I_O_HOLD
+				R522=I_O_STOP
+				R523=I_O_HOME_01
+				R524=I_O_HOME_02
+				R526=I_O_INCHING_MODE
+				R527=I_O_JOG_MODE
+				R529=I_S_MANU
+				R530=I_S_AUTO
+				R531=I_S_PRAUTO
+				R532=I_S_HOME
+				R533=I_S_EMG
+				R534=I_S_ORGCP
+				R535=I_S_STEP
+				R536=I_S_START
+				R537=I_S_HOLD
+				R538=I_S_STOP
+				R539=I_S_HOME_01
+				R540=I_S_HOME_02
+				R542=I_S_AUTO_EX
+				R543=I_S_ORG
+				R544=S_DRV_EMG
+				R545=S_DRV_MOVING
+				R546=S_DRV_SV_ON
+				R547=S_DRV_MOVE+
+				R548=S_DRV_MOVE-
+				R549=S_DRV_+OV
+				R550=S_DRV_-OV
+				R551=S_DRV_ORG_CP
+				R552=S_DRV_SV_AL
+				R553=S_DRV_INPOS
+				R554=S_SLP_PMS
+				R560=O_DRV_EMG
+				R562=O_DRV_RESET
+				R563=O_DRV_STOP
+				R564=O_DRV_SV_ON
+				R565=O_DRV_+JOG
+				R566=O_DRV_-JOG
+				R567=O_DRV_ORG
+				R568=O_DRV_W_ORG
+				R576=O_SK_PREV
+				R577=O_SK_NEXT
+				R578=O_DRV_INCHING1
+				R579=O_DRV_INCHING2
+				R580=O_DRV_INCHING3
+				R581=O_MDI
+				R582=O_SV_SLEEP
+				R583=O_SV_FREE1
+				R584=O_SV_FREE2
+				R585=O_GAIN_SEL
+				R586=O_CRASH_EN
+				R592=FORCE_IO
+				R593=mm_inch
+				R594=COLLISION_TEST
+				R608=S_JOG
+				R609=S_INCH
+				R612=S_MDI
+				R613=S_CRASH
+				R615=S_SV_FREE
+				R624=I_MAIN_ON
+				R625=I_MAIN_OFF
+				R626=I_MAIN_HOLD
+				R627=I_PRUN01_ON
+				R628=I_PRUN01_OFF
+				R629=I_PRUN01_HOLD
+				R630=I_PRUN02_ON
+				R631=I_PRUN02_OFF
+				R632=I_PRUN02_HOLD
+				R633=I_PRUN03_ON
+				R634=I_PRUN03_OFF
+				R635=I_PRUN03_HOLD
+				R636=I_PRUN04_ON
+				R637=I_PRUN04_OFF
+				R638=I_PRUN04_HOLD
+				R736=J_EN_Z
+				R737=J_EN_X
+				R738=J_EN_Y-
+				R739=J_EN_Y+
+				
+				R749=MMD2K
+				R750=MMD3K
+				R751=MMD4K
+				R752=MMDTA
+				R753=MMDTA2
+				R754=MMDSTA
+				R755=MMDSS
+				R756=MMDSS2
+				R757=MMDSS3
+				R758=MMDK
+				R759=MMDSK
+				R760=MMDCS
+				
+				R762=MMDRS
+				R763=MMDSC
+				R764=MMDTF
+				R765=MMDTB
+				
+				R767=MMDCVP
+				R768=MMDR1
+				R769=MMDR2
+				R770=MMDR3
+				R771=MMDP1
+				R772=MMDP2
+				R773=MMDP3
+				R774=MMDP4
+				R775=MMDIS
+				
+				R784=MDWS
+				R785=MDWO
+				R786=MDSO
+				R787=MDWS_K_SK
+				R788=MDWS_K
+				R789=MDWS_SK
+				R790=MMDTS_TA
+				R791=MDK_YT-
+				R792=MDK_SK
+				R793=MMDCS1
+				R794=MMDCS2
+				R795=MMDCS3
+				R796=PLT_VAL01
+				R797=PLT_VAL02
+				R800=M00_EN
+				R801=M01_EN
+				R802=M02_EN
+				R803=M03_EN
+				R804=M04_EN
+				R805=M05_EN
+				R806=M06_EN
+				R807=M07_EN
+				R808=M08_EN
+				R809=M09_EN
+				R810=M10_EN
+				R811=M11_EN
+				R812=M12_EN
+				R813=M13_EN
+				R814=M14_EN
+				R815=M15_EN
+				R816=M16_EN
+				R817=M17_EN
+				R818=M18_EN
+				R819=M19_EN
+				R820=M20_EN
+				R821=M21_EN
+				R822=M22_EN
+				R823=M23_EN
+				R824=M24_EN
+				R825=M25_EN
+				R826=M26_EN
+				R827=M27_EN
+				R828=M28_EN
+				R829=M29_EN
+				R830=M30_EN
+				R831=M31_EN
+				R832=M32_EN
+				R833=M33_EN
+				R834=M34_EN
+				R835=M35_EN
+				R836=M36_EN
+				R837=M37_EN
+				R838=M38_EN
+				R839=M39_EN
+				R840=M40_EN
+				R841=M41_EN
+				R842=M42_EN
+				R843=M43_EN
+				R844=M44_EN
+				R845=M45_EN
+				R846=M46_EN
+				R847=M47_EN
+				R848=M48_EN
+				R849=M49_EN
+				R850=M50_EN
+				R851=M51_EN
+				R852=M52_EN
+				R853=M53_EN
+				R854=M54_EN
+				R855=M55_EN
+				R856=M56_EN
+				R857=M57_EN
+				R858=M58_EN
+				R859=M59_EN
+				R860=M60_EN
+				R861=M61_EN
+				R862=M62_EN
+				R863=M63_EN
+				R864=M00_EX
+				R865=M01_EX
+				R866=M02_EX
+				R867=M03_EX
+				R868=M04_EX
+				R869=M05_EX
+				R870=M06_EX
+				R871=M07_EX
+				R872=M08_EX
+				R873=M09_EX
+				R874=M10_EX
+				R875=M11_EX
+				R876=M12_EX
+				R877=M13_EX
+				R878=M14_EX
+				R879=M15_EX
+				R880=M16_EX
+				R881=M17_EX
+				R882=M18_EX
+				R883=M19_EX
+				R884=M20_EX
+				R885=M21_EX
+				R886=M22_EX
+				R887=M23_EX
+				R888=M24_EX
+				R889=M25_EX
+				R890=M26_EX
+				R891=M27_EX
+				R892=M28_EX
+				R893=M29_EX
+				R894=M30_EX
+				R895=M31_EX
+				R896=M32_EX
+				R897=M33_EX
+				R898=M34_EX
+				R899=M35_EX
+				R900=M36_EX
+				R901=M37_EX
+				R902=M38_EX
+				R903=M39_EX
+				R904=M40_EX
+				R905=M41_EX
+				R906=M42_EX
+				R907=M43_EX
+				R908=M44_EX
+				R909=M45_EX
+				R910=M46_EX
+				R911=M47_EX
+				R912=M48_EX
+				R913=M49_EX
+				R914=M50_EX
+				R915=M51_EX
+				R916=M52_EX
+				R917=M53_EX
+				R918=M54_EX
+				R919=M55_EX
+				R920=M56_EX
+				R921=M57_EX
+				R922=M58_EX
+				R923=M59_EX
+				R924=M60_EX
+				R925=M61_EX
+				R926=M62_EX
+				R927=M63_EX
+				R928=M00_CP
+				R929=M01_CP
+				R930=M02_CP
+				R931=M03_CP
+				R932=M04_CP
+				R933=M05_CP
+				R934=M06_CP
+				R935=M07_CP
+				R936=M08_CP
+				R937=M09_CP
+				R938=M10_CP
+				R939=M11_CP
+				R940=M12_CP
+				R941=M13_CP
+				R942=M14_CP
+				R943=M15_CP
+				R944=M16_CP
+				R945=M17_CP
+				R946=M18_CP
+				R947=M19_CP
+				R948=M20_CP
+				R949=M21_CP
+				R950=M22_CP
+				R951=M23_CP
+				R952=M24_CP
+				R953=M25_CP
+				R954=M26_CP
+				R955=M27_CP
+				R956=M28_CP
+				R957=M29_CP
+				R958=M30_CP
+				R959=M31_CP
+				R960=M32_CP
+				R961=M33_CP
+				R962=M34_CP
+				R963=M35_CP
+				R964=M36_CP
+				R965=M37_CP
+				R966=M38_CP
+				R967=M39_CP
+				R968=M40_CP
+				R969=M41_CP
+				R970=M42_CP
+				R971=M43_CP
+				R972=M44_CP
+				R973=M45_CP
+				R974=M46_CP
+				R975=M47_CP
+				R976=M48_CP
+				R977=M49_CP
+				R978=M50_CP
+				R979=M51_CP
+				R980=M52_CP
+				R981=M53_CP
+				R982=M54_CP
+				R983=M55_CP
+				R984=M56_CP
+				R985=M57_CP
+				R986=M58_CP
+				R987=M59_CP
+				R988=M60_CP
+				R989=M61_CP
+				R990=M62_CP
+				R991=M63_CP
+				R992=ORG01_EN
+				R993=ORG02_EN
+				R994=ORG03_EN
+				R995=ORG04_EN
+				R996=ORG05_EN
+				R997=ORG06_EN
+				R998=ORG07_EN
+				R999=ORG08_EN
+				R1000=ORG09_EN
+				R1001=ORG10_EN
+				R1002=ORG11_EN
+				R1003=ORG12_EN
+				R1004=ORG13_EN
+				R1005=ORG14_EN
+				R1006=ORG15_EN
+				R1007=ORG16_EN
+				R1008=ORG01_EX
+				R1009=ORG02_EX
+				R1010=ORG03_EX
+				R1011=ORG04_EX
+				R1012=ORG05_EX
+				R1013=ORG06_EX
+				R1014=ORG07_EX
+				R1015=ORG08_EX
+				R1016=ORG09_EX
+				R1017=ORG10_EX
+				R1018=ORG11_EX
+				R1019=ORG12_EX
+				R1020=ORG13_EX
+				R1021=ORG14_EX
+				R1022=ORG15_EX
+				R1023=ORG16_EX
+				R1024=ORG01_CP
+				R1025=ORG02_CP
+				R1026=ORG03_CP
+				R1027=ORG04_CP
+				R1028=ORG05_CP
+				R1029=ORG06_CP
+				R1030=ORG07_CP
+				R1031=ORG08_CP
+				R1032=ORG09_CP
+				R1033=ORG10_CP
+				R1034=ORG11_CP
+				R1035=ORG12_CP
+				R1036=ORG13_CP
+				R1037=ORG14_CP
+				R1038=ORG15_CP
+				R1039=ORG16_CP
+				R1040=AX01_NOUSE
+				R1041=AX02_NOUSE
+				R1042=AX03_NOUSE
+				R1043=AX04_NOUSE
+				R1044=AX05_NOUSE
+				R1045=AX06_NOUSE
+				R1046=AX07_NOUSE
+				R1047=AX08_NOUSE
+				R1048=AX09_NOUSE
+				R1049=AX10_NOUSE
+				R1050=AX11_NOUSE
+				R1051=AX12_NOUSE
+				R1052=AX13_NOUSE
+				R1053=AX14_NOUSE
+				R1054=AX15_NOUSE
+				R1055=AX16_NOUSE
+				R1056=AT_MRY3
+				R1057=AT_MRY6
+				R1058=AT_FIRST
+
+				R1060=AT_ALCO_CP
+				R1062=AT_STBY_END
+				R1064=1CYCLE_CP
+				R1065=PROD_CNT
+				R1068=AT_MDAS_EX
+				R1069=AT_MDAS_CP
+				R1070=AT_SP_RST
+				R1072=AT_ORG
+				R1073=AT_STATUS
+				R1074=AT_MDKT
+				R1075=AT_MNG
+				
+				R1080=AT_X_L1
+				R1081=AT_X_L12
+				R1082=AT_FL3
+				R1083=AT_FL3S
+
+				R1088=AT_PRUN_CP
+				R1096=AT_MA_CK
+				
+				R1098=AT_WCO
+				R1099=AT_L4ISCK
+				R1100=AT_WCK1
+				R1101=AT_WCK2
+				R1102=AT_WCK3
+				R1103=AT_WCK4
+				R1104=AT_F_DOWN
+				R1106=AT_F_POS
+				
+				R1119=AT_END
+				
+				R1192=AT_1CYCLE_EX
+				R1193=AT_1CYCLE_CP
+				R1194=M_ORGEX
+
+				R1280=MAL_CK
+				R1281=AL_CO_EN
+				R1282=AL_CO_EX
+				R1283=AL_CO_CP
+				R1284=CASE00
+				R1285=CASE01
+				R1286=CASE02
+				R1287=CASE03
+				R1288=CASE04
+				R1292=CO_EASY
+				R1293=CO_ALCO
+				R1294=EZCO_END
+				R1295=ALCO_END
+
+				R1296=CHK_CHANGE
+				
+				R1408=ML3_2K
+				R1409=MV4RX
+				R1432=MFD_POS
+				R1433=MFD_POS_X
+				R1434=MFD_POS_Z
+
+				R1438=ML12_ML3
+				R1439=MREL_POS
+
+				R1856=ER_97
+				R1857=ER_98
+				R1858=ER_99
+				R1859=ER_100
+				R1860=ER_101
+				R1861=ER_102
+				R1862=ER_103
+				R1863=ER_104
+				R1864=ER_105
+				R1865=ER_106
+				R1866=ER_107
+				R1867=ER_108
+				R1868=ER_109
+				R1869=ER_110
+
+				R2080=INF_01
+				R2081=INF_02
+				R2082=INF_03
+				R2083=INF_04
+				R2084=INF_05
+				R2085=INF_06
+				R2086=INF_07
+				R2087=INF_08
+				R2088=INF_09
+				R2089=INF_10
+				
+				R2160=MSG_01
+				R2161=MSG_02
+				R2162=MSG_03
+				R2163=MSG_04
+				R2164=MSG_05
+				R2165=MSG_06
+				R2166=MSG_07
+				R2167=MSG_08
+				R2168=MSG_09
+				R2169=MSG_10
+				R2170=MSG_11
+				R2171=MSG_12
+				R2172=MSG_13
+				R2173=MSG_14
+				R2174=MSG_15
+				R2175=MSG_16
+				R2176=MSG_17
+				R2177=MSG_18
+				R2178=MSG_19
+				R2179=MSG_20
+				R2180=MSG_21
+				R2181=MSG_22
+				R2182=MSG_23
+				R2183=MSG_24
+				R2184=MSG_25
+				R2185=MSG_26
+				R2186=MSG_27
+				R2187=MSG_28
+				R2188=MSG_29
+				R2189=MSG_30
+				R2190=MSG_31
+				R2191=MSG_32
+				R2192=MSG_33
+				R2193=MSG_34
+				R2194=MSG_35
+				R2195=MSG_36
+				R2196=MSG_37
+				R2197=MSG_38
+				R2198=MSG_39
+				R2199=MSG_40
+				R2200=MSG_41
+				R2201=MSG_42
+				R2202=MSG_43
+				R2203=MSG_44
+				R2204=MSG_45
+				R2205=MSG_46
+				R2206=MSG_47
+				R2207=MSG_48
+				R2208=MSG_49
+				R2209=MSG_50
+				R2210=MSG_51
+				R2211=MSG_52
+				R2212=MSG_53
+				R2213=MSG_54
+				R2214=MSG_55
+				R2215=MSG_56
+				R2216=MSG_57
+				R2217=MSG_58
+				R2218=MSG_59
+				R2219=MSG_60
+				R2220=MSG_61
+				R2221=MSG_62
+				R2222=MSG_63
+				R2223=MSG_64
+				R2224=MSG_65
+				R2225=MSG_66
+				R2226=MSG_67
+				R2227=MSG_68
+				R2228=MSG_69
+				R2229=MSG_70
+				R2230=MSG_71
+				R2231=MSG_72
+				R2232=MSG_73
+				R2233=MSG_74
+				R2234=MSG_75
+				R2235=MSG_76
+				R2236=MSG_77
+				R2237=MSG_78
+				R2238=MSG_79
+				R2239=MSG_80
+				
+				R2240=P_TAKEOUT
+				R2241=P_CYCLE
+				R2242=P_IMM
+				R2248=P_EN_SETUP
+				R2249=P_ML3_X
+				R2250=P_MANU_X
+				R2256=P_AL_LAMP
+				R2257=P_ER_AL
+				R2258=P_MSG
+				R2259=P_AL_CK
+				R2260=P_INFO
+				
+				
+				R2400=TM00
+				R2401=TM01
+				R2402=TM02
+				R2403=TM03
+				R2404=TM04
+				R2405=TM05
+				R2406=TM06
+				R2407=TM07
+				R2408=TM08
+				R2409=TM09
+				R2410=TM10
+				R2411=TM11
+				R2412=TM12
+				R2413=TM13
+				R2414=TM14
+				R2415=TM15
+				R2416=TM16
+				R2417=TM17
+				R2418=TM18
+				R2419=TM19
+				R2420=TM20
+				R2421=TM21
+				R2422=TM22
+				R2423=TM23
+				R2424=TM24
+				R2425=TM25
+				R2426=TM26
+				R2427=TM27
+				R2428=TM28
+				R2429=TM29
+				R2430=TM30
+				R2431=TM31
+				R2432=TM32
+				R2433=TM33
+				R2434=TM34
+				R2435=TM35
+				R2436=TM36
+				R2437=TM37
+				R2438=TM38
+				R2439=TM39
+				R2440=TM40
+				R2441=TM41
+				R2442=TM42
+				R2443=TM43
+				R2444=TM44
+				R2445=TM45
+				R2446=TM46
+				R2447=TM47
+				R2448=TM48
+				R2449=TM49
+				R2450=TM50
+				R2451=TM51
+				R2452=TM52
+				R2453=TM53
+				R2454=TM54
+				R2455=TM55
+				R2456=TM56
+				R2457=TM57
+				R2458=TM58
+				R2459=TM59
+				R2460=TM60
+				R2461=TM61
+				R2462=TM62
+				R2463=TM63
+				R2464=TM64
+				R2465=TM65
+				R2466=TM66
+				R2467=TM67
+				R2468=TM68
+				R2469=TM69
+				R2470=TM70
+				R2471=TM71
+				R2472=TM72
+				R2473=TM73
+				R2474=TM74
+				R2475=TM75
+				R2476=TM76
+				R2477=TM77
+				R2478=TM78
+				R2479=TM79
+				R2480=TM80
+				
+				R2521=AL_TM01
+				R2522=AL_TM02
+				R2523=AL_TM03
+				R2524=AL_TM04
+				R2525=AL_TM05
+				R2526=AL_TM06
+				R2527=AL_TM07
+				R2528=AL_TM08
+				
+				R2558=I_TM158
+				R2559=I_TM159
+
+				R2560=Z_CW01
+				R2561=Z_CW02
+				R2562=Z_CW03
+				R2563=Z_CW04
+				R2564=Z_CW05
+				R2565=Z_CW06
+				R2566=Z_CW07
+				R2567=Z_CW08
+				R2568=Z_CW09
+				R2569=Z_CW10
+				R2570=Z_CW11
+				R2571=Z_CW12
+				R2572=Z_CW13
+				R2573=Z_CW14
+				R2574=Z_CW15
+				R2575=Z_CW16
+				R2576=Z_CCW01
+				R2577=Z_CCW02
+				R2578=Z_CCW03
+				R2579=Z_CCW04
+				R2580=Z_CCW05
+				R2581=Z_CCW06
+				R2582=Z_CCW07
+				R2583=Z_CCW08
+				R2584=Z_CCW09
+				R2585=Z_CCW10
+				R2586=Z_CCW11
+				R2587=Z_CCW12
+				R2588=Z_CCW13
+				R2589=Z_CCW14
+				R2590=Z_CCW15
+				R2591=Z_CCW16
+				R2592=X_CW01
+				R2593=X_CW02
+				R2594=X_CW03
+				R2595=X_CW04
+				R2596=X_CW05
+				R2597=X_CW06
+				R2598=X_CW07
+				R2599=X_CW08
+				R2600=X_CW09
+				R2601=X_CW10
+				R2602=X_CW11
+				R2603=X_CW12
+				R2604=X_CW13
+				R2605=X_CW14
+				R2606=X_CW15
+				R2607=X_CW16
+				R2608=X_CCW01
+				R2609=X_CCW02
+				R2610=X_CCW03
+				R2611=X_CCW04
+				R2612=X_CCW05
+				R2613=X_CCW06
+				R2614=X_CCW07
+				R2615=X_CCW08
+				R2616=X_CCW09
+				R2617=X_CCW10
+				R2618=X_CCW11
+				R2619=X_CCW12
+				R2620=X_CCW13
+				R2621=X_CCW14
+				R2622=X_CCW15
+				R2623=X_CCW16
+				R2624=Y_CW01
+				R2625=Y_CW02
+				R2626=Y_CW03
+				R2627=Y_CW04
+				R2628=Y_CW05
+				R2629=Y_CW06
+				R2630=Y_CW07
+				R2631=Y_CW08
+				R2632=Y_CW09
+				R2633=Y_CW10
+				R2634=Y_CW11
+				R2635=Y_CW12
+				R2636=Y_CW13
+				R2637=Y_CW14
+				R2638=Y_CW15
+				R2639=Y_CW16
+				R2640=Y_CCW01
+				R2641=Y_CCW02
+				R2642=Y_CCW03
+				R2643=Y_CCW04
+				R2644=Y_CCW05
+				R2645=Y_CCW06
+				R2646=Y_CCW07
+				R2647=Y_CCW08
+				R2648=Y_CCW09
+				R2649=Y_CCW10
+				R2650=Y_CCW11
+				R2651=Y_CCW12
+				R2652=Y_CCW13
+				R2653=Y_CCW14
+				R2654=Y_CCW15
+				R2655=Y_CCW16
+				
+				
+				R2688=M102EY
+				R2689=M103EY
+				R2690=M106EY
+				
+				R2692=M109EY
+				R2693=M112EY
+				R2694=M115EY
+				R2695=M130EY
+				R2696=M133EY
+				R2697=M136EY
+				R2698=M118EY
+				R2699=M121EY
+				R2700=M124EY
+				
+				R2702=M071EY
+				R2703=M072EY
+				R2704=M075EY
+				R2705=M077EY
+				
+				
+				R2708=M081EY
+				R2709=M083EY
+				R2710=M084EY
+				R2711=M085EY
+				R2712=M087EY
+				R2713=M089EY
+				R2714=M091EY
+				
+				
+				R2720=M104EX
+				R2721=M127EX
+				
+				
+				R2728=M076EX
+				R2729=M077EX
+				
+				R2731=M082EX
+				R2732=M086EX
+				R2733=M088EX
+				R2734=M090EX
+				R2735=M092EX
+				R2736=M073EX
+				R2737=M074EX
+				R2738=M071EX
+				R2739=M072EX
+				R2740=M085EZ
+				R2741=M087EZ
+				R2742=M089EZ
+				R2743=M091EZ
+
+				R2800=M101_EX
+				R2801=M102_EX
+				R2802=M103_EX
+				R2803=M104_EX
+				R2804=M105_EX
+				R2805=M106_EX
+				R2806=M107_EX
+				R2807=M108_EX
+				R2808=M109_EX
+				R2809=M110_EX
+				R2810=M111_EX
+				R2811=M112_EX
+				R2812=M113_EX
+				R2813=M114_EX
+				R2814=M115_EX
+				R2815=M116_EX
+				R2816=M117_EX
+				R2817=M118_EX
+				R2818=M119_EX
+				R2819=M120_EX
+				R2820=M121_EX
+				R2821=M122_EX
+				R2822=M123_EX
+				R2823=M124_EX
+				R2824=M125_EX
+				R2825=M126_EX
+				R2826=M127_EX
+				R2827=M128_EX
+				R2828=M129_EX
+				R2829=M130_EX
+				R2830=M131_EX
+				R2831=M132_EX
+				R2832=M133_EX
+				R2833=M134_EX
+				R2834=M135_EX
+				R2835=M136_EX
+				R2836=M137_EX
+				R2837=M138_EX
+				R2838=M139_EX
+				R2839=M140_EX
+				R2840=M141_EX
+				R2841=M142_EX
+				R2842=M143_EX
+				R2843=M144_EX
+				R2844=M145_EX
+				R2845=M146_EX
+				R2846=M147_EX
+				R2847=M148_EX
+				
+				R2848=M101_CP
+				R2849=M102_CP
+				R2850=M103_CP
+				R2851=M104_CP
+				R2852=M105_CP
+				R2853=M106_CP
+				R2854=M107_CP
+				R2855=M108_CP
+				R2856=M109_CP
+				R2857=M110_CP
+				R2858=M111_CP
+				R2859=M112_CP
+				R2860=M113_CP
+				R2861=M114_CP
+				R2862=M115_CP
+				R2863=M116_CP
+				R2864=M117_CP
+				R2865=M118_CP
+				R2866=M119_CP
+				R2867=M120_CP
+				R2868=M121_CP
+				R2869=M122_CP
+				R2870=M123_CP
+				R2871=M124_CP
+				R2872=M125_CP
+				R2873=M126_CP
+				R2874=M127_CP
+				R2875=M128_CP
+				R2876=M129_CP
+				R2877=M130_CP
+				R2878=M131_CP
+				R2879=M132_CP
+				R2880=M133_CP
+				R2881=M134_CP
+				R2882=M135_CP
+				R2883=M136_CP
+				R2884=M137_CP
+				R2885=M138_CP
+				R2886=M139_CP
+				R2887=M140_CP
+				R2888=M141_CP
+				R2889=M142_CP
+				R2890=M143_CP
+				R2891=M144_CP
+				R2892=M145_CP
+				R2893=M146_CP
+				R2894=M147_CP
+				R2895=M148_CP
+				
+				R3968=U_TM01
+				R3969=U_TM02
+				R3970=U_TM03
+				R3971=U_TM04
+				R3972=U_TM05
+				R3973=U_TM06
+				R3974=U_TM07
+				R3975=U_TM08
+				R3976=U_TM09
+				R3977=U_TM10
+				R3978=U_TM11
+				R3979=U_TM12
+				R3980=U_TM13
+				R3981=U_TM14
+				R3982=U_TM15
+				R3983=U_TM16
+				R3984=U_TM17
+				R3985=U_TM18
+				R3986=U_TM19
+				R3987=U_TM20
+				R3988=U_TM21
+				R3989=U_TM22
+				R3990=U_TM23
+				R3991=U_TM24
+				R3992=U_TM25
+				R3993=U_TM26
+				R3994=U_TM27
+				R3995=U_TM28
+				R3996=U_TM29
+				R3997=U_TM30
+				R3998=U_TM31
+				R3999=U_TM32
+				R4000=U_TM33
+				R4001=U_TM34
+				R4002=U_TM35
+				R4003=U_TM36
+				R4004=U_TM37
+				R4005=U_TM38
+				R4006=U_TM39
+				R4007=U_TM40
+				R4008=U_TM41
+				R4009=U_TM42
+				R4010=U_TM43
+				R4011=U_TM44
+				R4012=U_TM45
+				R4013=U_TM46
+				R4014=U_TM47
+				R4015=U_TM48
+				R4016=U_TM49
+				R4017=U_TM50
+				R4018=U_TM51
+				R4019=U_TM52
+				R4020=U_TM53
+				R4021=U_TM54
+				R4022=U_TM55
+				R4023=U_TM56
+				R4024=U_TM57
+				R4025=U_TM58
+				R4026=U_TM59
+				R4027=U_TM60
+				R4028=U_TM61
+				R4029=U_TM62
+				R4030=U_TM63
+				R4031=U_TM64
+				R4032=U_TM65
+				R4033=U_TM66
+				R4034=U_TM67
+				R4035=U_TM68
+				R4036=U_TM69
+				R4037=U_TM70
+				R4038=U_TM71
+				R4039=U_TM72
+				R4040=U_TM73
+				R4041=U_TM74
+				R4042=U_TM75
+				R4043=U_TM76
+				R4044=U_TM77
+				R4045=U_TM78
+				R4046=U_TM79
+				R4047=U_TM80
+				R4048=U_TM81
+				R4049=U_TM82
+				R4050=U_TM83
+				R4051=U_TM84
+				R4052=U_TM85
+				R4053=U_TM86
+				R4054=U_TM87
+				R4055=U_TM88
+				R4056=U_TM89
+				R4057=U_TM90
+				R4058=U_TM91
+				R4059=U_TM92
+				R4060=U_TM93
+				R4061=U_TM94
+				R4062=U_TM95
+				R4063=U_TM96
+				R4064=U_TM97
+				R4065=U_TM98
+				R4066=U_TM99
+				R4067=U_TM100
+			</ITEM>
+			<ITEM TYPE="F">	
+				F2160=S_ORGCP_AX01
+				F2161=S_ORGCP_AX02
+				F2162=S_ORGCP_AX03
+				F2163=S_ORGCP_AX04
+				F2164=S_ORGCP_AX05
+				F2165=S_ORGCP_AX06
+				F2166=S_ORGCP_AX07
+				F2167=S_ORGCP_AX08
+				F2168=S_ORGCP_AX09
+				F2169=S_ORGCP_AX10
+				F2170=S_ORGCP_AX11
+				F2171=S_ORGCP_AX12
+				
+				F3573=SERVO_C
+				F3574=SERVO_A
+				F3575=SERVO_B
+
+			</ITEM>
+			<ITEM TYPE="TMU">
+				TMU0=TMU00
+				TMU1=TMU01
+				TMU2=TMU02
+				TMU3=TMU03
+				TMU4=TMU04
+				TMU5=TMU05
+				TMU6=TMU06
+				TMU7=TMU07
+				TMU8=TMU08
+				TMU9=TMU09
+				TMU10=TMU10
+				TMU11=TMU11
+				TMU12=TMU12
+				TMU13=TMU13
+				TMU14=TMU14
+				TMU15=TMU15
+				TMU16=TMU16
+				TMU17=TMU17
+				TMU18=TMU18
+				TMU19=TMU19
+				TMU20=TMU20
+				TMU21=TMU21
+				TMU22=TMU22
+				TMU23=TMU23
+				TMU24=TMU24
+				TMU25=TMU25
+				TMU26=TMU26
+				TMU27=TMU27
+				TMU28=TMU28
+				TMU29=TMU29
+				TMU30=TMU30
+				TMU31=TMU31
+				TMU32=TMU32
+				TMU33=TMU33
+				TMU34=TMU34
+				TMU35=TMU35
+				TMU36=TMU36
+				TMU37=TMU37
+				TMU38=TMU38
+				TMU39=TMU39
+				TMU40=TMU40
+				TMU41=TMU41
+				TMU42=TMU42
+				TMU43=TMU43
+				TMU44=TMU44
+				TMU45=TMU45
+				TMU46=TMU46
+				TMU47=TMU47
+				TMU48=TMU48
+				TMU49=TMU49
+				TMU50=TMU50
+				TMU51=TMU51
+				TMU52=TMU52
+				TMU53=TMU53
+				TMU54=TMU54
+				TMU55=TMU55
+				TMU56=TMU56
+				TMU57=TMU57
+				TMU58=TMU58
+				TMU59=TMU59
+				TMU60=TMU60
+
+				TMU120=TMU_AL0
+				TMU121=TMU_AL1
+				TMU122=TMU_AL2
+				TMU123=TMU_AL3
+				TMU124=TMU_AL4
+				TMU125=TMU_AL5
+				TMU126=TMU_AL6
+				TMU127=TMU_AL7
+				TMU128=TMU_AL8
+				TMU129=TMU_AL9
+			</ITEM>
+			<ITEM TYPE="CTU">
+				CTU0=CTU01
+				CTU1=CTU02
+				CTU2=CTU03
+				CTU3=CTU04
+				CTU4=CTU05
+				CTU5=CTU06
+				CTU6=CTU07
+				CTU7=CTU08
+				CTU8=CTU09
+				CTU9=CTU10
+				CTU10=CTU11
+				CTU11=CTU12
+				CTU12=CTU13
+				CTU13=CTU14
+				CTU14=CTU15
+				CTU15=CTU16
+				CTU16=CTU17
+				CTU17=CTU18
+				CTU18=CTU19
+				CTU19=CTU20
+			</ITEM>
+			<ITEM TYPE="CTR">
+				CTR0=CTR01
+				CTR1=CTR02
+				CTR2=CTR03
+				CTR3=CTR04
+				CTR4=CTR05
+				CTR5=CTR06
+				CTR6=CTR07
+				CTR7=CTR08
+				CTR8=CTR09
+				CTR9=CTR10
+				CTR10=CTR11
+				CTR11=CTR12
+				CTR12=CTR13
+				CTR13=CTR14
+				CTR14=CTR15
+				CTR15=CTR16
+				CTR16=CTR17
+				CTR17=CTR18
+				CTR18=CTR19
+				CTR19=CTR20
+			</ITEM>
+			<ITEM TYPE="H">
+				H0=MDW
+				H1=MDS
+				H2=MDE
+				H3=MDKT
+				H4=MDTA
+				H5=MDTA2
+				H6=MDRS
+				H7=MDEB
+				H8=MDK
+				H9=MDSK
+				H10=MDCS1
+				H11=MDCS2
+				H12=MDCS3
+				H16=MDR1
+				H17=MDR2
+				H18=MDR3
+				H19=MDCS
+				H20=MDSTA
+				
+				H24=MD4
+				H25=MD4T
+				H26=MDVC
+				H27=MD4S
+				H28=MD4T2
+				H29=MDCV2
+				H30=MD4_2
+				H31=MD4ST
+				H32=MDTF
+				H33=MDTB
+				H34=MD4_3
+				H35=MDCV3
+				H36=MD4_4
+				H37=MDCV4
+				H40=MDSS
+				H41=MDSS2
+				H42=MDKO
+				H43=MDYT
+				H44=MDCN
+				H45=MD2K
+				H46=MDCVP
+				H47=MDFSLOW
+				H48=MD3K
+				H49=MD4K
+				H50=MDIS1
+				H51=MDIS2
+				H52=MDIS3
+				H53=MDIS4
+				H54=MDPPS
+				H55=MDWPS
+				H56=MDWCY
+				H57=MDNT1
+				H58=MDNT2
+				H59=MDOP1
+				H60=MDOP2
+				H61=MDOP3
+				
+				H64=MDNG
+				H65=MDIR
+				H66=MDAS
+				H67=MDSP
+				H68=MDCC
+				H69=MDISF
+				H70=MDFL8
+				H71=MMKO
+
+				
+				H72=MDEU
+				H73=MDBZ
+				H74=MDISLOW
+				
+				H75=MDEASY
+				
+				H77=MC_DLY
+				H78=MA_1CYL
+				
+				H80=PASS01
+				H81=PASS02
+				H82=P_OFFSET
+				H83=P_SLOW
+				H84=MDP01
+				H85=MDP02
+				H86=MDP03
+				H87=MDP04
+				H88=SV_SLEEP
+				H89=SV_FREE
+				H90=VIB_CONT
+				H91=CRASH
+				H92=E_VC1_ON
+				H93=E_VC2_ON
+				H94=E_VC3_ON
+				H95=E_VC4_ON
+				H96=ARM_RLS
+				H100=AT_1CYCLE
+				H101=SYS_TEMP2
+				H102=USER_PROG
+				H103=USE_1ARM
+				H104=X_ORG
+				H105=PS_USE
+				
+				
+			</ITEM>
+			<ITEM TYPE="TMP">
+				TMP0=TMP00
+				TMP1=TMP01
+				TMP2=TMP02
+				TMP3=TMP03
+				TMP4=TMP04
+				TMP5=TMP05
+				TMP6=TMP06
+				TMP7=TMP07
+				TMP8=TMP08
+				TMP9=TMP09
+				TMP10=TMP10
+				TMP11=TMP11
+				TMP12=TMP12
+				TMP13=TMP13
+				TMP14=TMP14
+				TMP15=TMP15
+				TMP16=TMP16
+				TMP17=TMP17
+				TMP18=TMP18
+				TMP19=TMP19
+				TMP20=TMP20
+				TMP21=TMP21
+				TMP22=TMP22
+				TMP23=TMP23
+				TMP24=TMP24
+				TMP25=TMP25
+				TMP26=TMP26
+				TMP27=TMP27
+				TMP28=TMP28
+				TMP29=TMP29
+				TMP30=TMP30
+				TMP31=TMP31
+				TMP32=TMP32
+				TMP33=TMP33
+				TMP34=TMP34
+				TMP35=TMP35
+				TMP36=TMP36
+				TMP37=TMP37
+				TMP38=TMP38
+				TMP39=TMP39
+				TMP40=TMP40
+				TMP41=TMP41
+				TMP42=TMP42
+				TMP43=TMP43
+				TMP44=TMP44
+				TMP45=TMP45
+				TMP46=TMP46
+				TMP47=TMP47
+				TMP48=TMP48
+				TMP49=TMP49
+				TMP50=TMP50
+				TMP51=TMP51
+				TMP52=TMP52
+				TMP53=TMP53
+				TMP54=TMP54
+				TMP55=TMP55
+				TMP56=TMP56
+				TMP57=TMP57
+				TMP58=TMP58
+				TMP59=TMP59
+				TMP60=TMP60
+				TMP61=TMP61
+				TMP62=TMP62
+				TMP63=TMP63
+				TMP64=TMP64
+				TMP65=TMP65
+				TMP66=TMP66
+				TMP67=TMP67
+				TMP68=TMP68
+				TMP69=TMP69
+				TMP70=TMP70
+				TMP71=TMP71
+				TMP72=TMP72
+				TMP73=TMP73
+				TMP74=TMP74
+				TMP75=TMP75
+				TMP76=TMP76
+				TMP77=TMP77
+				TMP78=TMP78
+				TMP79=TMP79
+				TMP80=TMP80
+				TMP81=TMP81
+				TMP82=TMP82
+				TMP83=TMP83
+				TMP84=TMP84
+				TMP85=TMP85
+				TMP86=TMP86
+				TMP87=TMP87
+				TMP88=TMP88
+				TMP89=TMP89
+				TMP90=TMP90
+
+				TMP120=TMP_AL0
+				TMP121=TMP_AL1
+				TMP122=TMP_AL2
+				TMP123=TMP_AL3
+				TMP124=TMP_AL4
+				TMP125=TMP_AL5
+				TMP126=TMP_AL6
+				TMP127=TMP_AL7
+			</ITEM>
+
+			<ITEM TYPE="CTP">
+				CTP0=CTP01
+				CTP1=CTP02
+				CTP2=CTP03
+				CTP3=CTP04
+				CTP4=CTP05
+				CTP5=CTP06
+				CTP6=CTP07
+				CTP7=CTP08
+				CTP8=CTP09
+				CTP9=CTP10
+				CTP10=CTP11
+				CTP11=CTP12
+				CTP12=CTP13
+				CTP13=CTP14
+				CTP14=CTP15
+				CTP15=CTP16
+				CTP16=CTP17
+				CTP17=CTP18
+				CTP18=CTP19
+				CTP19=CTP20
+			</ITEM>
+
+
+
+		</RELAY>
+
+		<AXISTABLE>
+		</AXISTABLE>
+
+	</ALIAS>
+</YUDO>

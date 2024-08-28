@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Y-Studio>
+  <Pou Name="MultiAxis" PlcEngineName="MultiAxisType1">
+    <Ladder Name="MultiAxis" />
+    <Label Name="MultiAxis" />
+    <Step Name="MultiAxis" />
+  </Pou>
+</Y-Studio>

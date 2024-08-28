@@ -1,0 +1,62 @@
+[DESC]
+; Axis configuration
+; History
+; 1.0.1 2020/12/01 DISPLAY tag fixed.
+;                  INFO tag added.
+;                  AXIS tag removed.
+; 2.0.1 2020/12/01 Type4 added.
+
+[INFO]
+FORMAT	= 2.0.1
+
+[MEMORY]
+;Index = ID, Motion type, Area item number , Home sensor id
+0  = Z,	 L, 1, LS1
+1  = X,  L, 2, LS6
+2  = Y,  L, 3, LS3
+3  = XS, L, 2, LS6S
+4  = YS, L, 3, LS3S
+5  = C, R, 0, LS8
+6  = A, R, 0, LS14
+;7  = B, R
+;8  = Z2, L
+;9  =
+;10 = 
+;11 = 
+
+[DISPLAY]
+; Memory Index(0~15) or Axis ID(in MEMORY tag) or -(hyphen)
+; AX1, AX2, AX3, AX4, AX5, ..., AX12
+Z, X, Y, XS, YS	; C,A  //ID(Symbol)
+;0, 1, 2, 3, 4	; 5,6  //Memory index
+
+[GROUP]
+;P/S only / Warn 
+P = Z, X, Y	;C,A
+S = Z, XS, YS
+
+[PTP]
+; Axis Active State in PTP
+Z  = (MDW MDS)
+X  = MDW
+Y  = MDW
+XS = MDS
+YS = MDS
+;C  = MDW
+;A  = MDW
+
+[AXISINFOVIEW]
+; LIST = Axis memory index or Axis ID LIST / MAX 12ea
+; LIST = 0, 1, 2, 3, 4, 5, 6or Z, X, Y, XS, YS, C, A
+; - or empty is empty
+LIST = X, Y, -, Z, XS, YS, ; C, A
+;POS = 
+;POS2 = 
+;LED = 
+
+[PASS]
+;AX =   x,   y,   w,   h
+X	= 530, 160, 160, 100	;	12137
+Y	=  50,  85, 160, 100 	;	12139
+XS	= 530, 280, 160, 100	;	12141
+YS	=  50, 205, 160, 100	;	12143
